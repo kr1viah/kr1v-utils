@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(RenderLayer.MultiPhase.class)
 public class RenderLayerMixin {
+    @SuppressWarnings("DataFlowIssue")
     @Inject(method = "draw", at = @At("HEAD"), cancellable = true)
     private void injected(BuiltBuffer buffer, CallbackInfo ci) {
         if ("solid"                          .equals(((RenderLayer)(Object)this).getName()) && !Render.SOLID.getBooleanValue()) { ci.cancel(); return; }
