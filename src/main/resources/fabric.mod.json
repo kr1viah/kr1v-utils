@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "id": "kr1v-utils",
-  "version": "${version}",
+  "version": " ",
   "name": "kr1v-utils",
   "description": "",
-  "authors": [],
+  "authors": ["kr1v"],
   "contact": {},
   "license": "MIT",
   "icon": "assets/kr1v-utils/icon.png",

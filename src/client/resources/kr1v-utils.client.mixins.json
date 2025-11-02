@@ -4,6 +4,18 @@
   "package": "kr1v.kr1vUtils.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "flight.ClientPlayerEntityMixin",
+    "flight.ClientPlayNetworkHandlerMixin",
+    "gui.ChatHudMixin",
+    "gui.ClientPlayNetworkHandlerMixin",
+    "gui.InGameHudMixin",
+    "gui.ParentElementMixin",
+    "gui.SubtitlesHudMixin",
+    "gui.TitleScreenMixin",
+    "render.GameRendererMixin",
+    "render.InGameHudMixin",
+    "render.RenderLayerMixin",
+    "render.WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -13,5 +25,8 @@
   },
   "mixinextras": {
     "minVersion": "0.5.0"
-  }
+  },
+  "mixins": [
+    "parcour.LivingEntityMixin"
+  ]
 }

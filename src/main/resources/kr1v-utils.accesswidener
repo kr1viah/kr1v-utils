@@ -1,0 +1,41 @@
+accessWidener	v2	named
+
+accessible class net/minecraft/client/gui/hud/SubtitlesHud$SubtitleEntry
+
+accessible method net/minecraft/client/gui/hud/ChatHud isChatHidden ()Z
+accessible field net/minecraft/client/gui/hud/ChatHud visibleMessages Ljava/util/List;
+accessible method net/minecraft/client/gui/hud/ChatHud getMessageIndex (DD)I
+accessible method net/minecraft/client/gui/hud/ChatHud toChatLineX (D)D
+accessible method net/minecraft/client/gui/hud/ChatHud toChatLineY (D)D
+accessible field net/minecraft/client/gui/hud/ChatHud client Lnet/minecraft/client/MinecraftClient;
+accessible method net/minecraft/client/gui/hud/ChatHud getLineHeight ()I
+accessible field net/minecraft/client/gui/hud/ChatHud scrolledLines I
+accessible method net/minecraft/client/gui/hud/ChatHud getMessageOpacityMultiplier (I)D
+accessible method net/minecraft/client/gui/hud/ChatHud getIndicatorX (Lnet/minecraft/client/gui/hud/ChatHudLine$Visible;)I
+accessible method net/minecraft/client/gui/hud/ChatHud drawIndicatorIcon (Lnet/minecraft/client/gui/DrawContext;IILnet/minecraft/client/gui/hud/MessageIndicator$Icon;)V
+accessible field net/minecraft/client/gui/hud/ChatHud hasUnreadNewMessages Z
+accessible field net/minecraft/client/gui/hud/ChatHud messages Ljava/util/List;
+accessible method net/minecraft/client/gui/hud/ChatHud getMessageLineIndex (DD)I
+
+accessible field net/minecraft/client/gui/screen/multiplayer/MultiplayerServerListWidget$ServerEntry favicon [B
+accessible method net/minecraft/client/gui/screen/multiplayer/MultiplayerServerListWidget$ServerEntry uploadFavicon ([B)Z
+accessible field net/minecraft/client/gui/screen/multiplayer/MultiplayerServerListWidget$ServerEntry statusIconTexture Lnet/minecraft/util/Identifier;
+accessible field net/minecraft/client/gui/screen/multiplayer/MultiplayerScreen serverList Lnet/minecraft/client/option/ServerList;
+accessible field net/minecraft/client/gui/screen/multiplayer/MultiplayerServerListWidget$ServerEntry screen Lnet/minecraft/client/gui/screen/multiplayer/MultiplayerScreen;
+accessible field net/minecraft/client/gui/screen/multiplayer/MultiplayerServerListWidget SERVER_PINGER_THREAD_POOL Ljava/util/concurrent/ThreadPoolExecutor;
+accessible field net/minecraft/client/gui/screen/multiplayer/MultiplayerServerListWidget$ServerEntry server Lnet/minecraft/client/network/ServerInfo;
+accessible field net/minecraft/client/gui/screen/multiplayer/MultiplayerServerListWidget$ServerEntry icon Lnet/minecraft/client/gui/screen/world/WorldIcon;
+mutable field net/minecraft/client/gui/screen/multiplayer/MultiplayerServerListWidget$ServerEntry icon Lnet/minecraft/client/gui/screen/world/WorldIcon;
+accessible method net/minecraft/client/gui/screen/multiplayer/MultiplayerServerListWidget$ServerEntry update ()V
+accessible field net/minecraft/client/gui/screen/Screen client Lnet/minecraft/client/MinecraftClient;
+accessible field net/minecraft/client/gui/widget/EntryListWidget client Lnet/minecraft/client/MinecraftClient;
+accessible method net/minecraft/client/gui/screen/multiplayer/MultiplayerServerListWidget$ServerEntry <init> (Lnet/minecraft/client/gui/screen/multiplayer/MultiplayerServerListWidget;Lnet/minecraft/client/gui/screen/multiplayer/MultiplayerScreen;Lnet/minecraft/client/network/ServerInfo;)V
+accessible field net/minecraft/client/gui/hud/SubtitlesHud$SubtitleEntry range F
+
+accessible class net/minecraft/client/render/VertexConsumers$Dual
+accessible class net/minecraft/client/render/OutlineVertexConsumerProvider$OutlineVertexConsumer
+accessible class net/minecraft/client/render/VertexConsumers$Union
+
+accessible field net/minecraft/client/gui/hud/InGameHud subtitlesHud Lnet/minecraft/client/gui/hud/SubtitlesHud;
+accessible field net/minecraft/client/gui/hud/SubtitlesHud audibleEntries Ljava/util/List;
+accessible field net/minecraft/client/gui/hud/SubtitlesHud entries Ljava/util/List;
