@@ -1,15 +1,29 @@
 package kr1v.kr1vUtils.client;
 
+import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.ConfigManager;
+import fi.dy.masa.malilib.config.IConfigBase;
+import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.event.InitializationHandler;
 import fi.dy.masa.malilib.event.InputEventHandler;
+import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.registry.Registry;
 import fi.dy.masa.malilib.util.data.ModInfo;
 import kr1v.kr1vUtils.client.config.ConfigHandler;
+import kr1v.kr1vUtils.client.config.Render;
 import kr1v.kr1vUtils.client.gui.screen.ConfigScreen;
 import kr1v.kr1vUtils.client.malilib.event.InputHandler;
+import kr1v.kr1vUtils.client.utils.ClassUtils;
 import kr1v.kr1vUtils.client.utils.MappingUtils;
+import kr1v.kr1vUtils.client.utils.StringUtils;
 import net.fabricmc.api.ClientModInitializer;
+import net.minecraft.client.render.RenderLayer;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Locale;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class Kr1vUtilsClient implements ClientModInitializer {
 
@@ -17,6 +31,29 @@ public class Kr1vUtilsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        for (Field field : ClassUtils.getAllFields(RenderLayer.MultiPhase.class)) {
+            if (Modifier.isStatic(field.getModifiers())) {
+                if (RenderLayer.class.isAssignableFrom(field.getType()) ||
+                    BiFunction.class.isAssignableFrom(field.getType()) ||
+                    Function.class.isAssignableFrom(field.getType())) {
+
+	                String name = MappingUtils.intermediaryToYarnSimple(field).toLowerCase(Locale.ROOT);
+
+	                ConfigBooleanHotkeyed hotkey = new ConfigBooleanHotkeyed(StringUtils.convertCamelCase(name), true, "", KeybindSettings.PRESS_ALLOWEXTRA, name);
+	                Render.RENDER_HOTKEYS.put(name, hotkey);
+                }
+            }
+        }
+
+        for (ConfigBooleanHotkeyed cbh : Render.RENDER_HOTKEYS.values()) {
+            ConfigHandler.addToggleHotkey(cbh);
+        }
+
+        Render.OPTIONS = new ImmutableList.Builder<IConfigBase>()
+            .addAll(ConfigHandler.generateOptions(Render.class))
+            .addAll(Render.RENDER_HOTKEYS.values().iterator())
+            .build();
+
         InitializationHandler.getInstance().registerInitializationHandler(() -> {
             ConfigManager.getInstance().registerConfigHandler(Kr1vUtilsClient.MOD_ID, new ConfigHandler());
 
@@ -27,6 +64,7 @@ public class Kr1vUtilsClient implements ClientModInitializer {
             InputEventHandler.getInputManager().registerKeyboardInputHandler(InputHandler.getInstance());
             InputEventHandler.getInputManager().registerMouseInputHandler(InputHandler.getInstance());
         });
+
         try {
             Class.forName(MappingUtils.class.getName());
         } catch (ClassNotFoundException e) {

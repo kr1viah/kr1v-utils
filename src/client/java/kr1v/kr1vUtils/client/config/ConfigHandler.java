@@ -57,15 +57,26 @@ public class ConfigHandler implements IConfigHandler {
         }
     }
 
-    public static ImmutableList<IConfigBase> generateOptions() {
-        ImmutableList.Builder<IConfigBase> ilb = ImmutableList.builder();
+    public static void addToggleHotkey(ConfigBooleanHotkeyed cbh) {
+        if (((KeybindMulti) cbh.getKeybind()).getCallback() == null) {
+            cbh.getKeybind().setCallback((keyAction, keybind) -> {
+                cbh.setBooleanValue(!cbh.getBooleanValue());
+                return true;
+            });
+        }
+    }
 
+    public static ImmutableList<IConfigBase> generateOptions() {
         Class<?> clazz = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
-                .walk(frames -> frames
-                        .skip(1)
-                        .findFirst()
-                        .map(StackWalker.StackFrame::getDeclaringClass)
-                        .orElse(null));
+            .walk(frames -> frames
+                .skip(1)
+                .findFirst()
+                .map(StackWalker.StackFrame::getDeclaringClass)
+                .orElse(null));
+        return generateOptions(clazz);
+    }
+    public static ImmutableList<IConfigBase> generateOptions(Class<?> clazz) {
+        ImmutableList.Builder<IConfigBase> ilb = ImmutableList.builder();
 
         for (Field f : clazz.getDeclaredFields()) {
             int mods = f.getModifiers();
@@ -77,12 +88,7 @@ public class ConfigHandler implements IConfigHandler {
                         ilb.add(value);
 
                         if (value instanceof ConfigBooleanHotkeyed cbh) {
-                            if (((KeybindMulti) cbh.getKeybind()).getCallback() == null) {
-                                cbh.getKeybind().setCallback((keyAction, keybind) -> {
-                                    cbh.setBooleanValue(!cbh.getBooleanValue());
-                                    return true;
-                                });
-                            }
+                            addToggleHotkey(cbh);
                         }
                     }
                 } catch (IllegalAccessException e) {
