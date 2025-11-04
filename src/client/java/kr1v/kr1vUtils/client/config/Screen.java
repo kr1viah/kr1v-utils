@@ -9,9 +9,9 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class Screen {
-    public static final ConfigBooleanHotkeyed DISABLED_SERVER_SCREEN_CLOSING = new ConfigBooleanHotkeyed("Prevent servers from closing the screen", false, "", "");
-    public static final ConfigStringList DISABLED_SCREEN_CLOSING_EXCEPTIONS = new ConfigStringList("Only these", ImmutableList.of("ChatScreen"), "");
-    public static final ConfigStringList PREVENT_OPENING_OF_SCREEN = new ConfigStringList("Prevent these screens from opening", ImmutableList.of(), "", "", "");
+	public static final ConfigBooleanHotkeyed DISABLED_SERVER_SCREEN_CLOSING = new ConfigBooleanHotkeyed("Prevent servers from closing the screen", false, "", "");
+	public static final ConfigStringList DISABLED_SCREEN_CLOSING_EXCEPTIONS = new ConfigStringList("Only these", ImmutableList.of("ChatScreen"), "");
+	public static final ConfigStringList PREVENT_OPENING_OF_SCREEN = new ConfigStringList("Prevent these screens from opening", ImmutableList.of(), "", "", "");
 
-    public static final List<? extends IConfigBase> OPTIONS = ConfigHandler.generateOptions();
+	public static final List<? extends IConfigBase> OPTIONS = ConfigHandler.generateOptions();
 }

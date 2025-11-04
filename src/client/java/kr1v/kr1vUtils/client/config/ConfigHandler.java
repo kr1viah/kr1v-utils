@@ -17,85 +17,86 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public class ConfigHandler implements IConfigHandler {
-    private static final String CONFIG_FILE_NAME = Kr1vUtilsClient.MOD_ID + ".json";
+	private static final String CONFIG_FILE_NAME = Kr1vUtilsClient.MOD_ID + ".json";
 
-    @Override
-    public void load() {
-        File configFile = new File(MinecraftClient.getInstance().runDirectory, "config/" + CONFIG_FILE_NAME);
+	@Override
+	public void load() {
+		File configFile = new File(MinecraftClient.getInstance().runDirectory, "config/" + CONFIG_FILE_NAME);
 
-        if (configFile.exists() && configFile.isFile() && configFile.canRead()) {
-            JsonElement element = JsonUtils.parseJsonFile(configFile);
+		if (configFile.exists() && configFile.isFile() && configFile.canRead()) {
+			JsonElement element = JsonUtils.parseJsonFile(configFile);
 
-            if (element != null && element.isJsonObject()) {
-                JsonObject root = element.getAsJsonObject();
+			if (element != null && element.isJsonObject()) {
+				JsonObject root = element.getAsJsonObject();
 
-                ConfigUtils.readConfigBase(root, "Chat", Chat.OPTIONS);
-                ConfigUtils.readConfigBase(root, "Debug", Debug.OPTIONS);
-                ConfigUtils.readConfigBase(root, "Keys", Keys.OPTIONS);
-                ConfigUtils.readConfigBase(root, "Misc", Misc.OPTIONS);
-                ConfigUtils.readConfigBase(root, "Render", Render.OPTIONS);
-                ConfigUtils.readConfigBase(root, "Screen", Screen.OPTIONS);
-            }
-        }
-    }
+				ConfigUtils.readConfigBase(root, "Chat", Chat.OPTIONS);
+				ConfigUtils.readConfigBase(root, "Debug", Debug.OPTIONS);
+				ConfigUtils.readConfigBase(root, "Keys", Keys.OPTIONS);
+				ConfigUtils.readConfigBase(root, "Misc", Misc.OPTIONS);
+				ConfigUtils.readConfigBase(root, "Render", Render.OPTIONS);
+				ConfigUtils.readConfigBase(root, "Screen", Screen.OPTIONS);
+			}
+		}
+	}
 
-    @Override
-    public void save() {
-        File dir = new File(MinecraftClient.getInstance().runDirectory, "config");
+	@Override
+	public void save() {
+		File dir = new File(MinecraftClient.getInstance().runDirectory, "config");
 
-        if ((dir.exists() && dir.isDirectory()) || dir.mkdirs()) {
-            JsonObject root = new JsonObject();
+		if ((dir.exists() && dir.isDirectory()) || dir.mkdirs()) {
+			JsonObject root = new JsonObject();
 
-            ConfigUtils.writeConfigBase(root, "Chat", Chat.OPTIONS);
-            ConfigUtils.writeConfigBase(root, "Debug", Debug.OPTIONS);
-            ConfigUtils.writeConfigBase(root, "Keys", Keys.OPTIONS);
-            ConfigUtils.writeConfigBase(root, "Misc", Misc.OPTIONS);
-            ConfigUtils.writeConfigBase(root, "Render", Render.OPTIONS);
-            ConfigUtils.writeConfigBase(root, "Screen", Screen.OPTIONS);
+			ConfigUtils.writeConfigBase(root, "Chat", Chat.OPTIONS);
+			ConfigUtils.writeConfigBase(root, "Debug", Debug.OPTIONS);
+			ConfigUtils.writeConfigBase(root, "Keys", Keys.OPTIONS);
+			ConfigUtils.writeConfigBase(root, "Misc", Misc.OPTIONS);
+			ConfigUtils.writeConfigBase(root, "Render", Render.OPTIONS);
+			ConfigUtils.writeConfigBase(root, "Screen", Screen.OPTIONS);
 
-            JsonUtils.writeJsonToFile(root, new File(dir, CONFIG_FILE_NAME));
-        }
-    }
+			JsonUtils.writeJsonToFile(root, new File(dir, CONFIG_FILE_NAME));
+		}
+	}
 
-    public static void addToggleHotkey(ConfigBooleanHotkeyed cbh) {
-        if (((KeybindMulti) cbh.getKeybind()).getCallback() == null) {
-            cbh.getKeybind().setCallback((keyAction, keybind) -> {
-                cbh.setBooleanValue(!cbh.getBooleanValue());
-                return true;
-            });
-        }
-    }
+	public static void addToggleHotkey(ConfigBooleanHotkeyed cbh) {
+		if (((KeybindMulti) cbh.getKeybind()).getCallback() == null) {
+			cbh.getKeybind().setCallback((keyAction, keybind) -> {
+				cbh.setBooleanValue(!cbh.getBooleanValue());
+				return true;
+			});
+		}
+	}
 
-    public static ImmutableList<IConfigBase> generateOptions() {
-        Class<?> clazz = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
-            .walk(frames -> frames
-                .skip(1)
-                .findFirst()
-                .map(StackWalker.StackFrame::getDeclaringClass)
-                .orElse(null));
-        return generateOptions(clazz);
-    }
-    public static ImmutableList<IConfigBase> generateOptions(Class<?> clazz) {
-        ImmutableList.Builder<IConfigBase> ilb = ImmutableList.builder();
+	public static ImmutableList<IConfigBase> generateOptions() {
+		Class<?> clazz = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
+			.walk(frames -> frames
+				.skip(1)
+				.findFirst()
+				.map(StackWalker.StackFrame::getDeclaringClass)
+				.orElse(null));
+		return generateOptions(clazz);
+	}
 
-        for (Field f : clazz.getDeclaredFields()) {
-            int mods = f.getModifiers();
-            if (Modifier.isStatic(mods) && IConfigBase.class.isAssignableFrom(f.getType())) {
-                try {
-                    f.setAccessible(true);
-                    IConfigBase value = (IConfigBase) f.get(null);
-                    if (value != null) {
-                        ilb.add(value);
+	public static ImmutableList<IConfigBase> generateOptions(Class<?> clazz) {
+		ImmutableList.Builder<IConfigBase> ilb = ImmutableList.builder();
 
-                        if (value instanceof ConfigBooleanHotkeyed cbh) {
-                            addToggleHotkey(cbh);
-                        }
-                    }
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-        return ilb.build();
-    }
+		for (Field f : clazz.getDeclaredFields()) {
+			int mods = f.getModifiers();
+			if (Modifier.isStatic(mods) && IConfigBase.class.isAssignableFrom(f.getType())) {
+				try {
+					f.setAccessible(true);
+					IConfigBase value = (IConfigBase) f.get(null);
+					if (value != null) {
+						ilb.add(value);
+
+						if (value instanceof ConfigBooleanHotkeyed cbh) {
+							addToggleHotkey(cbh);
+						}
+					}
+				} catch (IllegalAccessException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+		return ilb.build();
+	}
 }

@@ -17,24 +17,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public class ClientPlayNetworkHandlerMixin {
-    @Inject(method = "onCloseScreen", at = @At("HEAD"), cancellable = true)
-    public void preventScreenClosing(CloseScreenS2CPacket packet, CallbackInfo ci) {
-        if (Screen.DISABLED_SERVER_SCREEN_CLOSING.getBooleanValue()) {
-            if (MinecraftClient.getInstance().currentScreen != null) {
-                String currentScreenClass = MappingUtils.intermediaryToYarnSimple(MinecraftClient.getInstance().currentScreen.getClass());
-                boolean shouldPrevent = false;
-                for (String s : Screen.DISABLED_SCREEN_CLOSING_EXCEPTIONS.getStrings()) {
-                    if (s.equals(currentScreenClass)) {
-                        shouldPrevent = true;
-                        break;
-                    }
-                }
-                if (shouldPrevent) {
-                    ci.cancel();
-                } else if (Debug.DISABLED_SERVER_SCREEN_CLOSING_PRINT.getBooleanValue()) {
-                    ChatUtils.sendMessage(Text.literal("Allowed closing of screen class: " + currentScreenClass + " (Click to copy)").setStyle(Style.EMPTY.withClickEvent(new ClickEvent.CopyToClipboard(currentScreenClass))));
-                }
-            }
-        }
-    }
+	@Inject(method = "onCloseScreen", at = @At("HEAD"), cancellable = true)
+	public void preventScreenClosing(CloseScreenS2CPacket packet, CallbackInfo ci) {
+		if (Screen.DISABLED_SERVER_SCREEN_CLOSING.getBooleanValue()) {
+			if (MinecraftClient.getInstance().currentScreen != null) {
+				String currentScreenClass = MappingUtils.intermediaryToYarnSimple(MinecraftClient.getInstance().currentScreen.getClass());
+				boolean shouldPrevent = false;
+				for (String s : Screen.DISABLED_SCREEN_CLOSING_EXCEPTIONS.getStrings()) {
+					if (s.equals(currentScreenClass)) {
+						shouldPrevent = true;
+						break;
+					}
+				}
+				if (shouldPrevent) {
+					ci.cancel();
+				} else if (Debug.DISABLED_SERVER_SCREEN_CLOSING_PRINT.getBooleanValue()) {
+					ChatUtils.sendMessage(Text.literal("Allowed closing of screen class: " + currentScreenClass + " (Click to copy)").setStyle(Style.EMPTY.withClickEvent(new ClickEvent.CopyToClipboard(currentScreenClass))));
+				}
+			}
+		}
+	}
 }

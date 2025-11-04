@@ -4,7 +4,9 @@
   "version": " ",
   "name": "kr1v-utils",
   "description": "",
-  "authors": ["kr1v"],
+  "authors": [
+    "kr1v"
+  ],
   "contact": {},
   "license": "MIT",
   "icon": "assets/kr1v-utils/icon.png",

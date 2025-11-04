@@ -11,6 +11,7 @@ public class ClassUtils {
 			getAllFields(clazz.getSuperclass(), output);
 		return output;
 	}
+
 	public static void getAllFields(Class<?> clazz, List<Field> output) {
 		output.addAll(List.of(clazz.getDeclaredFields()));
 		if (clazz != Object.class)

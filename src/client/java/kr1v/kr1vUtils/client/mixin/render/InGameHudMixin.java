@@ -9,139 +9,139 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
-    @Inject(method = "renderMiscOverlays", at = @At("HEAD"), cancellable = true)
-    private void preventMiscOverlays(CallbackInfo ci) {
-        if (!Render.MISC_OVERLAYS.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderMiscOverlays", at = @At("HEAD"), cancellable = true)
+	private void preventMiscOverlays(CallbackInfo ci) {
+		if (!Render.MISC_OVERLAYS.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderSleepOverlay", at = @At("HEAD"), cancellable = true)
-    private void preventSleepOverlay(CallbackInfo ci) {
-        if (!Render.SLEEP_OVERLAY.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderSleepOverlay", at = @At("HEAD"), cancellable = true)
+	private void preventSleepOverlay(CallbackInfo ci) {
+		if (!Render.SLEEP_OVERLAY.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderOverlayMessage", at = @At("HEAD"), cancellable = true)
-    private void preventOverlayMessage(CallbackInfo ci) {
-        if (!Render.OVERLAY_MESSAGE.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderOverlayMessage", at = @At("HEAD"), cancellable = true)
+	private void preventOverlayMessage(CallbackInfo ci) {
+		if (!Render.OVERLAY_MESSAGE.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderTitleAndSubtitle", at = @At("HEAD"), cancellable = true)
-    private void preventTitleAndSubtitle(CallbackInfo ci) {
-        if (!Render.TITLE_AND_SUBTITLE.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderTitleAndSubtitle", at = @At("HEAD"), cancellable = true)
+	private void preventTitleAndSubtitle(CallbackInfo ci) {
+		if (!Render.TITLE_AND_SUBTITLE.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderChat", at = @At("HEAD"), cancellable = true)
-    private void preventChat(CallbackInfo ci) {
-        if (!Render.CHAT.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderChat", at = @At("HEAD"), cancellable = true)
+	private void preventChat(CallbackInfo ci) {
+		if (!Render.CHAT.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/scoreboard/ScoreboardObjective;)V", at = @At("HEAD"), cancellable = true)
-    private void preventScoreboardSidebar(CallbackInfo ci) {
-        if (!Render.SCOREBOARD_SIDEBAR.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/scoreboard/ScoreboardObjective;)V", at = @At("HEAD"), cancellable = true)
+	private void preventScoreboardSidebar(CallbackInfo ci) {
+		if (!Render.SCOREBOARD_SIDEBAR.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderPlayerList", at = @At("HEAD"), cancellable = true)
-    private void preventPlayerList(CallbackInfo ci) {
-        if (!Render.PLAYER_LIST.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderPlayerList", at = @At("HEAD"), cancellable = true)
+	private void preventPlayerList(CallbackInfo ci) {
+		if (!Render.PLAYER_LIST.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
-    private void preventCrosshair(CallbackInfo ci) {
-        if (!Render.CROSSHAIR.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
+	private void preventCrosshair(CallbackInfo ci) {
+		if (!Render.CROSSHAIR.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"), cancellable = true)
-    private void preventStatusEffectOverlay(CallbackInfo ci) {
-        if (!Render.STATUS_EFFECT_OVERLAY.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"), cancellable = true)
+	private void preventStatusEffectOverlay(CallbackInfo ci) {
+		if (!Render.STATUS_EFFECT_OVERLAY.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderMainHud", at = @At("HEAD"), cancellable = true)
-    private void preventMainHud(CallbackInfo ci) {
-        if (!Render.MAIN_HUD.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderMainHud", at = @At("HEAD"), cancellable = true)
+	private void preventMainHud(CallbackInfo ci) {
+		if (!Render.MAIN_HUD.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderHotbar", at = @At("HEAD"), cancellable = true)
-    private void preventHotbar(CallbackInfo ci) {
-        if (!Render.HOTBAR.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderHotbar", at = @At("HEAD"), cancellable = true)
+	private void preventHotbar(CallbackInfo ci) {
+		if (!Render.HOTBAR.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderMountJumpBar", at = @At("HEAD"), cancellable = true)
-    private void preventMountJumpBar(CallbackInfo ci) {
-        if (!Render.MOUNT_JUMP_BAR.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderMountJumpBar", at = @At("HEAD"), cancellable = true)
+	private void preventMountJumpBar(CallbackInfo ci) {
+		if (!Render.MOUNT_JUMP_BAR.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderExperienceBar", at = @At("HEAD"), cancellable = true)
-    private void preventExperienceBar(CallbackInfo ci) {
-        if (!Render.EXPERIENCE_BAR.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderExperienceBar", at = @At("HEAD"), cancellable = true)
+	private void preventExperienceBar(CallbackInfo ci) {
+		if (!Render.EXPERIENCE_BAR.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderExperienceLevel", at = @At("HEAD"), cancellable = true)
-    private void preventExperienceLevel(CallbackInfo ci) {
-        if (!Render.EXPERIENCE_LEVEL.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderExperienceLevel", at = @At("HEAD"), cancellable = true)
+	private void preventExperienceLevel(CallbackInfo ci) {
+		if (!Render.EXPERIENCE_LEVEL.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderHeldItemTooltip", at = @At("HEAD"), cancellable = true)
-    private void preventHeldItemTooltip(CallbackInfo ci) {
-        if (!Render.HELD_ITEM_TOOLTIP.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderHeldItemTooltip", at = @At("HEAD"), cancellable = true)
+	private void preventHeldItemTooltip(CallbackInfo ci) {
+		if (!Render.HELD_ITEM_TOOLTIP.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderDemoTimer", at = @At("HEAD"), cancellable = true)
-    private void preventDemoTimer(CallbackInfo ci) {
-        if (!Render.DEMO_TIMER.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderDemoTimer", at = @At("HEAD"), cancellable = true)
+	private void preventDemoTimer(CallbackInfo ci) {
+		if (!Render.DEMO_TIMER.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderStatusBars", at = @At("HEAD"), cancellable = true)
-    private void preventStatusBars(CallbackInfo ci) {
-        if (!Render.STATUS_BARS.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderStatusBars", at = @At("HEAD"), cancellable = true)
+	private void preventStatusBars(CallbackInfo ci) {
+		if (!Render.STATUS_BARS.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderArmor", at = @At("HEAD"), cancellable = true)
-    private static void preventArmor(CallbackInfo ci) {
-        if (!Render.ARMOR.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderArmor", at = @At("HEAD"), cancellable = true)
+	private static void preventArmor(CallbackInfo ci) {
+		if (!Render.ARMOR.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderHealthBar", at = @At("HEAD"), cancellable = true)
-    private void preventHealthBar(CallbackInfo ci) {
-        if (!Render.HEALTH_BAR.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderHealthBar", at = @At("HEAD"), cancellable = true)
+	private void preventHealthBar(CallbackInfo ci) {
+		if (!Render.HEALTH_BAR.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderFood", at = @At("HEAD"), cancellable = true)
-    private void preventFood(CallbackInfo ci) {
-        if (!Render.FOOD.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderFood", at = @At("HEAD"), cancellable = true)
+	private void preventFood(CallbackInfo ci) {
+		if (!Render.FOOD.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderMountHealth", at = @At("HEAD"), cancellable = true)
-    private void preventMountHealth(CallbackInfo ci) {
-        if (!Render.MOUNT_HEALTH.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderMountHealth", at = @At("HEAD"), cancellable = true)
+	private void preventMountHealth(CallbackInfo ci) {
+		if (!Render.MOUNT_HEALTH.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderSpyglassOverlay", at = @At("HEAD"), cancellable = true)
-    private void preventSpyglassOverlay(CallbackInfo ci) {
-        if (!Render.SPYGLASS_OVERLAY.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderSpyglassOverlay", at = @At("HEAD"), cancellable = true)
+	private void preventSpyglassOverlay(CallbackInfo ci) {
+		if (!Render.SPYGLASS_OVERLAY.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderVignetteOverlay", at = @At("HEAD"), cancellable = true)
-    private void preventVignetteOverlay(CallbackInfo ci) {
-        if (!Render.VIGNETTE_OVERLAY.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderVignetteOverlay", at = @At("HEAD"), cancellable = true)
+	private void preventVignetteOverlay(CallbackInfo ci) {
+		if (!Render.VIGNETTE_OVERLAY.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderPortalOverlay", at = @At("HEAD"), cancellable = true)
-    private void preventPortalOverlay(CallbackInfo ci) {
-        if (!Render.PORTAL_OVERLAY.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderPortalOverlay", at = @At("HEAD"), cancellable = true)
+	private void preventPortalOverlay(CallbackInfo ci) {
+		if (!Render.PORTAL_OVERLAY.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderNauseaOverlay", at = @At("HEAD"), cancellable = true)
-    private void preventNauseaOverlay(CallbackInfo ci) {
-        if (!Render.NAUSEA_OVERLAY.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderNauseaOverlay", at = @At("HEAD"), cancellable = true)
+	private void preventNauseaOverlay(CallbackInfo ci) {
+		if (!Render.NAUSEA_OVERLAY.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderHotbarItem", at = @At("HEAD"), cancellable = true)
-    private void preventHotbarItem(CallbackInfo ci) {
-        if (!Render.HOTBAR_ITEM.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderHotbarItem", at = @At("HEAD"), cancellable = true)
+	private void preventHotbarItem(CallbackInfo ci) {
+		if (!Render.HOTBAR_ITEM.getBooleanValue()) ci.cancel();
+	}
 
-    @Inject(method = "renderAutosaveIndicator", at = @At("HEAD"), cancellable = true)
-    private void preventAutosaveIndicator(CallbackInfo ci) {
-        if (!Render.AUTOSAVE_INDICATOR.getBooleanValue()) ci.cancel();
-    }
+	@Inject(method = "renderAutosaveIndicator", at = @At("HEAD"), cancellable = true)
+	private void preventAutosaveIndicator(CallbackInfo ci) {
+		if (!Render.AUTOSAVE_INDICATOR.getBooleanValue()) ci.cancel();
+	}
 
 }

@@ -8,49 +8,49 @@ import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.text.Style;
 
 public class DummyScreen extends ChatScreen {
-    public DummyScreen() {
-        super("");
-        client = MinecraftClient.getInstance();
-        if (this.client.player == null) this.client.setScreen(null);
-    }
+	public DummyScreen() {
+		super("");
+		client = MinecraftClient.getInstance();
+		if (this.client.player == null) this.client.setScreen(null);
+	}
 
-    @Override
-    public void init() {
-        if (this.client.player == null) return;
-        super.init();
-    }
+	@Override
+	public void init() {
+		if (this.client.player == null) return;
+		super.init();
+	}
 
-    @Override
-    protected void addScreenNarrations(NarrationMessageBuilder messageBuilder) {
-        if (this.client.player == null) return;
-        super.addScreenNarrations(messageBuilder);
-    }
+	@Override
+	protected void addScreenNarrations(NarrationMessageBuilder messageBuilder) {
+		if (this.client.player == null) return;
+		super.addScreenNarrations(messageBuilder);
+	}
 
-    @Override
-    protected void setInitialFocus() {
-        if (this.client.player == null) return;
-        super.setInitialFocus();
-    }
+	@Override
+	protected void setInitialFocus() {
+		if (this.client.player == null) return;
+		super.setInitialFocus();
+	}
 
-    @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float deltaTicks) {
-        this.client.inGameHud.getChatHud().render(context, this.client.inGameHud.getTicks(), mouseX, mouseY, true);
-    }
+	@Override
+	public void render(DrawContext context, int mouseX, int mouseY, float deltaTicks) {
+		this.client.inGameHud.getChatHud().render(context, this.client.inGameHud.getTicks(), mouseX, mouseY, true);
+	}
 
-    @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (button == 0) {
-            ChatHud chatHud = this.client.inGameHud.getChatHud();
-            if (chatHud.mouseClicked(mouseX, mouseY)) {
-                return true;
-            }
+	@Override
+	public boolean mouseClicked(double mouseX, double mouseY, int button) {
+		if (button == 0) {
+			ChatHud chatHud = this.client.inGameHud.getChatHud();
+			if (chatHud.mouseClicked(mouseX, mouseY)) {
+				return true;
+			}
 
-            Style style = this.client.inGameHud.getChatHud().getTextStyleAt(mouseX, mouseY);
-            if (style != null && this.handleTextClick(style)) {
-                return true;
-            }
-        }
-        this.client.setScreen(null);
-        return true;
-    }
+			Style style = this.client.inGameHud.getChatHud().getTextStyleAt(mouseX, mouseY);
+			if (style != null && this.handleTextClick(style)) {
+				return true;
+			}
+		}
+		this.client.setScreen(null);
+		return true;
+	}
 }

@@ -11,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ParentElement.class)
 public interface ParentElementMixin {
-    @Inject(method = "mouseReleased", at = @At("HEAD"))
-    private void injected(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
-        if (this instanceof ChatScreen) {
-            if (MinecraftClient.getInstance().inGameHud.getChatHud() instanceof BetterChatHud betterChatHud) {
-                betterChatHud.mouseReleased(mouseX, mouseY);
-            }
-        }
-    }
+	@Inject(method = "mouseReleased", at = @At("HEAD"))
+	private void injected(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
+		if (this instanceof ChatScreen) {
+			if (MinecraftClient.getInstance().inGameHud.getChatHud() instanceof BetterChatHud betterChatHud) {
+				betterChatHud.mouseReleased(mouseX, mouseY);
+			}
+		}
+	}
 }
 

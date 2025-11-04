@@ -15,15 +15,15 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
-    @Shadow
-    @Final
-    private MinecraftClient client;
+	@Shadow
+	@Final
+	private MinecraftClient client;
 
-    @Definition(id = "ChatHud", type = ChatHud.class)
-    @Definition(id = "client", local = @Local(type = MinecraftClient.class, argsOnly = true))
-    @Expression("new ChatHud(client)")
-    @ModifyExpressionValue(method = "<init>", at = @At("MIXINEXTRAS:EXPRESSION"))
-    private ChatHud injected(ChatHud original) {
-        return new BetterChatHud(client);
-    }
+	@Definition(id = "ChatHud", type = ChatHud.class)
+	@Definition(id = "client", local = @Local(type = MinecraftClient.class, argsOnly = true))
+	@Expression("new ChatHud(client)")
+	@ModifyExpressionValue(method = "<init>", at = @At("MIXINEXTRAS:EXPRESSION"))
+	private ChatHud injected(ChatHud original) {
+		return new BetterChatHud(client);
+	}
 }

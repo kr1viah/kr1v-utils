@@ -28,48 +28,48 @@ import java.util.function.Function;
 
 public class Kr1vUtilsClient implements ClientModInitializer {
 
-    public static final String MOD_ID = "kr1v-utils";
+	public static final String MOD_ID = "kr1v-utils";
 
-    @Override
-    public void onInitializeClient() {
-        var ilb = new ImmutableList.Builder<IConfigBase>();
+	@Override
+	public void onInitializeClient() {
+		var ilb = new ImmutableList.Builder<IConfigBase>();
 
-        ilb.addAll(ConfigHandler.generateOptions(Render.class));
+		ilb.addAll(ConfigHandler.generateOptions(Render.class));
 
-        for (Field field : ClassUtils.getAllFields(RenderLayer.MultiPhase.class)) {
-            if (Modifier.isStatic(field.getModifiers())) {
-                if (RenderLayer.class.isAssignableFrom(field.getType()) ||
-                    BiFunction.class.isAssignableFrom(field.getType()) ||
-                    Function.class.isAssignableFrom(field.getType())) {
+		for (Field field : ClassUtils.getAllFields(RenderLayer.MultiPhase.class)) {
+			if (Modifier.isStatic(field.getModifiers())) {
+				if (RenderLayer.class.isAssignableFrom(field.getType()) ||
+					BiFunction.class.isAssignableFrom(field.getType()) ||
+					Function.class.isAssignableFrom(field.getType())) {
 
-	                String name = MappingUtils.intermediaryToYarnSimple(field).toLowerCase(Locale.ROOT);
+					String name = MappingUtils.intermediaryToYarnSimple(field).toLowerCase(Locale.ROOT);
 
-	                ConfigBooleanHotkeyed hotkey = new ConfigBooleanHotkeyed(StringUtils.convertCamelCase(name), true, "", (KeybindSettings) KeybindSetting.ofAny(), name);
-                    ConfigHandler.addToggleHotkey(hotkey);
+					ConfigBooleanHotkeyed hotkey = new ConfigBooleanHotkeyed(StringUtils.convertCamelCase(name), true, "", (KeybindSettings) KeybindSetting.ofAny(), name);
+					ConfigHandler.addToggleHotkey(hotkey);
 
-                    ilb.add(hotkey);
-	                Render.RENDER_HOTKEYS.put(name, hotkey);
-                }
-            }
-        }
+					ilb.add(hotkey);
+					Render.RENDER_HOTKEYS.put(name, hotkey);
+				}
+			}
+		}
 
-        Render.OPTIONS = ilb.build();
+		Render.OPTIONS = ilb.build();
 
-        InitializationHandler.getInstance().registerInitializationHandler(() -> {
-            ConfigManager.getInstance().registerConfigHandler(Kr1vUtilsClient.MOD_ID, new ConfigHandler());
+		InitializationHandler.getInstance().registerInitializationHandler(() -> {
+			ConfigManager.getInstance().registerConfigHandler(Kr1vUtilsClient.MOD_ID, new ConfigHandler());
 
-            Registry.CONFIG_SCREEN.registerConfigScreenFactory(
-                    new ModInfo(Kr1vUtilsClient.MOD_ID, Kr1vUtilsClient.MOD_ID, ConfigScreen::new)
-            );
-            InputEventHandler.getKeybindManager().registerKeybindProvider(InputHandler.getInstance());
-            InputEventHandler.getInputManager().registerKeyboardInputHandler(InputHandler.getInstance());
-            InputEventHandler.getInputManager().registerMouseInputHandler(InputHandler.getInstance());
-        });
+			Registry.CONFIG_SCREEN.registerConfigScreenFactory(
+				new ModInfo(Kr1vUtilsClient.MOD_ID, Kr1vUtilsClient.MOD_ID, ConfigScreen::new)
+			);
+			InputEventHandler.getKeybindManager().registerKeybindProvider(InputHandler.getInstance());
+			InputEventHandler.getInputManager().registerKeyboardInputHandler(InputHandler.getInstance());
+			InputEventHandler.getInputManager().registerMouseInputHandler(InputHandler.getInstance());
+		});
 
-        try {
-            Class.forName(MappingUtils.class.getName());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
+		try {
+			Class.forName(MappingUtils.class.getName());
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
