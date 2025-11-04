@@ -16,6 +16,7 @@ import kr1v.kr1vUtils.client.malilib.event.InputHandler;
 import kr1v.kr1vUtils.client.utils.ClassUtils;
 import kr1v.kr1vUtils.client.utils.MappingUtils;
 import kr1v.kr1vUtils.client.utils.StringUtils;
+import kr1v.kr1vUtils.client.utils.malilib.KeybindSetting;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.render.RenderLayer;
 
@@ -31,6 +32,10 @@ public class Kr1vUtilsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        var ilb = new ImmutableList.Builder<IConfigBase>();
+
+        ilb.addAll(ConfigHandler.generateOptions(Render.class));
+
         for (Field field : ClassUtils.getAllFields(RenderLayer.MultiPhase.class)) {
             if (Modifier.isStatic(field.getModifiers())) {
                 if (RenderLayer.class.isAssignableFrom(field.getType()) ||
@@ -39,20 +44,16 @@ public class Kr1vUtilsClient implements ClientModInitializer {
 
 	                String name = MappingUtils.intermediaryToYarnSimple(field).toLowerCase(Locale.ROOT);
 
-	                ConfigBooleanHotkeyed hotkey = new ConfigBooleanHotkeyed(StringUtils.convertCamelCase(name), true, "", KeybindSettings.PRESS_ALLOWEXTRA, name);
+	                ConfigBooleanHotkeyed hotkey = new ConfigBooleanHotkeyed(StringUtils.convertCamelCase(name), true, "", (KeybindSettings) KeybindSetting.ofAny(), name);
+                    ConfigHandler.addToggleHotkey(hotkey);
+
+                    ilb.add(hotkey);
 	                Render.RENDER_HOTKEYS.put(name, hotkey);
                 }
             }
         }
 
-        for (ConfigBooleanHotkeyed cbh : Render.RENDER_HOTKEYS.values()) {
-            ConfigHandler.addToggleHotkey(cbh);
-        }
-
-        Render.OPTIONS = new ImmutableList.Builder<IConfigBase>()
-            .addAll(ConfigHandler.generateOptions(Render.class))
-            .addAll(Render.RENDER_HOTKEYS.values().iterator())
-            .build();
+        Render.OPTIONS = ilb.build();
 
         InitializationHandler.getInstance().registerInitializationHandler(() -> {
             ConfigManager.getInstance().registerConfigHandler(Kr1vUtilsClient.MOD_ID, new ConfigHandler());

@@ -1,6 +1,7 @@
 plugins {
     id 'fabric-loom' version '1.12.5'
     id 'maven-publish'
+    id 'dev.lukebemish.opensesame.loom' version '0.7.7'
 }
 
 version = project.mod_version
@@ -22,6 +23,9 @@ loom {
     }
 }
 
+opensesame.apply(sourceSets.main)
+opensesame.apply(sourceSets.client)
+
 
 repositories {
     maven {
@@ -36,12 +40,13 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modApi "com.github.sakura-ryoko:malilib:${project.malilib_version}"
 
+    modImplementation include("dev.lukebemish.opensesame:opensesame-fabric:${project.opensesame_version}")
     implementation include("net.fabricmc:tiny-remapper:${project.tiny_version}")
     implementation include("net.fabricmc:mapping-io:${project.mapping_io_version}")
     implementation include("org.reflections:reflections:${project.reflections_version}")
     implementation include("org.javassist:javassist:${project.javaasist_version}-GA")
-    modApi "com.github.sakura-ryoko:malilib:${project.malilib_version}"
 }
 
 processResources {
