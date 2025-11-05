@@ -39,3 +39,5 @@ accessible class net/minecraft/client/render/VertexConsumers$Union
 accessible field net/minecraft/client/gui/hud/InGameHud subtitlesHud Lnet/minecraft/client/gui/hud/SubtitlesHud;
 accessible field net/minecraft/client/gui/hud/SubtitlesHud audibleEntries Ljava/util/List;
 accessible field net/minecraft/client/gui/hud/SubtitlesHud entries Ljava/util/List;
+
+accessible field net/minecraft/client/render/Camera pos Lnet/minecraft/util/math/Vec3d;

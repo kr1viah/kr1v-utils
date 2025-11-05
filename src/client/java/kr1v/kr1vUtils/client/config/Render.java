@@ -2,6 +2,7 @@ package kr1v.kr1vUtils.client.config;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
+import fi.dy.masa.malilib.config.options.ConfigDouble;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
 
 import java.util.HashMap;
@@ -10,7 +11,10 @@ import java.util.Map;
 
 @SuppressWarnings("unused")
 public class Render {
-//    public static final ConfigBooleanHotkeyed
+	public static final ConfigDouble          OFFSET_X = new ConfigDouble("Offset x", 0, -100, 100, "");
+	public static final ConfigDouble          OFFSET_Y = new ConfigDouble("Offset y", 0, -100, 100,"");
+	public static final ConfigDouble          OFFSET_Z = new ConfigDouble("Offset z", 0, -100, 100,"");
+	public static final ConfigBooleanHotkeyed RELATIVE_TO_PLAYER_ANGLE = new ConfigBooleanHotkeyed("Offset relative to player angle", true, "", "");
 
 	public static final ConfigLabel SEPARATOR1 = new ConfigLabel("");
 	public static final ConfigLabel SEPARATOR2 = new ConfigLabel("In game hud:");
