@@ -4,6 +4,9 @@
   "package": "kr1v.kr1vUtils.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "actionbar.ClientPlayNetworkHandlerMixin",
+    "actionbar.InGameHudMixin",
+    "actionbar.MessageHandlerMixin",
     "flight.ClientPlayerEntityMixin",
     "flight.ClientPlayNetworkHandlerMixin",
     "gui.ChatHudMixin",

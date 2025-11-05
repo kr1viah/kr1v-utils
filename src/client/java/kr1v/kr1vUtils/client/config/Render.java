@@ -22,7 +22,7 @@ public class Render {
 	public static final ConfigBooleanHotkeyed CHAT = new ConfigBooleanHotkeyed("Chat", true, "", "renderChat");
 	public static final ConfigBooleanHotkeyed SCOREBOARD_SIDEBAR = new ConfigBooleanHotkeyed("Scoreboard sidebar", true, "", "renderScoreboardSidebar");
 	public static final ConfigBooleanHotkeyed PLAYER_LIST = new ConfigBooleanHotkeyed("Player list", true, "", "renderPlayerList");
-	public static final ConfigBooleanHotkeyed CROSSHAIR = new ConfigBooleanHotkeyed("Crosshair", true, "", "renderCrosshair");
+	public static final ConfigBooleanHotkeyed CROSSHAIR = new ConfigBooleanHotkeyed("Crosshair (igh)", true, "", "renderCrosshair");
 	public static final ConfigBooleanHotkeyed STATUS_EFFECT_OVERLAY = new ConfigBooleanHotkeyed("Status effect overlay", true, "", "renderStatusEffectOverlay");
 	public static final ConfigBooleanHotkeyed MAIN_HUD = new ConfigBooleanHotkeyed("Main HUD", true, "", "renderMainHud");
 	public static final ConfigBooleanHotkeyed HOTBAR = new ConfigBooleanHotkeyed("Hotbar", true, "", "renderHotbar");
