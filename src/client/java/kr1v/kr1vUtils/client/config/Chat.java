@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.config.options.ConfigColor;
+import fi.dy.masa.malilib.config.options.ConfigString;
 import fi.dy.masa.malilib.config.options.ConfigStringList;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import kr1v.kr1vUtils.client.gui.BetterChatHud;
@@ -18,6 +19,8 @@ public class Chat {
 	public static final ConfigBooleanHotkeyed ALLOW_DUPLICATE_SUBTITLES = new ConfigBooleanHotkeyed("Duplicate subtitles", false, "", "Allow having multiple of the same message after each other in the subtitles");
 	public static final ConfigBooleanHotkeyed CHAT_SELECTING = new ConfigBooleanHotkeyed("Chat selecting", true, "LEFT_CONTROL,C", KeybindSettings.GUI, "Be able to select and copy the chat");
 	public static final ConfigColor CHAT_SELECTED_TEXT_BACKGROUND_COLOUR = new ConfigColor("Selected text background colour", "0xAA0033FF", "");
+	public static final ConfigBooleanHotkeyed ADD_HOVER_TIMESTAMP = new ConfigBooleanHotkeyed("Add hover timestamp", true, "", "");
+	public static final ConfigString TIMESTAMP_FORMAT = new ConfigString("Timestamp format", "[HH:mm:ss]",  "");
 
 	public static final List<? extends IConfigBase> OPTIONS = ConfigHandler.generateOptions();
 
