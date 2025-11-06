@@ -1,17 +1,16 @@
 package kr1v.kr1vUtils.client.config;
 
 import com.google.common.collect.ImmutableList;
-import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.config.options.ConfigColor;
 import fi.dy.masa.malilib.config.options.ConfigString;
 import fi.dy.masa.malilib.config.options.ConfigStringList;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import kr1v.kr1vUtils.client.gui.BetterChatHud;
+import kr1v.kr1vUtils.client.utils.annotation.Config;
 import net.minecraft.client.MinecraftClient;
 
-import java.util.List;
-
+@Config
 @SuppressWarnings("unused")
 public class Chat {
 	public static final ConfigStringList CHAT_HIDE = new ConfigStringList("Prevent messages with these regex strings from getting added to the chat", ImmutableList.of(), "Happens after replacing");
@@ -21,8 +20,6 @@ public class Chat {
 	public static final ConfigColor CHAT_SELECTED_TEXT_BACKGROUND_COLOUR = new ConfigColor("Selected text background colour", "0xAA0033FF", "");
 	public static final ConfigBooleanHotkeyed ADD_HOVER_TIMESTAMP = new ConfigBooleanHotkeyed("Add hover timestamp", true, "", "");
 	public static final ConfigString TIMESTAMP_FORMAT = new ConfigString("Timestamp format", "[HH:mm:ss]",  "");
-
-	public static final List<? extends IConfigBase> OPTIONS = ConfigHandler.generateOptions();
 
 	static {
 		CHAT_SELECTING.getKeybind().setCallback((button, keybind) -> {

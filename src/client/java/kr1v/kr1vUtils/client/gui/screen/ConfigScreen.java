@@ -8,6 +8,7 @@ import fi.dy.masa.malilib.util.StringUtils;
 import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.kr1vUtils.client.config.*;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
+import kr1v.kr1vUtils.client.utils.Annotations;
 import net.minecraft.client.gui.DrawContext;
 
 import java.util.List;
@@ -84,12 +85,12 @@ public class ConfigScreen extends GuiConfigsBase {
 	}
 
 	public enum ConfigGuiTab {
-		CHAT("Chat", Chat.OPTIONS),
-		DEBUG("Debug", Debug.OPTIONS),
-		KEYS("Keys", Keys.OPTIONS),
-		MISC("Misc", Misc.OPTIONS),
-		RENDER("Render", Render.OPTIONS),
-		SCREEN("Screen", Screen.OPTIONS);
+		CHAT("Chat", Annotations.configsFor(Chat.class)),
+		DEBUG("Debug", Annotations.configsFor(Debug.class)),
+		KEYS("Keys", Annotations.configsFor(Keys.class)),
+		MISC("Misc", Annotations.configsFor(Misc.class)),
+		RENDER("Render", Annotations.configsFor(Render.class)),
+		SCREEN("Screen", Annotations.configsFor(Screen.class));
 
 		private final String translationKey;
 		private final List<? extends IConfigBase> options;

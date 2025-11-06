@@ -1,21 +1,21 @@
 package kr1v.kr1vUtils.client.config;
 
 import com.google.common.collect.ImmutableList;
-import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.config.options.ConfigHotkey;
 import fi.dy.masa.malilib.config.options.ConfigStringList;
 import fi.dy.masa.malilib.gui.GuiBase;
 import kr1v.kr1vUtils.client.gui.screen.ConfigScreen;
 import kr1v.kr1vUtils.client.gui.screen.DummyScreen;
+import kr1v.kr1vUtils.client.utils.annotation.Config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+@Config
 @SuppressWarnings("unused")
 public class Misc {
 	public static boolean preventClosingOnce = false;
@@ -34,8 +34,6 @@ public class Misc {
 	public static final ConfigBooleanHotkeyed CLIENT_ON_TOP = new ConfigBooleanHotkeyed("Put client action bar on top", true, "", "");
 	public static final ConfigBooleanHotkeyed SAVE_LAST_POSITION = new ConfigBooleanHotkeyed("Remember where you were exactly in configs", true, "", "");
 	public static final Map<String, Integer> tabToScrollPosition = new HashMap<>();
-
-	public static final List<? extends IConfigBase> OPTIONS = ConfigHandler.generateOptions();
 
 	static {
 		OPEN_GUI.getKeybind().setCallback((keyAction, keybind) -> {

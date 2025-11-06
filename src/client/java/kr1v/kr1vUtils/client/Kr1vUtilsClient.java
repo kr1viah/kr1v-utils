@@ -13,6 +13,7 @@ import kr1v.kr1vUtils.client.config.ConfigHandler;
 import kr1v.kr1vUtils.client.config.Render;
 import kr1v.kr1vUtils.client.gui.screen.ConfigScreen;
 import kr1v.kr1vUtils.client.malilib.event.InputHandler;
+import kr1v.kr1vUtils.client.utils.Annotations;
 import kr1v.kr1vUtils.client.utils.ClassUtils;
 import kr1v.kr1vUtils.client.utils.MappingUtils;
 import kr1v.kr1vUtils.client.utils.StringUtils;
@@ -33,6 +34,8 @@ public class Kr1vUtilsClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		ClassUtils.touch(Annotations.class, MappingUtils.class);
+
 		var ilb = new ImmutableList.Builder<IConfigBase>();
 
 		ilb.addAll(ConfigHandler.generateOptions(Render.class));
@@ -54,7 +57,8 @@ public class Kr1vUtilsClient implements ClientModInitializer {
 			}
 		}
 
-		Render.OPTIONS = ilb.build();
+		Annotations.configsFor(Render.class).clear();
+		Annotations.configsFor(Render.class).addAll(ilb.build());
 
 		ConfigHandler configHandler = new ConfigHandler();
 
@@ -71,10 +75,5 @@ public class Kr1vUtilsClient implements ClientModInitializer {
 
 		ClientLifecycleEvents.CLIENT_STOPPING.register(client -> configHandler.save());
 
-		try {
-			Class.forName(MappingUtils.class.getName());
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
 	}
 }

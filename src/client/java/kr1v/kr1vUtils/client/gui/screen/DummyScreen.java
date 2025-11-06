@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.text.Style;
 
+@SuppressWarnings("DataFlowIssue")
 public class DummyScreen extends ChatScreen {
 	public DummyScreen() {
 		super("");

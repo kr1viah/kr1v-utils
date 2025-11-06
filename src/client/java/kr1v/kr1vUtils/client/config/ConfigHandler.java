@@ -12,6 +12,7 @@ import fi.dy.masa.malilib.hotkeys.KeybindMulti;
 import fi.dy.masa.malilib.util.JsonUtils;
 import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.kr1vUtils.client.gui.screen.ConfigScreen;
+import kr1v.kr1vUtils.client.utils.Annotations;
 import net.minecraft.client.MinecraftClient;
 
 import java.io.File;
@@ -46,12 +47,12 @@ public class ConfigHandler implements IConfigHandler {
 					}
 				}
 
-				ConfigUtils.readConfigBase(root, "Chat", Chat.OPTIONS);
-				ConfigUtils.readConfigBase(root, "Debug", Debug.OPTIONS);
-				ConfigUtils.readConfigBase(root, "Keys", Keys.OPTIONS);
-				ConfigUtils.readConfigBase(root, "Misc", Misc.OPTIONS);
-				ConfigUtils.readConfigBase(root, "Render", Render.OPTIONS);
-				ConfigUtils.readConfigBase(root, "Screen", Screen.OPTIONS);
+				ConfigUtils.readConfigBase(root, "Chat", Annotations.configsFor(Chat.class));
+				ConfigUtils.readConfigBase(root, "Debug", Annotations.configsFor(Debug.class));
+				ConfigUtils.readConfigBase(root, "Keys", Annotations.configsFor(Keys.class));
+				ConfigUtils.readConfigBase(root, "Misc", Annotations.configsFor(Misc.class));
+				ConfigUtils.readConfigBase(root, "Render", Annotations.configsFor(Render.class));
+				ConfigUtils.readConfigBase(root, "Screen", Annotations.configsFor(Screen.class));
 			}
 		}
 	}
@@ -70,12 +71,12 @@ public class ConfigHandler implements IConfigHandler {
 			}
 			root.add("scrollPositions", scrollPositions);
 
-			ConfigUtils.writeConfigBase(root, "Chat", Chat.OPTIONS);
-			ConfigUtils.writeConfigBase(root, "Debug", Debug.OPTIONS);
-			ConfigUtils.writeConfigBase(root, "Keys", Keys.OPTIONS);
-			ConfigUtils.writeConfigBase(root, "Misc", Misc.OPTIONS);
-			ConfigUtils.writeConfigBase(root, "Render", Render.OPTIONS);
-			ConfigUtils.writeConfigBase(root, "Screen", Screen.OPTIONS);
+			ConfigUtils.writeConfigBase(root, "Chat", Annotations.configsFor(Chat.class));
+			ConfigUtils.writeConfigBase(root, "Debug", Annotations.configsFor(Debug.class));
+			ConfigUtils.writeConfigBase(root, "Keys", Annotations.configsFor(Keys.class));
+			ConfigUtils.writeConfigBase(root, "Misc", Annotations.configsFor(Misc.class));
+			ConfigUtils.writeConfigBase(root, "Render", Annotations.configsFor(Render.class));
+			ConfigUtils.writeConfigBase(root, "Screen", Annotations.configsFor(Screen.class));
 
 			JsonUtils.writeJsonToFile(root, new File(dir, CONFIG_FILE_NAME));
 		}
@@ -88,16 +89,6 @@ public class ConfigHandler implements IConfigHandler {
 				return true;
 			});
 		}
-	}
-
-	public static ImmutableList<IConfigBase> generateOptions() {
-		Class<?> clazz = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
-			.walk(frames -> frames
-				.skip(1)
-				.findFirst()
-				.map(StackWalker.StackFrame::getDeclaringClass)
-				.orElse(null));
-		return generateOptions(clazz);
 	}
 
 	public static ImmutableList<IConfigBase> generateOptions(Class<?> clazz) {

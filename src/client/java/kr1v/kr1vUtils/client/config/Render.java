@@ -1,14 +1,14 @@
 package kr1v.kr1vUtils.client.config;
 
-import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.config.options.ConfigDouble;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
+import kr1v.kr1vUtils.client.utils.annotation.Config;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+@Config
 @SuppressWarnings("unused")
 public class Render {
 	public static final ConfigDouble          OFFSET_X = new ConfigDouble("Offset x", 0, -100, 100, "");
@@ -65,6 +65,4 @@ public class Render {
 	public static final ConfigLabel SEPARATOR6 = new ConfigLabel("Render layer:");
 
 	public static final Map<String, ConfigBooleanHotkeyed> RENDER_HOTKEYS = new HashMap<>();
-
-	public static List<? extends IConfigBase> OPTIONS;
 }

@@ -1,16 +1,15 @@
 package kr1v.kr1vUtils.client.config;
 
-import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.hotkeys.KeybindMulti;
+import kr1v.kr1vUtils.client.utils.annotation.Config;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
 
-import java.util.List;
-
+@Config
 @SuppressWarnings("unused")
 public class Keys {
 	public static final ConfigBooleanHotkeyed DISPLAY_CURRENTLY_PRESSED_KEYS = new ConfigBooleanHotkeyed("Display currently pressed keys", false, "", "");
@@ -19,8 +18,6 @@ public class Keys {
 	public static final ConfigInteger PRESSED_KEYS_Y = new ConfigInteger("Currently pressed keys Y", 0, "");
 	public static final ConfigInteger PRESSED_MOUSE_X = new ConfigInteger("Currently pressed mouse X", 2, "");
 	public static final ConfigInteger PRESSED_MOUSE_Y = new ConfigInteger("Currently pressed mouse Y", 11, "");
-
-	public static final List<? extends IConfigBase> OPTIONS = ConfigHandler.generateOptions();
 
 	static {
 		//noinspection deprecation

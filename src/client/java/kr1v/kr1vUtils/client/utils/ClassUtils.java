@@ -5,6 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClassUtils {
+	public static void touch(Class<?>... classes) {
+		for (Class<?> clazz : classes) {
+			touch(clazz);
+		}
+	}
+
+	public static void touch(Class<?> clazz) {
+		try {
+			Class.forName(clazz.getName());
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	public static List<Field> getAllFields(Class<?> clazz) {
 		List<Field> output = new ArrayList<>(List.of(clazz.getDeclaredFields()));
 		if (clazz != Object.class)

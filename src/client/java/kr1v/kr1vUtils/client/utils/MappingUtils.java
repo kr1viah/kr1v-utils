@@ -1,5 +1,6 @@
 package kr1v.kr1vUtils.client.utils;
 
+import kr1v.kr1vUtils.client.utils.annotation.Touch;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.mappingio.MappingReader;
 import net.fabricmc.mappingio.tree.MappingTree;
@@ -22,6 +23,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.zip.GZIPInputStream;
 
+@Touch
 public class MappingUtils {
 	private static final Map<String, String> cachedClasses = new HashMap<>();
 	private static final Map<String, String> cachedFields = new HashMap<>();
@@ -30,6 +32,7 @@ public class MappingUtils {
 	private static final Path mappingsPath = MinecraftClient.getInstance().runDirectory.toPath().resolve(".tiny").resolve("yarn-" + MinecraftVersion.CURRENT.getName() + "+build.1-tiny");
 
 
+	@SuppressWarnings("DataFlowIssue")
 	public static String intermediaryToYarn(Class<?> intermediaryClass) {
 		String intermediaryName = intermediaryClass.getName();
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) return intermediaryName; // already yarn
@@ -53,6 +56,7 @@ public class MappingUtils {
 		return yarnName.substring(yarnName.lastIndexOf(".") + 1);
 	}
 
+	@SuppressWarnings("DataFlowIssue")
 	public static String intermediaryToYarn(Field intermediaryField) {
 		String ownerInter = intermediaryField.getDeclaringClass().getName();
 		String key = ownerInter + "#" + intermediaryField.getName() + ":" + descriptorForType(intermediaryField.getType());
@@ -101,6 +105,7 @@ public class MappingUtils {
 		return full.substring(full.lastIndexOf(".") + 1);
 	}
 
+	@SuppressWarnings("DataFlowIssue")
 	public static String intermediaryToYarn(Method intermediaryMethod) {
 		String ownerInter = intermediaryMethod.getDeclaringClass().getName();
 		String desc = descriptorForMethod(intermediaryMethod);
@@ -209,12 +214,13 @@ public class MappingUtils {
 
 				Files.copy(in, gzPath, StandardCopyOption.REPLACE_EXISTING);
 				GZIPInputStream gis = new GZIPInputStream(new FileInputStream(gzPath.toFile()));
-				FileOutputStream fos = new FileOutputStream(mappingsPath.toFile());
+				try (FileOutputStream fos = new FileOutputStream(mappingsPath.toFile())) {
 
-				byte[] buffer = new byte[8192];
-				int len;
-				while ((len = gis.read(buffer)) != -1) {
-					fos.write(buffer, 0, len);
+					byte[] buffer = new byte[8192];
+					int len;
+					while ((len = gis.read(buffer)) != -1) {
+						fos.write(buffer, 0, len);
+					}
 				}
 
 				Files.delete(gzPath);
