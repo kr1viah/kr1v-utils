@@ -12,7 +12,9 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class Misc {
@@ -30,6 +32,8 @@ public class Misc {
 	public static final ConfigBooleanHotkeyed PRINT_MISSED_JUMPS = new ConfigBooleanHotkeyed("Print missed jumps", false, "", "Prints a message to the chat when a jump is missed");
 	public static final ConfigBooleanHotkeyed SEPARATE_SERVER_CLIENT_ACTION_BAR = new ConfigBooleanHotkeyed("Separate the server and client action bar", true, "", "");
 	public static final ConfigBooleanHotkeyed CLIENT_ON_TOP = new ConfigBooleanHotkeyed("Put client action bar on top", true, "", "");
+	public static final ConfigBooleanHotkeyed SAVE_LAST_POSITION = new ConfigBooleanHotkeyed("Remember where you were exactly in configs", true, "", "");
+	public static final Map<String, Integer> tabToScrollPosition = new HashMap<>();
 
 	public static final List<? extends IConfigBase> OPTIONS = ConfigHandler.generateOptions();
 

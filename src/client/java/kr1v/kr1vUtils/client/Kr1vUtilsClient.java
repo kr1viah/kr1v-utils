@@ -18,6 +18,7 @@ import kr1v.kr1vUtils.client.utils.MappingUtils;
 import kr1v.kr1vUtils.client.utils.StringUtils;
 import kr1v.kr1vUtils.client.utils.malilib.KeybindSetting;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.minecraft.client.render.RenderLayer;
 
 import java.lang.reflect.Field;
@@ -55,8 +56,10 @@ public class Kr1vUtilsClient implements ClientModInitializer {
 
 		Render.OPTIONS = ilb.build();
 
+		ConfigHandler configHandler = new ConfigHandler();
+
 		InitializationHandler.getInstance().registerInitializationHandler(() -> {
-			ConfigManager.getInstance().registerConfigHandler(Kr1vUtilsClient.MOD_ID, new ConfigHandler());
+			ConfigManager.getInstance().registerConfigHandler(Kr1vUtilsClient.MOD_ID, configHandler);
 
 			Registry.CONFIG_SCREEN.registerConfigScreenFactory(
 				new ModInfo(Kr1vUtilsClient.MOD_ID, Kr1vUtilsClient.MOD_ID, ConfigScreen::new)
@@ -65,6 +68,8 @@ public class Kr1vUtilsClient implements ClientModInitializer {
 			InputEventHandler.getInputManager().registerKeyboardInputHandler(InputHandler.getInstance());
 			InputEventHandler.getInputManager().registerMouseInputHandler(InputHandler.getInstance());
 		});
+
+		ClientLifecycleEvents.CLIENT_STOPPING.register(client -> configHandler.save());
 
 		try {
 			Class.forName(MappingUtils.class.getName());

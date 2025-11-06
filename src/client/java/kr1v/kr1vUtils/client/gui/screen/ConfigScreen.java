@@ -13,7 +13,7 @@ import net.minecraft.client.gui.DrawContext;
 import java.util.List;
 
 public class ConfigScreen extends GuiConfigsBase {
-	public static ConfigGuiTab tab = ConfigGuiTab.MISC;
+	public static ConfigGuiTab tab = null;
 
 	public ConfigScreen() {
 		super(10, 50, Kr1vUtilsClient.MOD_ID, null, "Configs", "0.0.0");
@@ -32,6 +32,7 @@ public class ConfigScreen extends GuiConfigsBase {
 		}
 	}
 
+	@SuppressWarnings("SameParameterValue")
 	private int createButton(int x, int y, int width, ConfigGuiTab tab) {
 		ButtonGeneric button = new ButtonGeneric(x, y, width, 20, tab.getDisplayName());
 		button.setEnabled(ConfigScreen.tab != tab);
@@ -40,12 +41,22 @@ public class ConfigScreen extends GuiConfigsBase {
 		this.addButton(button, (button1, mouseButton) -> {
 			ConfigScreen.tab = tab2;
 			reCreateListWidget(); // apply the new config width
-			if (getListWidget() != null)
-				getListWidget().resetScrollbarPosition();
 			initGui();
 		});
 
 		return button.getWidth() + 2;
+	}
+
+	@Override
+	protected void reCreateListWidget() {
+		super.reCreateListWidget();
+		if (getListWidget() != null)
+			getListWidget().getScrollbar().setValue(Misc.tabToScrollPosition.getOrDefault(ConfigScreen.tab.toString(),0));
+	}
+
+	@Override
+	protected void closeGui(boolean showParent) {
+		super.closeGui(showParent);
 	}
 
 	@Override
