@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActionbarMessageManager {
-	public static List<Text> serverMessages = new ArrayList<>();
+	public static final List<Text> serverMessages = new ArrayList<>();
 
 	public static boolean displayOnTop(Text text) {
 		if (serverMessages.remove(text)) {

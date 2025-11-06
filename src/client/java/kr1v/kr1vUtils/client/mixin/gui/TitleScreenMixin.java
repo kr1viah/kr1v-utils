@@ -34,7 +34,7 @@ public abstract class TitleScreenMixin extends Screen {
 	public abstract void tick();
 
 	@Unique
-	List<MultiplayerServerListWidget.ServerEntry> serverEntries = new ArrayList<>();
+	private final List<MultiplayerServerListWidget.ServerEntry> serverEntries = new ArrayList<>();
 
 	protected TitleScreenMixin(Text title) {
 		super(title);

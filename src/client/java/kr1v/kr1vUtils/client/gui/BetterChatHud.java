@@ -212,24 +212,26 @@ public class BetterChatHud extends ChatHud {
 									int sStart = Math.clamp(normSelectCharacterStart, 0, len);
 									int sEnd = Math.clamp(normSelectCharacterEnd, 0, len);
 
+									String sens = full.substring(0, Math.min(sStart, len));
+									String ness = full.substring(0, Math.min(sEnd, len));
 									if (isFirst(messageIndex) && isLast(messageIndex)) {
 										if (sStart < sEnd) {
-											normalEndSelectedStart = client.textRenderer.getWidth(full.substring(0, Math.min(sStart, len)));
-											selectedEndNormalStart = client.textRenderer.getWidth(full.substring(0, Math.min(sEnd, len)));
+											normalEndSelectedStart = client.textRenderer.getWidth(sens);
+											selectedEndNormalStart = client.textRenderer.getWidth(ness);
 											selectedTextBuilder.append(full, sStart, sEnd);
 											selectedTextBuilder.append("\n");
 										} else {
-											normalEndSelectedStart = client.textRenderer.getWidth(full.substring(0, Math.min(sEnd, len)));
-											selectedEndNormalStart = client.textRenderer.getWidth(full.substring(0, Math.min(sStart, len)));
+											normalEndSelectedStart = client.textRenderer.getWidth(ness);
+											selectedEndNormalStart = client.textRenderer.getWidth(sens);
 											selectedTextBuilder.append(full, sEnd, sStart);
 											selectedTextBuilder.append("\n");
 										}
 									} else if (isFirst(messageIndex)) {
-										selectedEndNormalStart = client.textRenderer.getWidth(full.substring(0, Math.min(sStart, len)));
+										selectedEndNormalStart = client.textRenderer.getWidth(sens);
 										selectedTextBuilder.append(full, 0, sStart);
 										selectedTextBuilder.append("\n");
 									} else if (isLast(messageIndex)) {
-										normalEndSelectedStart = client.textRenderer.getWidth(full.substring(0, Math.min(sEnd, len)));
+										normalEndSelectedStart = client.textRenderer.getWidth(ness);
 										selectedEndNormalStart = end;
 										selectedTextBuilder.append(full, sEnd, len);
 										selectedTextBuilder.append("\n");

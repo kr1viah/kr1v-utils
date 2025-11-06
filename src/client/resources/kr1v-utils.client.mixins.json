@@ -16,7 +16,6 @@
     "gui.ParentElementMixin",
     "gui.SubtitlesHudMixin",
     "gui.TitleScreenMixin",
-    "render.GameRendererMixin",
     "render.InGameHudMixin",
     "render.RenderLayerMixin",
     "render.VertexConsumerMixin1",
