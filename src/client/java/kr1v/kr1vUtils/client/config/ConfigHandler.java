@@ -1,6 +1,5 @@
 package kr1v.kr1vUtils.client.config;
 
-import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
@@ -18,6 +17,8 @@ import net.minecraft.client.MinecraftClient;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ConfigHandler implements IConfigHandler {
@@ -91,9 +92,8 @@ public class ConfigHandler implements IConfigHandler {
 		}
 	}
 
-	public static ImmutableList<IConfigBase> generateOptions(Class<?> clazz) {
-		ImmutableList.Builder<IConfigBase> ilb = ImmutableList.builder();
-
+	public static List<IConfigBase> generateOptions(Class<?> clazz) {
+		List<IConfigBase> list = new ArrayList<>();
 		for (Field f : clazz.getDeclaredFields()) {
 			int mods = f.getModifiers();
 			if (Modifier.isStatic(mods) && IConfigBase.class.isAssignableFrom(f.getType())) {
@@ -101,7 +101,7 @@ public class ConfigHandler implements IConfigHandler {
 					f.setAccessible(true);
 					IConfigBase value = (IConfigBase) f.get(null);
 					if (value != null) {
-						ilb.add(value);
+                        list.add(value);
 
 						if (value instanceof ConfigBooleanHotkeyed cbh) {
 							addToggleHotkey(cbh);
@@ -112,6 +112,6 @@ public class ConfigHandler implements IConfigHandler {
 				}
 			}
 		}
-		return ilb.build();
+		return list;
 	}
 }
