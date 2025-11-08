@@ -41,3 +41,6 @@ accessible field net/minecraft/client/gui/hud/SubtitlesHud audibleEntries Ljava/
 accessible field net/minecraft/client/gui/hud/SubtitlesHud entries Ljava/util/List;
 
 accessible field net/minecraft/client/render/Camera pos Lnet/minecraft/util/math/Vec3d;
+
+accessible class net/minecraft/world/border/WorldBorder$StaticArea
+accessible class net/minecraft/world/border/WorldBorder$Area

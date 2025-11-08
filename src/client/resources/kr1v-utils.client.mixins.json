@@ -34,6 +34,20 @@
   },
   "mixins": [
     "malilib.GuiScrollBarMixin",
-    "parcour.LivingEntityMixin"
+    "parcour.LivingEntityMixin",
+    "worldborder.AbstractChunkHolderMixin",
+    "worldborder.BlockPosMixin",
+    "worldborder.EntityMixin",
+    "worldborder.ForceLoadCommandMixin",
+    "worldborder.MinecraftServerMixin",
+    "worldborder.PlayerEntityMixin",
+    "worldborder.ServerPlayNetworkHandlerMixin",
+    "worldborder.ServerPropertiesHandlerMixin",
+    "worldborder.WorldBorderCommandMixin",
+    "worldborder.WorldBorderMixin",
+    "worldborder.WorldBorderPropertiesMixin",
+    "worldborder.WorldBorderStaticAreaMixin",
+    "worldborder.WorldMixin",
+    "worldborder.WorldViewMixin"
   ]
 }

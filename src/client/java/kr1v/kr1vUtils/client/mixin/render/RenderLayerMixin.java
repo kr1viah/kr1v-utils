@@ -19,7 +19,8 @@ public abstract class RenderLayerMixin extends RenderLayer {
 	private void injected(BuiltBuffer buffer, CallbackInfo ci) {
 		ConfigBooleanHotkeyed correspondingHotkey = Render.RENDER_HOTKEYS.get(getName());
 		if (correspondingHotkey == null) {
-            throw new IllegalStateException("Render layer " + getName() + " did not have a corresponding hotkey.");
+            return;
+//            throw new IllegalStateException("Render layer " + getName() + " did not have a corresponding hotkey.");
 		}
 		if (!correspondingHotkey.getBooleanValue()) {
 			ci.cancel();
