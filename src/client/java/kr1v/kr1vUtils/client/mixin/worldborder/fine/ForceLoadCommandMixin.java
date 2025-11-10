@@ -1,4 +1,4 @@
-package kr1v.kr1vUtils.client.mixin.worldborder;
+package kr1v.kr1vUtils.client.mixin.worldborder.fine;
 
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;

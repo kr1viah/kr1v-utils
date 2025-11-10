@@ -20,10 +20,38 @@ import java.util.Map;
 public class Misc {
 	public static boolean preventClosingOnce = false;
 
-	public static final ConfigHotkey OPEN_GUI = new ConfigHotkey("Open config gui", "G,C", "");
-	public static final ConfigHotkey SHOW_CURSOR = new ConfigHotkey("Show cursor", "", "");
-	public static final ConfigBooleanHotkeyed ALWAYS_CLOSE_BUTTON = new ConfigBooleanHotkeyed("Always close screens upon pressing escape", false, "", "");
-	public static final ConfigHotkey FORCE_TOGGLE_FLIGHT = new ConfigHotkey("Force toggle creative flight", "", "");
+	public static final ConfigHotkey OPEN_GUI = new ConfigHotkey("Open config gui", "G,C", "") {{
+        this.getKeybind().setCallback((keyAction, keybind) -> {
+            GuiBase.openGui(new ConfigScreen());
+            return true;
+        });
+    }};
+	public static final ConfigHotkey SHOW_CURSOR = new ConfigHotkey("Show cursor", "", "") {{
+        this.getKeybind().setCallback((button, keybind) -> {
+            MinecraftClient.getInstance().setScreen(new DummyScreen());
+            return true;
+        });
+    }};
+	public static final ConfigBooleanHotkeyed ALWAYS_CLOSE_BUTTON = new ConfigBooleanHotkeyed("Always close screens upon pressing escape", false, "", "") {{
+        this.getKeybind().setCallback((keyAction, keybind) -> {
+            preventClosingOnce = true;
+            if (MinecraftClient.getInstance().currentScreen != null)
+                MinecraftClient.getInstance().currentScreen.close();
+            preventClosingOnce = false;
+            return true;
+        });
+    }};
+	public static final ConfigHotkey FORCE_TOGGLE_FLIGHT = new ConfigHotkey("Force toggle creative flight", "", "") {{
+        this.getKeybind().setCallback((button, keybind) -> {
+            ClientPlayerEntity player = MinecraftClient.getInstance().player;
+            if (player != null && player.getAbilities().allowFlying) {
+                player.getAbilities().flying = !player.getAbilities().flying;
+                if (!PREVENT_FLIGHT_STATE_CHANGE.getBooleanValue() && player.isOnGround())
+                    player.addVelocity(new Vec3d(0, 0.08, 0));
+            }
+            return true;
+        });
+    }};
 	public static final ConfigBooleanHotkeyed PREVENT_FLIGHT_STATE_CHANGE = new ConfigBooleanHotkeyed("Prevent creative flight state change", false, "", "");
 	public static final ConfigStringList QUICKPLAY_SERVERS = new ConfigStringList("Servers to put onto the main menu", ImmutableList.of(), "Separate name with ip with a #");
 	public static final ConfigBooleanHotkeyed FAST_MAIN_MENU = new ConfigBooleanHotkeyed("Fast main menu", true, "", "");
@@ -33,35 +61,6 @@ public class Misc {
 	public static final ConfigBooleanHotkeyed SEPARATE_SERVER_CLIENT_ACTION_BAR = new ConfigBooleanHotkeyed("Separate the server and client action bar", true, "", "");
 	public static final ConfigBooleanHotkeyed CLIENT_ON_TOP = new ConfigBooleanHotkeyed("Put client action bar on top", true, "", "");
 	public static final ConfigBooleanHotkeyed SAVE_LAST_POSITION = new ConfigBooleanHotkeyed("Remember where you were exactly in configs", true, "", "");
+
 	public static final Map<String, Integer> tabToScrollPosition = new HashMap<>();
-
-	static {
-		OPEN_GUI.getKeybind().setCallback((keyAction, keybind) -> {
-			GuiBase.openGui(new ConfigScreen());
-			return true;
-		});
-
-		ALWAYS_CLOSE_BUTTON.getKeybind().setCallback((keyAction, keybind) -> {
-			preventClosingOnce = true;
-			if (MinecraftClient.getInstance().currentScreen != null)
-				MinecraftClient.getInstance().currentScreen.close();
-			preventClosingOnce = false;
-			return true;
-		});
-
-		SHOW_CURSOR.getKeybind().setCallback((button, keybind) -> {
-			MinecraftClient.getInstance().setScreen(new DummyScreen());
-			return true;
-		});
-
-		FORCE_TOGGLE_FLIGHT.getKeybind().setCallback((button, keybind) -> {
-			ClientPlayerEntity player = MinecraftClient.getInstance().player;
-			if (player != null && player.getAbilities().allowFlying) {
-				player.getAbilities().flying = !player.getAbilities().flying;
-				if (!PREVENT_FLIGHT_STATE_CHANGE.getBooleanValue() && player.isOnGround())
-					player.addVelocity(new Vec3d(0, 0.08, 0));
-			}
-			return true;
-		});
-	}
 }

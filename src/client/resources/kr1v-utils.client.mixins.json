@@ -21,7 +21,8 @@
     "render.VertexConsumerMixin1",
     "render.VertexConsumerMixin2",
     "render.VertexConsumerMixin3",
-    "render.WorldRendererMixin"
+    "render.WorldRendererMixin",
+    "worldborder.compatbreakers.WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -35,19 +36,31 @@
   "mixins": [
     "malilib.GuiScrollBarMixin",
     "parcour.LivingEntityMixin",
-    "worldborder.AbstractChunkHolderMixin",
-    "worldborder.BlockPosMixin",
-    "worldborder.EntityMixin",
-    "worldborder.ForceLoadCommandMixin",
-    "worldborder.MinecraftServerMixin",
-    "worldborder.PlayerEntityMixin",
-    "worldborder.ServerPlayNetworkHandlerMixin",
-    "worldborder.ServerPropertiesHandlerMixin",
-    "worldborder.WorldBorderCommandMixin",
-    "worldborder.WorldBorderMixin",
-    "worldborder.WorldBorderPropertiesMixin",
-    "worldborder.WorldBorderStaticAreaMixin",
-    "worldborder.WorldMixin",
-    "worldborder.WorldViewMixin"
+    "worldborder.compatbreakers.BlockPosMixin",
+    "worldborder.compatbreakers.ChunkDeltaUpdateS2CPacketMixin",
+    "worldborder.compatbreakers.ChunkSectionPosMixin",
+    "worldborder.compatbreakers.LightStorageMixin",
+    "worldborder.compatbreakers.PacketByteBufMixin",
+    "worldborder.compatbreakers.PointOfInterestStorageMixin",
+    "worldborder.compatbreakers.ServerChunkLoadingManagerMixin",
+    "worldborder.compatbreakers.SkyLightStorageMixin",
+    "worldborder.fine.AbstractChunkHolderMixin",
+    "worldborder.fine.AquiferSamplerImplMixin",
+    "worldborder.fine.BlockPosMixin",
+    "worldborder.fine.BlockRenderViewMixin",
+    "worldborder.fine.EntityMixin",
+    "worldborder.fine.ForceLoadCommandMixin",
+    "worldborder.fine.MinecraftServerMixin",
+    "worldborder.fine.OctavePerlinNoiseSamplerMixin",
+    "worldborder.fine.PlayerEntityMixin",
+    "worldborder.fine.SectionedEntityCacheMixin",
+    "worldborder.fine.ServerPlayNetworkHandlerMixin",
+    "worldborder.fine.ServerPropertiesHandlerMixin",
+    "worldborder.fine.WorldBorderCommandMixin",
+    "worldborder.fine.WorldBorderMixin",
+    "worldborder.fine.WorldBorderPropertiesAccessor",
+    "worldborder.fine.WorldBorderPropertiesMixin",
+    "worldborder.fine.WorldMixin",
+    "worldborder.fine.WorldViewMixin"
   ]
 }
