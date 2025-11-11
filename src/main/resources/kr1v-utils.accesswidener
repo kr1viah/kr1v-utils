@@ -46,3 +46,5 @@ accessible class net/minecraft/world/border/WorldBorder$StaticArea
 accessible class net/minecraft/world/border/WorldBorder$Area
 
 accessible method net/minecraft/world/chunk/ChunkStatus register (Ljava/lang/String;Lnet/minecraft/world/chunk/ChunkStatus;Ljava/util/EnumSet;Lnet/minecraft/world/chunk/ChunkType;)Lnet/minecraft/world/chunk/ChunkStatus;
+
+accessible class net/minecraft/structure/pool/StructurePoolBasedGenerator$StructurePoolGenerator

@@ -60,7 +60,7 @@ public class Misc {
 	public static final ConfigBooleanHotkeyed SEPARATE_SERVER_CLIENT_ACTION_BAR = new ConfigBooleanPlus("Separate the server and client action bar", true);
 	public static final ConfigBooleanHotkeyed CLIENT_ON_TOP = new ConfigBooleanPlus("Put client action bar on top", true);
 	public static final ConfigBooleanHotkeyed SAVE_LAST_POSITION = new ConfigBooleanPlus("Remember where you were exactly in configs", true);
-    private static double prevGamma = MinecraftClient.getInstance().options.getGamma().getValue();
+    private static double prevGamma = 0.0;
     public static final ConfigBooleanPlus FULLBRIGHT = new ConfigBooleanPlus("Fullbright", config -> {
         if (config.getBooleanValue()) {
             prevGamma = MinecraftClient.getInstance().options.getGamma().getValue();

@@ -5,11 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
-* Loads this class at mod init
-*/
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface Touch {
-	boolean async() default true;
+@Target(ElementType.FIELD)
+public @interface Labels {
+    Label[] value();
 }

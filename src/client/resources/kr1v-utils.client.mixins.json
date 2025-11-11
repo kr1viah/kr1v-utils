@@ -35,6 +35,15 @@
   "mixins": [
     "malilib.GuiScrollBarMixin",
     "parcour.LivingEntityMixin",
-    "worldgen.ChunkGeneratingMixin"
+    "worldgen.CaveCarverMixin",
+    "worldgen.ChunkGeneratingMixin",
+    "worldgen.NetherCaveCarverMixin",
+    "worldgen.NoiseChunkGeneratorMixin",
+    "worldgen.RavineCarverMixin",
+    "worldgen.StructurePoolBasedGeneratorMixin",
+    "worldgen.StructurePoolGeneratorMixin",
+    "worldgen.SurfaceBuilderMixin",
+    "worldgen.noise.DoublePerlinNoiseSamplerMixin",
+    "worldgen.noise.OctavePerlinNoiseSamplerMixin"
   ]
 }

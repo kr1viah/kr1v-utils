@@ -4,6 +4,7 @@ import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.config.options.ConfigDouble;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
 import kr1v.kr1vUtils.client.utils.annotation.Config;
+import kr1v.kr1vUtils.client.utils.annotation.Label;
 import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
 
 import java.util.HashMap;
@@ -17,9 +18,8 @@ public class Render {
 	public static final ConfigDouble          OFFSET_Z = new ConfigDouble("Offset z", 0, -100, 100,"");
 	public static final ConfigBooleanHotkeyed RELATIVE_TO_PLAYER_ANGLE = new ConfigBooleanPlus("Offset relative to player angle");
 
-	public static final ConfigLabel SEPARATOR1 = new ConfigLabel("");
-	public static final ConfigLabel SEPARATOR2 = new ConfigLabel("In game hud:");
-
+    @Label
+    @Label("In game hud:")
 	public static final ConfigBooleanHotkeyed MISC_OVERLAYS = new ConfigBooleanPlus("Misc overlays");
 	public static final ConfigBooleanHotkeyed SLEEP_OVERLAY = new ConfigBooleanPlus("Sleep overlay");
 	public static final ConfigBooleanHotkeyed OVERLAY_MESSAGE = new ConfigBooleanPlus("Overlay message");
@@ -48,9 +48,8 @@ public class Render {
 	public static final ConfigBooleanHotkeyed HOTBAR_ITEM = new ConfigBooleanPlus("Hotbar item");
 	public static final ConfigBooleanHotkeyed AUTOSAVE_INDICATOR = new ConfigBooleanPlus("Autosave indicator");
 
-	public static final ConfigLabel SEPARATOR3 = new ConfigLabel("");
-	public static final ConfigLabel SEPARATOR4 = new ConfigLabel("Game renderer:");
-
+    @Label
+    @Label("Game renderer:")
 	public static final ConfigBooleanHotkeyed MAIN = new ConfigBooleanPlus("Main");
 	public static final ConfigBooleanHotkeyed PARTICLES = new ConfigBooleanPlus("Particles");
 	public static final ConfigBooleanHotkeyed CLOUDS = new ConfigBooleanPlus("Clouds");
@@ -62,8 +61,8 @@ public class Render {
 	public static final ConfigBooleanHotkeyed TARGET_BLOCK_OUTLINE = new ConfigBooleanPlus("Target block outline");
 	public static final ConfigBooleanHotkeyed SKY = new ConfigBooleanPlus("Sky");
 
-	public static final ConfigLabel SEPARATOR5 = new ConfigLabel("");
-	public static final ConfigLabel SEPARATOR6 = new ConfigLabel("Render layer:");
+    @Label
+	public static final ConfigLabel SEPARATOR = new ConfigLabel("Render layer:");
 
 	public static final Map<String, ConfigBooleanHotkeyed> RENDER_HOTKEYS = new HashMap<>();
 }

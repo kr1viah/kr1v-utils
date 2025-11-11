@@ -11,7 +11,9 @@ import fi.dy.masa.malilib.hotkeys.KeybindMulti;
 import fi.dy.masa.malilib.util.JsonUtils;
 import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.kr1vUtils.client.gui.screen.ConfigScreen;
+import kr1v.kr1vUtils.client.malilib.ConfigLabel;
 import kr1v.kr1vUtils.client.utils.Annotations;
+import kr1v.kr1vUtils.client.utils.annotation.Label;
 import net.minecraft.client.MinecraftClient;
 
 import java.io.File;
@@ -90,15 +92,17 @@ public class ConfigHandler implements IConfigHandler {
 		for (Field f : clazz.getDeclaredFields()) {
 			int mods = f.getModifiers();
 			if (Modifier.isStatic(mods) && IConfigBase.class.isAssignableFrom(f.getType())) {
+                if (f.isAnnotationPresent(Label.class)) {
+                    Label[] labels = f.getAnnotationsByType(Label.class);
+                    for (Label l : labels) {
+                        list.add(new ConfigLabel(l.value()));
+                    }
+                }
 				try {
 					f.setAccessible(true);
 					IConfigBase value = (IConfigBase) f.get(null);
 					if (value != null) {
                         list.add(value);
-
-						if (value instanceof ConfigBooleanHotkeyed cbh) {
-							addToggleHotkey(cbh);
-						}
 					}
 				} catch (IllegalAccessException e) {
 					throw new RuntimeException(e);
