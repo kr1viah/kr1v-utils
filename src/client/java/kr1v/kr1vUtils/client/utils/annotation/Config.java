@@ -4,4 +4,7 @@ import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Config { }
+public @interface Config {
+    String name() default "";
+    boolean defaultEnabled() default true;
+}

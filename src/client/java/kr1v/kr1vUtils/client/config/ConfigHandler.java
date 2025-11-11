@@ -37,7 +37,7 @@ public class ConfigHandler implements IConfigHandler {
 				if (ConfigScreen.tab == null && root.has("lastTab")) {
 					ConfigScreen.tab = ConfigScreen.ConfigGuiTab.valueOf(root.get("lastTab").getAsString());
 				} else if (ConfigScreen.tab == null) {
-					ConfigScreen.tab = ConfigScreen.ConfigGuiTab.MISC;
+					ConfigScreen.tab = ConfigScreen.ConfigGuiTab.valueOf("Misc");
 				}
 
 				if (root.has("scrollPositions") &&
@@ -48,12 +48,9 @@ public class ConfigHandler implements IConfigHandler {
 					}
 				}
 
-				ConfigUtils.readConfigBase(root, "Chat", Annotations.configsFor(Chat.class));
-				ConfigUtils.readConfigBase(root, "Debug", Annotations.configsFor(Debug.class));
-				ConfigUtils.readConfigBase(root, "Keys", Annotations.configsFor(Keys.class));
-				ConfigUtils.readConfigBase(root, "Misc", Annotations.configsFor(Misc.class));
-				ConfigUtils.readConfigBase(root, "Render", Annotations.configsFor(Render.class));
-				ConfigUtils.readConfigBase(root, "Screen", Annotations.configsFor(Screen.class));
+                for (Class<?> configClass : Annotations.CACHE.keySet()) {
+                    ConfigUtils.readConfigBase(root, configClass.getSimpleName(), Annotations.configsFor(configClass));
+                }
 			}
 		}
 	}
@@ -72,13 +69,9 @@ public class ConfigHandler implements IConfigHandler {
 			}
 			root.add("scrollPositions", scrollPositions);
 
-			ConfigUtils.writeConfigBase(root, "Chat", Annotations.configsFor(Chat.class));
-			ConfigUtils.writeConfigBase(root, "Debug", Annotations.configsFor(Debug.class));
-			ConfigUtils.writeConfigBase(root, "Keys", Annotations.configsFor(Keys.class));
-			ConfigUtils.writeConfigBase(root, "Misc", Annotations.configsFor(Misc.class));
-			ConfigUtils.writeConfigBase(root, "Render", Annotations.configsFor(Render.class));
-			ConfigUtils.writeConfigBase(root, "Screen", Annotations.configsFor(Screen.class));
-
+            for (Class<?> configClass : Annotations.CACHE.keySet()) {
+                ConfigUtils.writeConfigBase(root, configClass.getSimpleName(), Annotations.configsFor(configClass));
+            }
 			JsonUtils.writeJsonToFile(root, new File(dir, CONFIG_FILE_NAME));
 		}
 	}

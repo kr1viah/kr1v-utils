@@ -21,8 +21,7 @@
     "render.VertexConsumerMixin1",
     "render.VertexConsumerMixin2",
     "render.VertexConsumerMixin3",
-    "render.WorldRendererMixin",
-    "worldborder.compatbreakers.WorldRendererMixin"
+    "render.WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -36,31 +35,6 @@
   "mixins": [
     "malilib.GuiScrollBarMixin",
     "parcour.LivingEntityMixin",
-    "worldborder.compatbreakers.BlockPosMixin",
-    "worldborder.compatbreakers.ChunkDeltaUpdateS2CPacketMixin",
-    "worldborder.compatbreakers.ChunkSectionPosMixin",
-    "worldborder.compatbreakers.LightStorageMixin",
-    "worldborder.compatbreakers.PacketByteBufMixin",
-    "worldborder.compatbreakers.PointOfInterestStorageMixin",
-    "worldborder.compatbreakers.ServerChunkLoadingManagerMixin",
-    "worldborder.compatbreakers.SkyLightStorageMixin",
-    "worldborder.fine.AbstractChunkHolderMixin",
-    "worldborder.fine.AquiferSamplerImplMixin",
-    "worldborder.fine.BlockPosMixin",
-    "worldborder.fine.BlockRenderViewMixin",
-    "worldborder.fine.EntityMixin",
-    "worldborder.fine.ForceLoadCommandMixin",
-    "worldborder.fine.MinecraftServerMixin",
-    "worldborder.fine.OctavePerlinNoiseSamplerMixin",
-    "worldborder.fine.PlayerEntityMixin",
-    "worldborder.fine.SectionedEntityCacheMixin",
-    "worldborder.fine.ServerPlayNetworkHandlerMixin",
-    "worldborder.fine.ServerPropertiesHandlerMixin",
-    "worldborder.fine.WorldBorderCommandMixin",
-    "worldborder.fine.WorldBorderMixin",
-    "worldborder.fine.WorldBorderPropertiesAccessor",
-    "worldborder.fine.WorldBorderPropertiesMixin",
-    "worldborder.fine.WorldMixin",
-    "worldborder.fine.WorldViewMixin"
+    "worldgen.ChunkGeneratingMixin"
   ]
 }

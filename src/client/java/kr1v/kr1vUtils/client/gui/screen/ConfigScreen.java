@@ -11,6 +11,7 @@ import kr1v.kr1vUtils.client.malilib.ConfigLabel;
 import kr1v.kr1vUtils.client.utils.Annotations;
 import net.minecraft.client.gui.DrawContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigScreen extends GuiConfigsBase {
@@ -84,23 +85,37 @@ public class ConfigScreen extends GuiConfigsBase {
 		super.render(drawContext, mouseX, mouseY, partialTicks);
 	}
 
-	public enum ConfigGuiTab {
-		CHAT("Chat", Annotations.configsFor(Chat.class)),
-		DEBUG("Debug", Annotations.configsFor(Debug.class)),
-		KEYS("Keys", Annotations.configsFor(Keys.class)),
-		MISC("Misc", Annotations.configsFor(Misc.class)),
-		RENDER("Render", Annotations.configsFor(Render.class)),
-		SCREEN("Screen", Annotations.configsFor(Screen.class));
-
+	public static class ConfigGuiTab {
 		private final String translationKey;
 		private final List<? extends IConfigBase> options;
+        private static ConfigGuiTab[] values;
 
 		ConfigGuiTab(String translationKey, List<? extends IConfigBase> options) {
 			this.options = options;
 			this.translationKey = translationKey;
 		}
 
-		public List<? extends IConfigBase> getOptions() {
+        public static ConfigGuiTab[] values() {
+            if (values == null) {
+                List<ConfigGuiTab> valuesList = new ArrayList<>();
+                for (Class<?> clazz : Annotations.CACHE.keySet()) {
+                    valuesList.add(new ConfigGuiTab(Annotations.nameForConfig(clazz), Annotations.configsFor(clazz)));
+                }
+                values = valuesList.toArray(new ConfigGuiTab[0]);
+            }
+            return values;
+        }
+
+        public static ConfigGuiTab valueOf(String lastTab) {
+            for (ConfigGuiTab tab : values()) {
+                if (tab.translationKey.equals(lastTab)) return tab;
+            }
+            System.out.println(lastTab);
+            return values()[0];
+//            throw new RuntimeException("No such tab exists!");
+        }
+
+        public List<? extends IConfigBase> getOptions() {
 			return this.options;
 		}
 

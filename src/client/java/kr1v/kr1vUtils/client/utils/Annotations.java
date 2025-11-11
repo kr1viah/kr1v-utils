@@ -4,6 +4,7 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import kr1v.kr1vUtils.client.config.ConfigHandler;
 import kr1v.kr1vUtils.client.utils.annotation.Config;
 import kr1v.kr1vUtils.client.utils.annotation.Touch;
+import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
 import org.reflections.Reflections;
 
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.Set;
 public final class Annotations {
 	private Annotations() {}
 
-	private static final Map<Class<?>, List<IConfigBase>> CACHE;
+	public static final Map<Class<?>, List<IConfigBase>> CACHE;
 
 	static {
 		Reflections reflections = new Reflections();
@@ -22,7 +23,9 @@ public final class Annotations {
 			Map<Class<?>, List<IConfigBase>> result = new HashMap<>();
 			Set<Class<?>> configTypes = reflections.getTypesAnnotatedWith(Config.class);
 			for (Class<?> cfgClass : configTypes) {
+                ConfigBooleanPlus.defaultEnabled = cfgClass.getAnnotation(Config.class).defaultEnabled();
 				List<IConfigBase> list = ConfigHandler.generateOptions(cfgClass);
+                ConfigBooleanPlus.defaultEnabled = true;
 				result.put(cfgClass, list);
 			}
 			CACHE = result;
@@ -43,4 +46,10 @@ public final class Annotations {
 	public static List<IConfigBase> configsFor(Class<?> configClass) {
 		return CACHE.get(configClass);
 	}
+
+    public static String nameForConfig(Class<?> configClass) {
+        String name = configClass.getAnnotation(Config.class).name();
+        if (name.isEmpty()) name = configClass.getSimpleName();
+        return name;
+    }
 }
