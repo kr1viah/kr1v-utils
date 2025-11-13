@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public class NoiseChunkGeneratorMixin {
     @WrapMethod(method = "getHeight")
     private int getHeight(int x, int z, Heightmap.Type heightmap, HeightLimitView world, NoiseConfig noiseConfig, Operation<Integer> original) {
-        if (WorldGen.OVERRIDE_STRUCTURE_HEIGHT.getBooleanValue()) {
+        if (WorldGen.OVERRIDE_STRUCTURE_HEIGHT.shouldHandle()) {
             return WorldGen.OVERRIDE_STRUCTURE_HEIGHT_VALUE.getIntegerValue();
         }
         return original.call(x, z, heightmap, world, noiseConfig);

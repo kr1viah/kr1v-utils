@@ -20,6 +20,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public class VertexConsumerMixin1 {
 	@WrapMethod(method = "vertex(FFF)Lnet/minecraft/client/render/VertexConsumer;")
 	private VertexConsumer wrap(float x, float y, float z, Operation<VertexConsumer> original) {
+        if (!Render.AFFECT_OFFSETTING.shouldHandle()) return original.call(x, y, z);
 		ClientPlayerEntity player = MinecraftClient.getInstance().player;
 		if (player != null && Render.RELATIVE_TO_PLAYER_ANGLE.getBooleanValue()) {
 			double[] d = PositionOffsetter.worldOffsetFromPlayerAngles(player.getYaw(), player.getPitch());

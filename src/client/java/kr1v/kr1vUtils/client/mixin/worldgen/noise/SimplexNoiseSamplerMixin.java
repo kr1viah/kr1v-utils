@@ -46,7 +46,7 @@ public class SimplexNoiseSamplerMixin {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void setConsts(Random random, CallbackInfo ci) {
-        if (SN_OVERRIDE_SIMPLEX_NOISE.getBooleanValue()) {
+        if (SN_OVERRIDE_SIMPLEX_NOISE.shouldHandle()) {
             SQRT_3 = SN_SQRT_3.getDoubleValue();
             SKEW_FACTOR_2D = SN_SKEW_FACTOR_2d.getDoubleValue();
             UNSKEW_FACTOR_2D = SN_UNSKEW_FACTOR_2d.getDoubleValue();

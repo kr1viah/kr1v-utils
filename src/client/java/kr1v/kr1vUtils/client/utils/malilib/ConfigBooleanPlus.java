@@ -6,10 +6,44 @@ import fi.dy.masa.malilib.hotkeys.IHotkeyCallback;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
 
-public class ConfigBooleanPlus extends ConfigBooleanHotkeyed {
+import static kr1v.kr1vUtils.client.config.ConfigHandler.dependantOns;
+import static kr1v.kr1vUtils.client.config.ConfigHandler.dependencies;
+
+public class ConfigBooleanPlus extends ConfigBooleanHotkeyed implements Plus {
     public static boolean defaultEnabled = true;
+
+    @Override
+    public boolean shouldHandle() {
+        if (!getBooleanValue()) {
+            return false;
+        }
+        if (dependantOns.containsKey(this)) {
+            String[] dependencyNames = dependantOns.get(this);
+            for (String dependencyName : dependencyNames) {
+                ConfigBooleanPlus dependencyConfig = dependencies.get(dependencyName);
+                if (!dependencyConfig.shouldHandle()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public boolean shouldHandleNoThis() {
+        if (dependantOns.containsKey(this)) {
+            String[] dependencyNames = dependantOns.get(this);
+            for (String dependencyName : dependencyNames) {
+                ConfigBooleanPlus dependencyConfig = dependencies.get(dependencyName);
+                if (!dependencyConfig.shouldHandle()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     {
         getKeybind().setCallback((keyAction, keybind) -> {
+            if (!shouldHandleNoThis()) return false;
             setBooleanValue(!getBooleanValue());
             return true;
         });

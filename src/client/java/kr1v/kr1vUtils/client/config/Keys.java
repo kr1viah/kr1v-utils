@@ -1,9 +1,9 @@
 package kr1v.kr1vUtils.client.config;
 
-import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.hotkeys.KeybindMulti;
 import kr1v.kr1vUtils.client.utils.annotation.Config;
+import kr1v.kr1vUtils.client.utils.annotation.DependantOn;
 import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
@@ -13,11 +13,16 @@ import net.minecraft.client.render.RenderTickCounter;
 @Config
 @SuppressWarnings("unused")
 public class Keys {
-	public static final ConfigBooleanHotkeyed DISPLAY_CURRENTLY_PRESSED_KEYS = new ConfigBooleanPlus("Display currently pressed keys");
-	public static final ConfigBooleanHotkeyed DISPLAY_CURRENTLY_PRESSED_MOUSE_BUTTONS = new ConfigBooleanPlus("Display currently pressed mouse buttons");
+    @DependantOn("Affect anything")
+	public static final ConfigBooleanPlus DISPLAY_CURRENTLY_PRESSED_KEYS = new ConfigBooleanPlus("Display currently pressed keys");
+    @DependantOn("Affect anything")
+	public static final ConfigBooleanPlus DISPLAY_CURRENTLY_PRESSED_MOUSE_BUTTONS = new ConfigBooleanPlus("Display currently pressed mouse buttons");
 	public static final ConfigInteger PRESSED_KEYS_X = new ConfigInteger("Currently pressed keys X", 2, "");
+    @DependantOn("Affect anything")
 	public static final ConfigInteger PRESSED_KEYS_Y = new ConfigInteger("Currently pressed keys Y", 0, "");
+    @DependantOn("Affect anything")
 	public static final ConfigInteger PRESSED_MOUSE_X = new ConfigInteger("Currently pressed mouse X", 2, "");
+    @DependantOn("Affect anything")
 	public static final ConfigInteger PRESSED_MOUSE_Y = new ConfigInteger("Currently pressed mouse Y", 11, "");
 
 	static {
@@ -49,12 +54,12 @@ public class Keys {
 				shouldNotAddPlusKey = false;
 			}
 		}
-		if (DISPLAY_CURRENTLY_PRESSED_KEYS.getBooleanValue()) {
+		if (DISPLAY_CURRENTLY_PRESSED_KEYS.shouldHandle()) {
 			int x = PRESSED_KEYS_X.getIntegerValue();
 			int y = PRESSED_KEYS_Y.getIntegerValue();
 			context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, keyDisplay.toString(), x, y, 0xFFFFFFFF);
 		}
-		if (DISPLAY_CURRENTLY_PRESSED_MOUSE_BUTTONS.getBooleanValue()) {
+		if (DISPLAY_CURRENTLY_PRESSED_MOUSE_BUTTONS.shouldHandle()) {
 			int x = PRESSED_MOUSE_X.getIntegerValue();
 			int y = PRESSED_MOUSE_Y.getIntegerValue();
 			context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, mouseDisplay.toString(), x, y, 0xFFFFFFFF);

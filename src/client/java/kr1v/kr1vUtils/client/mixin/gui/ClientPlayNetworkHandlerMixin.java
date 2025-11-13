@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ClientPlayNetworkHandlerMixin {
 	@Inject(method = "onCloseScreen", at = @At("HEAD"), cancellable = true)
 	public void preventScreenClosing(CloseScreenS2CPacket packet, CallbackInfo ci) {
-		if (Screen.DISABLED_SERVER_SCREEN_CLOSING.getBooleanValue()) {
+		if (Screen.DISABLED_SERVER_SCREEN_CLOSING.shouldHandle()) {
 			if (MinecraftClient.getInstance().currentScreen != null) {
 				String currentScreenClass = MappingUtils.intermediaryToYarnSimple(MinecraftClient.getInstance().currentScreen.getClass());
 				boolean shouldPrevent = false;
@@ -31,7 +31,7 @@ public class ClientPlayNetworkHandlerMixin {
 				}
 				if (shouldPrevent) {
 					ci.cancel();
-				} else if (Debug.DISABLED_SERVER_SCREEN_CLOSING_PRINT.getBooleanValue()) {
+				} else if (Debug.DISABLED_SERVER_SCREEN_CLOSING_PRINT.shouldHandle()) {
 					ChatUtils.sendMessage(Text.literal("Allowed closing of screen class: " + currentScreenClass + " (Click to copy)").setStyle(Style.EMPTY.withClickEvent(new ClickEvent.CopyToClipboard(currentScreenClass))));
 				}
 			}

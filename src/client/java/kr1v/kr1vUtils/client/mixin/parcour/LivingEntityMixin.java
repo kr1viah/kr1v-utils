@@ -60,11 +60,11 @@ public abstract class LivingEntityMixin extends Entity {
 
 			if (!boxes.isEmpty()) {
 				double closestDistance = getClosestDistance(boxes);
-				if (Misc.PRINT_SUBOPTIMAL_JUMPS.getBooleanValue())
+				if (Misc.PRINT_SUBOPTIMAL_JUMPS.shouldHandle())
 					ChatUtils.sendMessage(String.format("Suboptimal jump by: %.4f blocks", closestDistance));
 			} else {
 				// idk man, unintended coyote time?
-				if (Misc.PRINT_OPTIMAL_JUMPS.getBooleanValue())
+				if (Misc.PRINT_OPTIMAL_JUMPS.shouldHandle())
 					ChatUtils.sendMessage("You jumped on the last tick possible!");
 			}
 
@@ -73,7 +73,7 @@ public abstract class LivingEntityMixin extends Entity {
 				Vec3d pos = positions.get(positions.size() - 1 - i);
 				List<Box> boxes = getTouchingBoxes(pos, (int) Math.floor(pos.y - 0.00001));
 				if (!boxes.isEmpty()) {
-					if (Misc.PRINT_MISSED_JUMPS.getBooleanValue())
+					if (Misc.PRINT_MISSED_JUMPS.shouldHandle())
 						ChatUtils.sendMessage("You missed the jump by " + (i - 1) + " tick(s)");
 					break;
 				}

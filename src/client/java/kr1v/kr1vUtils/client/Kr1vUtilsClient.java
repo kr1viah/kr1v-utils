@@ -17,6 +17,7 @@ import kr1v.kr1vUtils.client.utils.Annotations;
 import kr1v.kr1vUtils.client.utils.ClassUtils;
 import kr1v.kr1vUtils.client.utils.MappingUtils;
 import kr1v.kr1vUtils.client.utils.StringUtils;
+import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
 import kr1v.kr1vUtils.client.utils.malilib.KeybindSetting;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
@@ -48,9 +49,9 @@ public class Kr1vUtilsClient implements ClientModInitializer {
 
 					String name = MappingUtils.intermediaryToYarnSimple(field).toLowerCase(Locale.ROOT);
 
-					ConfigBooleanHotkeyed hotkey = new ConfigBooleanHotkeyed(StringUtils.convertCamelCase(name), true, "", (KeybindSettings) KeybindSetting.ofAny(), name);
-					ConfigHandler.addToggleHotkey(hotkey);
+					ConfigBooleanPlus hotkey = new ConfigBooleanPlus(StringUtils.convertCamelCase(name), true, "", (KeybindSettings) KeybindSetting.ofAny(), name, "", "");
 
+                    ConfigHandler.addDependantOn(hotkey, "Affect render layers");
 					ilb.add(hotkey);
 					Render.RENDER_HOTKEYS.put(name, hotkey);
 				}

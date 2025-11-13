@@ -2,6 +2,7 @@ package kr1v.kr1vUtils.client.mixin.render;
 
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import kr1v.kr1vUtils.client.config.Render;
+import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
 import net.minecraft.client.render.BuiltBuffer;
 import net.minecraft.client.render.RenderLayer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,12 +18,12 @@ public abstract class RenderLayerMixin extends RenderLayer {
 
 	@Inject(method = "draw", at = @At("HEAD"), cancellable = true)
 	private void injected(BuiltBuffer buffer, CallbackInfo ci) {
-		ConfigBooleanHotkeyed correspondingHotkey = Render.RENDER_HOTKEYS.get(getName());
+		ConfigBooleanPlus correspondingHotkey = Render.RENDER_HOTKEYS.get(getName());
 		if (correspondingHotkey == null) {
             return;
 //            throw new IllegalStateException("Render layer " + getName() + " did not have a corresponding hotkey.");
 		}
-		if (!correspondingHotkey.getBooleanValue()) {
+		if (!correspondingHotkey.shouldHandle()) {
 			ci.cancel();
 			if (buffer != null) {
 				buffer.close();

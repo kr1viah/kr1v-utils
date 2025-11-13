@@ -38,7 +38,7 @@ public class InGameHudMixin {
 
 	@WrapMethod(method = "setOverlayMessage")
 	private void redirectOverlayMessage(Text text, boolean tinted, Operation<Void> original) {
-		if (!Misc.SEPARATE_SERVER_CLIENT_ACTION_BAR.getBooleanValue()) {
+		if (!Misc.SEPARATE_SERVER_CLIENT_ACTION_BAR.shouldHandle()) {
 			original.call(text, tinted);
 			return;
 		}

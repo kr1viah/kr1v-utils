@@ -21,7 +21,7 @@ public class ChatHudMixin {
 	@WrapMethod(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;Lnet/minecraft/client/gui/hud/MessageIndicator;)V")
 	private void addTimeStamp(Text message, MessageSignatureData signatureData, MessageIndicator indicator, Operation<Void> original) {
 		MutableText mutableMessage = message.copy();
-		if (Chat.ADD_HOVER_TIMESTAMP.getBooleanValue()) {
+		if (Chat.ADD_HOVER_TIMESTAMP.shouldHandle()) {
 			Instant instant = Instant.now();
 			LocalTime time = instant.atZone(ZoneId.systemDefault()).toLocalTime();
 			String timeStr;

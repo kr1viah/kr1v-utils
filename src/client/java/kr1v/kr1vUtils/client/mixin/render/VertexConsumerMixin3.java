@@ -13,15 +13,19 @@ import org.spongepowered.asm.mixin.Mixin;
 public interface VertexConsumerMixin3 {
 	@WrapMethod(method = "vertex(FFFIFFIIFFF)V")
 	private void injected(float x, float y, float z, int color, float u, float v, int overlay, int light, float normalX, float normalY, float normalZ, Operation<Void> original) {
-		ClientPlayerEntity player = MinecraftClient.getInstance().player;
-		if (player != null && Render.RELATIVE_TO_PLAYER_ANGLE.getBooleanValue()) {
-			double[] d = PositionOffsetter.worldOffsetFromPlayerAngles(player.getYaw(), player.getPitch());
-			x += (float) d[0]; y += (float) d[1]; z += (float) d[2];
-		} else {
-			x += (float) Render.OFFSET_X.getDoubleValue();
-			y += (float) Render.OFFSET_Y.getDoubleValue();
-			z += (float) Render.OFFSET_Z.getDoubleValue();
-		}
+        if (Render.AFFECT_OFFSETTING.shouldHandle()) {
+            ClientPlayerEntity player = MinecraftClient.getInstance().player;
+            if (player != null && Render.RELATIVE_TO_PLAYER_ANGLE.getBooleanValue()) {
+                double[] d = PositionOffsetter.worldOffsetFromPlayerAngles(player.getYaw(), player.getPitch());
+                x += (float) d[0];
+                y += (float) d[1];
+                z += (float) d[2];
+            } else {
+                x += (float) Render.OFFSET_X.getDoubleValue();
+                y += (float) Render.OFFSET_Y.getDoubleValue();
+                z += (float) Render.OFFSET_Z.getDoubleValue();
+            }
+        }
 		original.call(x, y, z, color, u, v, overlay, light, normalX, normalY, normalZ);
 	}
 }

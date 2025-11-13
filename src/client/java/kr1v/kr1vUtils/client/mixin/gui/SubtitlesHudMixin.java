@@ -17,11 +17,9 @@ public class SubtitlesHudMixin {
 	@Shadow
 	private boolean enabled;
 
-	//	@Definition(id = "enabled", field = "Lnet/minecraft/client/gui/hud/SubtitlesHud;enabled:Z")
-//	@Expression("(this.enabled)")
-//	@ModifyExpressionValue(method = "render", at = @At("MIXINEXTRAS:EXPRESSION"))
 	@ModifyExpressionValue(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;enabled:Z", ordinal = 4))
 	private boolean forceRender(boolean original) {
+        if (!Chat.REDIRECT_TO_SUBTITLES.shouldHandleNoThis()) return original;
 		return original || Chat.REDIRECT_TO_SUBTITLES.getBooleanValue();
 	}
 
@@ -29,6 +27,7 @@ public class SubtitlesHudMixin {
 	@Expression("this.entries")
 	@ModifyExpressionValue(method = "render", at = @At("MIXINEXTRAS:EXPRESSION"))
 	private List<SubtitlesHud.SubtitleEntry> removeEntriesIfDisabled(List<SubtitlesHud.SubtitleEntry> original) {
+        if (!Chat.REDIRECT_TO_SUBTITLES.shouldHandleNoThis()) return original;
 		if (!enabled && Chat.REDIRECT_TO_SUBTITLES.getBooleanValue()) {
 			original.removeIf(entry ->
 				entry.range != 1093813.875f);
@@ -40,6 +39,7 @@ public class SubtitlesHudMixin {
 	@Expression("bl")
 	@ModifyExpressionValue(method = "render", at = @At("MIXINEXTRAS:EXPRESSION"))
 	private boolean preventAngleBracketRendering(boolean original, @SuppressWarnings("LocalMayBeArgsOnly") @Local SubtitlesHud.SubtitleEntry subtitleEntry) {
+        if (!Chat.REDIRECT_TO_SUBTITLES.shouldHandleNoThis()) return original;
 		if ((subtitleEntry).range == 1093813.875f) {
 			return true;
 		}

@@ -6,20 +6,23 @@ import com.google.gson.JsonPrimitive;
 import fi.dy.masa.malilib.config.ConfigUtils;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
-import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
-import fi.dy.masa.malilib.hotkeys.KeybindMulti;
 import fi.dy.masa.malilib.util.JsonUtils;
 import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.kr1vUtils.client.gui.screen.ConfigScreen;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
 import kr1v.kr1vUtils.client.utils.Annotations;
+import kr1v.kr1vUtils.client.utils.annotation.DependantOn;
+import kr1v.kr1vUtils.client.utils.annotation.Dependency;
 import kr1v.kr1vUtils.client.utils.annotation.Label;
+import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
 import net.minecraft.client.MinecraftClient;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,28 +81,14 @@ public class ConfigHandler implements IConfigHandler {
 		}
 	}
 
-	public static void addToggleHotkey(ConfigBooleanHotkeyed cbh) {
-		if (((KeybindMulti) cbh.getKeybind()).getCallback() == null) {
-			cbh.getKeybind().setCallback((keyAction, keybind) -> {
-				cbh.setBooleanValue(!cbh.getBooleanValue());
-				return true;
-			});
-		}
-	}
-
 	public static List<IConfigBase> generateOptions(Class<?> clazz) {
 		List<IConfigBase> list = new ArrayList<>();
 		for (Field f : clazz.getDeclaredFields()) {
 			int mods = f.getModifiers();
 			if (Modifier.isStatic(mods) && IConfigBase.class.isAssignableFrom(f.getType())) {
-                if (f.isAnnotationPresent(Label.class)) {
-                    Label[] labels = f.getAnnotationsByType(Label.class);
-                    for (Label l : labels) {
-                        list.add(new ConfigLabel(l.value()));
-                    }
-                }
 				try {
-					f.setAccessible(true);
+                    f.setAccessible(true);
+                    handleConfigAnnotations(f, list);
 					IConfigBase value = (IConfigBase) f.get(null);
 					if (value != null) {
                         list.add(value);
@@ -111,4 +100,27 @@ public class ConfigHandler implements IConfigHandler {
 		}
 		return list;
 	}
+
+    private static void handleConfigAnnotations(Field f, List<IConfigBase> list) throws IllegalAccessException {
+        for (Annotation annotation : f.getDeclaredAnnotations()) {
+            handleConfigAnnotation(f, annotation, list);
+        }
+    }
+
+    private static void handleConfigAnnotation(Field f, Annotation annotation, List<IConfigBase> list) throws IllegalAccessException {
+        if (annotation instanceof Label label) {
+            list.add(new ConfigLabel(label.value()));
+        } else if (annotation instanceof DependantOn dependantOn) {
+            dependantOns.put((IConfigBase) f.get(null), dependantOn.value());
+        } else if (annotation instanceof Dependency dependency) {
+            dependencies.put(dependency.value(), (ConfigBooleanPlus) f.get(null));
+        }
+    }
+
+    public static void addDependantOn(IConfigBase config, String... dependencies) {
+        dependantOns.put(config, dependencies);
+    }
+
+    public static final Map<IConfigBase, String[]> dependantOns = new HashMap<>();
+    public static final Map<String, ConfigBooleanPlus> dependencies = new HashMap<>();
 }

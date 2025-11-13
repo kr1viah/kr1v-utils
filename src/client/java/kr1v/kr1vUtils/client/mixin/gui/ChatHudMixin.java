@@ -25,7 +25,7 @@ public class ChatHudMixin {
 				Pattern pattern = Pattern.compile(str);
 				Matcher matcher = pattern.matcher(message.getString());
 				if (matcher.matches()) {
-					if (Chat.REDIRECT_TO_SUBTITLES.getBooleanValue()) {
+					if (Chat.REDIRECT_TO_SUBTITLES.shouldHandle()) {
 						if (MinecraftClient.getInstance().player != null) {
 							List<SubtitlesHud.SubtitleEntry> entries = (MinecraftClient.getInstance().inGameHud.subtitlesHud).entries;
 							if (!Chat.ALLOW_DUPLICATE_SUBTITLES.getBooleanValue()) {
