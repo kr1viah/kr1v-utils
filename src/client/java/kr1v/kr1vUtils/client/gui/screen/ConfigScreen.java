@@ -15,7 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigScreen extends GuiConfigsBase {
-	public static ConfigGuiTab tab = null;
+    public static ConfigGuiTab tab = null;
+
+    public static void setTab(ConfigGuiTab tab) {
+        ConfigScreen.tab = tab;
+    }
 
 	public ConfigScreen() {
 		super(10, 50, Kr1vUtilsClient.MOD_ID, null, "Configs", "0.0.0");
@@ -41,7 +45,7 @@ public class ConfigScreen extends GuiConfigsBase {
 		final ConfigGuiTab tab2 = tab;
 
 		this.addButton(button, (button1, mouseButton) -> {
-			ConfigScreen.tab = tab2;
+			ConfigScreen.setTab(tab2);
 			reCreateListWidget(); // apply the new config width
 			initGui();
 		});

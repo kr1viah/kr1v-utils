@@ -19,7 +19,7 @@ public class ClassUtils {
 		try {
 			Class.forName(clazz.getName());
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("What the actual fuck did you do", e);
 		}
 	}
 

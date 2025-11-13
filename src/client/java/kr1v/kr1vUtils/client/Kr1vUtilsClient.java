@@ -35,7 +35,7 @@ public class Kr1vUtilsClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		ClassUtils.touch(Annotations.class, MappingUtils.class);
+		ClassUtils.touch(Annotations.class);
 
 		var ilb = new ImmutableList.Builder<IConfigBase>();
 
@@ -76,5 +76,11 @@ public class Kr1vUtilsClient implements ClientModInitializer {
 
 		ClientLifecycleEvents.CLIENT_STOPPING.register(client -> configHandler.save());
 
+        if (ConfigScreen.tab == null) {
+            ConfigScreen.setTab(ConfigScreen.ConfigGuiTab.values()[0]);
+            if (ConfigScreen.tab == null) {
+                throw new IllegalStateException("Something went wrong.");
+            }
+        }
 	}
 }

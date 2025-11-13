@@ -40,9 +40,12 @@ public class ConfigHandler implements IConfigHandler {
 				JsonObject root = element.getAsJsonObject();
 
 				if (ConfigScreen.tab == null && root.has("lastTab")) {
-					ConfigScreen.tab = ConfigScreen.ConfigGuiTab.valueOf(root.get("lastTab").getAsString());
+                    ConfigScreen.setTab(ConfigScreen.ConfigGuiTab.valueOf(root.get("lastTab").getAsString()));
 				} else if (ConfigScreen.tab == null) {
-					ConfigScreen.tab = ConfigScreen.ConfigGuiTab.valueOf("Misc");
+                    ConfigScreen.setTab(ConfigScreen.ConfigGuiTab.values()[0]);
+                    if (ConfigScreen.tab == null) {
+                        throw new IllegalStateException("Something went wrong.");
+                    }
 				}
 
 				if (root.has("scrollPositions") &&
@@ -102,18 +105,19 @@ public class ConfigHandler implements IConfigHandler {
 	}
 
     private static void handleConfigAnnotations(Field f, List<IConfigBase> list) throws IllegalAccessException {
+        System.out.println("Handling field: " + f.getName());
         for (Annotation annotation : f.getDeclaredAnnotations()) {
             handleConfigAnnotation(f, annotation, list);
         }
     }
 
     private static void handleConfigAnnotation(Field f, Annotation annotation, List<IConfigBase> list) throws IllegalAccessException {
-        if (annotation instanceof Label label) {
-            list.add(new ConfigLabel(label.value()));
-        } else if (annotation instanceof DependantOn dependantOn) {
-            dependantOns.put((IConfigBase) f.get(null), dependantOn.value());
-        } else if (annotation instanceof Dependency dependency) {
-            dependencies.put(dependency.value(), (ConfigBooleanPlus) f.get(null));
+        System.out.println("   Handling annotation " + annotation.toString());
+        switch (annotation) {
+            case Label label -> list.add(new ConfigLabel(label.value()));
+            case DependantOn dependantOn -> dependantOns.put((IConfigBase) f.get(null), dependantOn.value());
+            case Dependency dependency -> dependencies.put(dependency.value(), (ConfigBooleanPlus) f.get(null));
+            default -> {}
         }
     }
 
