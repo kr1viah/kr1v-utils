@@ -1,6 +1,5 @@
 package kr1v.kr1vUtils.client.mixin.render;
 
-import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import kr1v.kr1vUtils.client.config.Render;
 import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
 import net.minecraft.client.render.BuiltBuffer;
@@ -23,7 +22,10 @@ public abstract class RenderLayerMixin extends RenderLayer {
             return;
 //            throw new IllegalStateException("Render layer " + getName() + " did not have a corresponding hotkey.");
 		}
-		if (!correspondingHotkey.shouldHandle()) {
+        if (!correspondingHotkey.shouldHandleNoThis()) {
+            return;
+        }
+        if (!correspondingHotkey.getBooleanValue()) {
 			ci.cancel();
 			if (buffer != null) {
 				buffer.close();
