@@ -1,4 +1,4 @@
-package kr1v.kr1vUtils.client.config;
+package kr1v.kr1vUtils.client.config.configs;
 
 import fi.dy.masa.malilib.config.options.ConfigDouble;
 import fi.dy.masa.malilib.config.options.ConfigInteger;

@@ -1,6 +1,6 @@
 package kr1v.kr1vUtils.client.gui;
 
-import kr1v.kr1vUtils.client.config.Chat;
+import kr1v.kr1vUtils.client.config.configs.Chat;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.ChatHud;

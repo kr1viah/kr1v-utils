@@ -6,7 +6,7 @@ import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.util.StringUtils;
 import kr1v.kr1vUtils.client.Kr1vUtilsClient;
-import kr1v.kr1vUtils.client.config.*;
+import kr1v.kr1vUtils.client.config.configs.Misc;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
 import kr1v.kr1vUtils.client.utils.Annotations;
 import net.minecraft.client.gui.DrawContext;

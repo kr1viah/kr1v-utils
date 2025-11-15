@@ -2,7 +2,7 @@ package kr1v.kr1vUtils.client.mixin.render;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import kr1v.kr1vUtils.client.config.Render;
+import kr1v.kr1vUtils.client.config.configs.Render;
 import kr1v.kr1vUtils.client.mixinclasses.PositionOffsetter;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;

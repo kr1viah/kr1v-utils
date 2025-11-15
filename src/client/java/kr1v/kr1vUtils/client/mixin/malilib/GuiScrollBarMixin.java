@@ -1,7 +1,7 @@
 package kr1v.kr1vUtils.client.mixin.malilib;
 
 import fi.dy.masa.malilib.gui.GuiScrollBar;
-import kr1v.kr1vUtils.client.config.Misc;
+import kr1v.kr1vUtils.client.config.configs.Misc;
 import kr1v.kr1vUtils.client.gui.screen.ConfigScreen;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;

@@ -8,6 +8,7 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.util.JsonUtils;
 import kr1v.kr1vUtils.client.Kr1vUtilsClient;
+import kr1v.kr1vUtils.client.config.configs.Misc;
 import kr1v.kr1vUtils.client.gui.screen.ConfigScreen;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
 import kr1v.kr1vUtils.client.utils.Annotations;

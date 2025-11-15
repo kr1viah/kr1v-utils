@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import kr1v.kr1vUtils.client.config.Chat;
+import kr1v.kr1vUtils.client.config.configs.Chat;
 import net.minecraft.client.gui.hud.SubtitlesHud;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -38,7 +38,7 @@ public class SubtitlesHudMixin {
 	@Definition(id = "bl", local = @Local(type = boolean.class))
 	@Expression("bl")
 	@ModifyExpressionValue(method = "render", at = @At("MIXINEXTRAS:EXPRESSION"))
-	private boolean preventAngleBracketRendering(boolean original, @SuppressWarnings("LocalMayBeArgsOnly") @Local SubtitlesHud.SubtitleEntry subtitleEntry) {
+	private boolean preventAngleBracketRendering(boolean original, @Local SubtitlesHud.SubtitleEntry subtitleEntry) {
         if (!Chat.REDIRECT_TO_SUBTITLES.shouldHandleNoThis()) return original;
 		if ((subtitleEntry).range == 1093813.875f) {
 			return true;

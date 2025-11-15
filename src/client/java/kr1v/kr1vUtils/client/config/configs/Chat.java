@@ -1,9 +1,7 @@
-package kr1v.kr1vUtils.client.config;
+package kr1v.kr1vUtils.client.config.configs;
 
 import com.google.common.collect.ImmutableList;
-import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.config.options.ConfigColor;
-import fi.dy.masa.malilib.config.options.ConfigString;
 import fi.dy.masa.malilib.config.options.ConfigStringList;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import kr1v.kr1vUtils.client.gui.BetterChatHud;

@@ -1,7 +1,7 @@
 package kr1v.kr1vUtils.client.mixin.gui;
 
-import kr1v.kr1vUtils.client.config.Debug;
-import kr1v.kr1vUtils.client.config.Screen;
+import kr1v.kr1vUtils.client.config.configs.Debug;
+import kr1v.kr1vUtils.client.config.configs.Screen;
 import kr1v.kr1vUtils.client.utils.ChatUtils;
 import kr1v.kr1vUtils.client.utils.MappingUtils;
 import net.minecraft.client.MinecraftClient;

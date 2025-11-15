@@ -1,6 +1,6 @@
 package kr1v.kr1vUtils.client.mixinclasses;
 
-import kr1v.kr1vUtils.client.config.Render;
+import kr1v.kr1vUtils.client.config.configs.Render;
 
 public class PositionOffsetter {
 	public static double[] worldOffsetFromPlayerAngles(double yawDeg, double pitchDeg) {

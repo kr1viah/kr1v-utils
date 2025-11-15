@@ -1,6 +1,6 @@
 package kr1v.kr1vUtils.client.mixinclasses;
 
-import kr1v.kr1vUtils.client.config.Misc;
+import kr1v.kr1vUtils.client.config.configs.Misc;
 import net.minecraft.text.Text;
 
 import java.util.ArrayList;

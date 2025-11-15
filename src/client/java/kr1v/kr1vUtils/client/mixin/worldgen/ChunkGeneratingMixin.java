@@ -2,7 +2,7 @@ package kr1v.kr1vUtils.client.mixin.worldgen;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import kr1v.kr1vUtils.client.config.WorldGen;
+import kr1v.kr1vUtils.client.config.configs.WorldGen;
 import net.minecraft.util.collection.BoundedRegionArray;
 import net.minecraft.world.chunk.*;
 import org.spongepowered.asm.mixin.Mixin;

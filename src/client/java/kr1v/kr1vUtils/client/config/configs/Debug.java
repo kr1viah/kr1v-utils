@@ -1,6 +1,5 @@
-package kr1v.kr1vUtils.client.config;
+package kr1v.kr1vUtils.client.config.configs;
 
-import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import kr1v.kr1vUtils.client.utils.annotation.Config;
 import kr1v.kr1vUtils.client.utils.annotation.DependantOn;
 import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;

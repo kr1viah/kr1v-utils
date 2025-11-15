@@ -3,7 +3,7 @@ package kr1v.kr1vUtils.client.mixin.worldgen;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import kr1v.kr1vUtils.client.config.WorldGen;
+import kr1v.kr1vUtils.client.config.configs.WorldGen;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
