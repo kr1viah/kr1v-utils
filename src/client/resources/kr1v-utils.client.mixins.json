@@ -34,6 +34,7 @@
   },
   "mixins": [
     "malilib.GuiScrollBarMixin",
+    "malilib.WidgetConfigOptionMixin",
     "parcour.LivingEntityMixin",
     "worldgen.CaveCarverMixin",
     "worldgen.ChunkGeneratingMixin",
