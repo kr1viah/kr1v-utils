@@ -3,7 +3,6 @@ package kr1v.kr1vUtils.client.config.configs;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.hotkeys.KeybindMulti;
 import kr1v.kr1vUtils.client.utils.annotation.Config;
-import kr1v.kr1vUtils.client.utils.annotation.DependantOn;
 import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
@@ -13,17 +12,12 @@ import net.minecraft.client.render.RenderTickCounter;
 @Config
 @SuppressWarnings("unused")
 public class Keys {
-    @DependantOn("Affect anything")
-	public static final ConfigBooleanPlus DISPLAY_CURRENTLY_PRESSED_KEYS = new ConfigBooleanPlus("Display currently pressed keys");
-    @DependantOn("Affect anything")
-	public static final ConfigBooleanPlus DISPLAY_CURRENTLY_PRESSED_MOUSE_BUTTONS = new ConfigBooleanPlus("Display currently pressed mouse buttons");
+    public static final ConfigBooleanPlus DISPLAY_CURRENTLY_PRESSED_KEYS = new ConfigBooleanPlus("Display currently pressed keys");
+    public static final ConfigBooleanPlus DISPLAY_CURRENTLY_PRESSED_MOUSE_BUTTONS = new ConfigBooleanPlus("Display currently pressed mouse buttons");
 	public static final ConfigInteger PRESSED_KEYS_X = new ConfigInteger("Currently pressed keys X", 2, "");
-    @DependantOn("Affect anything")
-	public static final ConfigInteger PRESSED_KEYS_Y = new ConfigInteger("Currently pressed keys Y", 0, "");
-    @DependantOn("Affect anything")
-	public static final ConfigInteger PRESSED_MOUSE_X = new ConfigInteger("Currently pressed mouse X", 2, "");
-    @DependantOn("Affect anything")
-	public static final ConfigInteger PRESSED_MOUSE_Y = new ConfigInteger("Currently pressed mouse Y", 11, "");
+    public static final ConfigInteger PRESSED_KEYS_Y = new ConfigInteger("Currently pressed keys Y", 0, "");
+    public static final ConfigInteger PRESSED_MOUSE_X = new ConfigInteger("Currently pressed mouse X", 2, "");
+    public static final ConfigInteger PRESSED_MOUSE_Y = new ConfigInteger("Currently pressed mouse Y", 11, "");
 
 	static {
 		//noinspection deprecation

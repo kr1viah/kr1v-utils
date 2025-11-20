@@ -12,10 +12,7 @@ import kr1v.kr1vUtils.client.config.configs.Misc;
 import kr1v.kr1vUtils.client.gui.screen.ConfigScreen;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
 import kr1v.kr1vUtils.client.utils.Annotations;
-import kr1v.kr1vUtils.client.utils.annotation.DependantOn;
-import kr1v.kr1vUtils.client.utils.annotation.Dependency;
 import kr1v.kr1vUtils.client.utils.annotation.Label;
-import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
 import net.minecraft.client.MinecraftClient;
 
 import java.io.File;
@@ -23,7 +20,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -106,26 +102,16 @@ public class ConfigHandler implements IConfigHandler {
 	}
 
     private static void handleConfigAnnotations(Field f, List<IConfigBase> list) throws IllegalAccessException {
-        System.out.println("Handling field: " + f.getName());
         for (Annotation annotation : f.getDeclaredAnnotations()) {
             handleConfigAnnotation(f, annotation, list);
         }
     }
 
-    private static void handleConfigAnnotation(Field f, Annotation annotation, List<IConfigBase> list) throws IllegalAccessException {
-        System.out.println("   Handling annotation " + annotation.toString());
+    @SuppressWarnings("SwitchStatementWithTooFewBranches")
+    private static void handleConfigAnnotation(Field f, Annotation annotation, List<IConfigBase> list) {
         switch (annotation) {
             case Label label -> list.add(new ConfigLabel(label.value()));
-            case DependantOn dependantOn -> dependantOns.put((IConfigBase) f.get(null), dependantOn.value());
-            case Dependency dependency -> dependencies.put(dependency.value(), (ConfigBooleanPlus) f.get(null));
             default -> {}
         }
     }
-
-    public static void addDependantOn(IConfigBase config, String... dependencies) {
-        dependantOns.put(config, dependencies);
-    }
-
-    public static final Map<IConfigBase, String[]> dependantOns = new HashMap<>();
-    public static final Map<String, ConfigBooleanPlus> dependencies = new HashMap<>();
 }
