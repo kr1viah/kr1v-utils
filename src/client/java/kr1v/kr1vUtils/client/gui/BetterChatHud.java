@@ -60,9 +60,6 @@ public class BetterChatHud extends ChatHud {
 
 	@Override
 	public boolean mouseClicked(double mouseX, double mouseY) {
-        if (!Chat.CHAT_SELECTING.shouldHandleNoThis()) {
-            return super.mouseClicked(mouseX, mouseY);
-        }
 		if (!Chat.CHAT_SELECTING.getBooleanValue()) {
 			return super.mouseClicked(mouseX, mouseY);
 		}
@@ -95,7 +92,6 @@ public class BetterChatHud extends ChatHud {
 	}
 
 	public void mouseReleased(double mouseX, double mouseY) {
-        if (!Chat.CHAT_SELECTING.shouldHandleNoThis()) return;
 		if (!Chat.CHAT_SELECTING.getBooleanValue()) return;
 		if (mouseClickX == (int) mouseX && mouseClickY == (int) mouseY) {
 			clearSelection();
@@ -135,10 +131,6 @@ public class BetterChatHud extends ChatHud {
 
 	@Override
 	public void render(DrawContext context, int currentTick, int mouseX, int mouseY, boolean focused) {
-		if (!Chat.CHAT_SELECTING.shouldHandleNoThis()) {
-			super.render(context, currentTick, mouseX, mouseY, focused);
-			return;
-		}
 		if (!Chat.CHAT_SELECTING.getBooleanValue()) {
 			super.render(context, currentTick, mouseX, mouseY, focused);
 			return;

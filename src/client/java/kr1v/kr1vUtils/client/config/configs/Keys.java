@@ -3,7 +3,7 @@ package kr1v.kr1vUtils.client.config.configs;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.hotkeys.KeybindMulti;
 import kr1v.kr1vUtils.client.utils.annotation.Config;
-import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
+import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -48,12 +48,12 @@ public class Keys {
 				shouldNotAddPlusKey = false;
 			}
 		}
-		if (DISPLAY_CURRENTLY_PRESSED_KEYS.shouldHandle()) {
+		if (DISPLAY_CURRENTLY_PRESSED_KEYS.getBooleanValue()) {
 			int x = PRESSED_KEYS_X.getIntegerValue();
 			int y = PRESSED_KEYS_Y.getIntegerValue();
 			context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, keyDisplay.toString(), x, y, 0xFFFFFFFF);
 		}
-		if (DISPLAY_CURRENTLY_PRESSED_MOUSE_BUTTONS.shouldHandle()) {
+		if (DISPLAY_CURRENTLY_PRESSED_MOUSE_BUTTONS.getBooleanValue()) {
 			int x = PRESSED_MOUSE_X.getIntegerValue();
 			int y = PRESSED_MOUSE_Y.getIntegerValue();
 			context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, mouseDisplay.toString(), x, y, 0xFFFFFFFF);

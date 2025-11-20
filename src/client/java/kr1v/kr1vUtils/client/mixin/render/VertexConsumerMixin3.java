@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public interface VertexConsumerMixin3 {
 	@WrapMethod(method = "vertex(FFFIFFIIFFF)V")
 	private void injected(float x, float y, float z, int color, float u, float v, int overlay, int light, float normalX, float normalY, float normalZ, Operation<Void> original) {
-        if (Render.AFFECT_OFFSETTING.shouldHandle()) {
+        if (Render.AFFECT_OFFSETTING.getBooleanValue()) {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             if (player != null && Render.RELATIVE_TO_PLAYER_ANGLE.getBooleanValue()) {
                 double[] d = PositionOffsetter.worldOffsetFromPlayerAngles(player.getYaw(), player.getPitch());

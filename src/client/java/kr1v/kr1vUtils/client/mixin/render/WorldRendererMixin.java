@@ -11,52 +11,51 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class WorldRendererMixin {
 	@Inject(method = "renderMain", at = @At("HEAD"), cancellable = true)
 	private void preventMain(CallbackInfo ci) {
-		if (Render.MAIN.shouldHandleNoThis() && !Render.MAIN.getBooleanValue()) ci.cancel();
+		if (!Render.MAIN.getBooleanValue()) ci.cancel();
 	}
 
 	@Inject(method = "renderParticles", at = @At("HEAD"), cancellable = true)
 	private void preventParticles(CallbackInfo ci) {
-		if (Render.PARTICLES.shouldHandleNoThis() && !Render.PARTICLES.getBooleanValue()) ci.cancel();
+		if (!Render.PARTICLES.getBooleanValue()) ci.cancel();
 	}
 
 	@Inject(method = "renderClouds", at = @At("HEAD"), cancellable = true)
 	private void preventClouds(CallbackInfo ci) {
-		if (Render.CLOUDS.shouldHandleNoThis() && !Render.CLOUDS.getBooleanValue()) ci.cancel();
+		if (!Render.CLOUDS.getBooleanValue()) ci.cancel();
 	}
 
 	@Inject(method = "renderWeather", at = @At("HEAD"), cancellable = true)
 	private void preventWeather(CallbackInfo ci) {
-		if (Render.WEATHER.shouldHandleNoThis() && !Render.WEATHER.getBooleanValue()) ci.cancel();
+		if (!Render.WEATHER.getBooleanValue()) ci.cancel();
 	}
 
 	@Inject(method = "renderLateDebug", at = @At("HEAD"), cancellable = true)
 	private void preventLateDebug(CallbackInfo ci) {
-		if (Render.LATE_DEBUG.shouldHandleNoThis() && !Render.LATE_DEBUG.getBooleanValue()) ci.cancel();
+		if (!Render.LATE_DEBUG.getBooleanValue()) ci.cancel();
 	}
 
 	@Inject(method = "renderEntities", at = @At("HEAD"), cancellable = true)
 	private void preventEntities(CallbackInfo ci) {
-		if (Render.ENTITIES.shouldHandleNoThis() && !Render.ENTITIES.getBooleanValue()) ci.cancel();
+		if (!Render.ENTITIES.getBooleanValue()) ci.cancel();
 	}
 
 	@Inject(method = "renderBlockEntities", at = @At("HEAD"), cancellable = true)
 	private void preventBlockEntities(CallbackInfo ci) {
-		if (Render.BLOCK_ENTITIES.shouldHandleNoThis() && !Render.BLOCK_ENTITIES.getBooleanValue()) ci.cancel();
+		if (!Render.BLOCK_ENTITIES.getBooleanValue()) ci.cancel();
 	}
 
 	@Inject(method = "renderBlockDamage", at = @At("HEAD"), cancellable = true)
 	private void preventBlockDamage(CallbackInfo ci) {
-		if (Render.BLOCK_DAMAGE.shouldHandleNoThis() && !Render.BLOCK_DAMAGE.getBooleanValue()) ci.cancel();
+		if (!Render.BLOCK_DAMAGE.getBooleanValue()) ci.cancel();
 	}
 
 	@Inject(method = "renderTargetBlockOutline", at = @At("HEAD"), cancellable = true)
 	private void preventTargetBlockOutline(CallbackInfo ci) {
-		if (Render.TARGET_BLOCK_OUTLINE.shouldHandleNoThis() && !Render.TARGET_BLOCK_OUTLINE.getBooleanValue()) ci.cancel();
+		if (!Render.TARGET_BLOCK_OUTLINE.getBooleanValue()) ci.cancel();
 	}
 
 	@Inject(method = "renderSky", at = @At("HEAD"), cancellable = true)
 	private void preventSky(CallbackInfo ci) {
-		if (Render.SKY.shouldHandleNoThis() && !Render.SKY.getBooleanValue()) ci.cancel();
+		if (!Render.SKY.getBooleanValue()) ci.cancel();
 	}
-
 }

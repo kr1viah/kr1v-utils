@@ -6,8 +6,8 @@ import fi.dy.masa.malilib.config.options.ConfigStringList;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import kr1v.kr1vUtils.client.gui.BetterChatHud;
 import kr1v.kr1vUtils.client.utils.annotation.Config;
-import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
-import kr1v.kr1vUtils.client.utils.malilib.ConfigStringPlus;
+import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
+import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigStringPlus;
 import net.minecraft.client.MinecraftClient;
 
 @Config
@@ -24,7 +24,7 @@ public class Chat {
 
 	static {
 		CHAT_SELECTING.getKeybind().setCallback((button, keybind) -> {
-			if (BetterChatHud.selectedText == null || BetterChatHud.selectedText.isEmpty() || !CHAT_SELECTING.shouldHandle())
+			if (BetterChatHud.selectedText == null || BetterChatHud.selectedText.isEmpty() || !CHAT_SELECTING.getBooleanValue())
 				return false;
 			MinecraftClient.getInstance().keyboard.setClipboard(BetterChatHud.selectedText);
 			return true;

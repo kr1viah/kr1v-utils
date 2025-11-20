@@ -1,35 +1,9 @@
-package kr1v.kr1vUtils.client.utils.malilib;
+package kr1v.kr1vUtils.client.utils.malilib.plus;
 
 import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.options.ConfigStringList;
-import kr1v.kr1vUtils.client.config.ConfigHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConfigStringListPlus extends ConfigStringList implements Plus {
-    @Override
-    public boolean shouldHandle() {
-        if (ConfigHandler.dependantOns.containsKey(this)) {
-            String[] dependencyNames = ConfigHandler.dependantOns.get(this);
-            for (String dependencyName : dependencyNames) {
-                ConfigBooleanPlus dependencyConfig = ConfigHandler.dependencies.get(dependencyName);
-                if (!dependencyConfig.shouldHandle()) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public List<String> getStrings() {
-        if (shouldHandle())
-            return super.getStrings();
-        else
-            return new ArrayList<>();
-    }
-
     public ConfigStringListPlus(String name) {
         super(name, ImmutableList.of());
     }

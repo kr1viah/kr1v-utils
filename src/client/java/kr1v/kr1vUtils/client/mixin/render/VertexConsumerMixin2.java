@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public class VertexConsumerMixin2 {
 	@WrapMethod(method = "vertex(FFFIFFIIFFF)V")
 	private void injected(float x, float y, float z, int color, float u, float v, int overlay, int light, float normalX, float normalY, float normalZ, Operation<Void> original) {
-        if (!Render.AFFECT_OFFSETTING.shouldHandle()) {
+        if (!Render.AFFECT_OFFSETTING.getBooleanValue()) {
             original.call(x, y, z, color, u, v, overlay, light, normalX, normalY, normalZ);
             return;
         }

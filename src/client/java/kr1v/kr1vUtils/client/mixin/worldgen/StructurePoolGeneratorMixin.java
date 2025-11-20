@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public class StructurePoolGeneratorMixin  {
     @WrapOperation(method = "generatePiece", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/BlockPos;getY()I"))
     private int generatePiece(BlockPos instance, Operation<Integer> original) {
-        if (WorldGen.OVERRIDE_STRUCTURE_HEIGHT.shouldHandle()) {
+        if (WorldGen.OVERRIDE_STRUCTURE_HEIGHT.getBooleanValue()) {
             return original.call(instance.withY(WorldGen.OVERRIDE_STRUCTURE_HEIGHT_VALUE.getIntegerValue()));
         }
         return original.call(instance);

@@ -28,13 +28,13 @@ public class DoublePerlinNoiseSamplerMixin {
 
     @ModifyConstant(method = "sample", constant = @Constant(doubleValue = 1.0181268882175227))
     private double changeMagic(double constant) {
-        if (OVERRIDE_DOUBLE_PERLIN_NOISE.shouldHandle()) return DPN_MAGIC_CONSTANT.getDoubleValue();
+        if (OVERRIDE_DOUBLE_PERLIN_NOISE.getBooleanValue()) return DPN_MAGIC_CONSTANT.getDoubleValue();
         return constant;
     }
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void changeMaxAndAmplitude(Random random, DoublePerlinNoiseSampler.NoiseParameters parameters, boolean modern, CallbackInfo ci) {
-        if (OVERRIDE_DOUBLE_PERLIN_NOISE.shouldHandle()) {
+        if (OVERRIDE_DOUBLE_PERLIN_NOISE.getBooleanValue()) {
             this.amplitude = DPN_AMPLITUDE.getDoubleValue();
             this.maxValue = DPN_MAX_VALUE.getDoubleValue();
         }

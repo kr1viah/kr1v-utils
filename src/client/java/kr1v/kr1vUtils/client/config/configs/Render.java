@@ -3,7 +3,7 @@ package kr1v.kr1vUtils.client.config.configs;
 import fi.dy.masa.malilib.config.options.ConfigDouble;
 import kr1v.kr1vUtils.client.utils.annotation.Config;
 import kr1v.kr1vUtils.client.utils.annotation.Label;
-import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
+import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
 
 import java.util.HashMap;
 import java.util.Map;

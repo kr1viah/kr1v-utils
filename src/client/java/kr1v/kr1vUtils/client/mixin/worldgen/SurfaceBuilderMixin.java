@@ -14,19 +14,11 @@ import org.spongepowered.asm.mixin.Mixin;
 public class SurfaceBuilderMixin {
     @WrapMethod(method = "placeIceberg")
     private void placeIceberg(int minY, Biome biome, BlockColumn column, BlockPos.Mutable mutablePos, int x, int z, int surfaceY, Operation<Void> original) {
-        if (!WorldGen.ICE_BERGS.shouldHandleNoThis()) {
-            original.call(minY, biome, column, mutablePos, x, z, surfaceY);
-            return;
-        }
         if (WorldGen.ICE_BERGS.getBooleanValue()) original.call(minY, biome, column, mutablePos, x, z, surfaceY);
     }
 
     @WrapMethod(method = "placeBadlandsPillar")
     private void placeBadlandsPillar(BlockColumn column, int x, int z, int surfaceY, HeightLimitView chunk, Operation<Void> original) {
-        if (!WorldGen.BAD_LANDS_PILLARS.shouldHandleNoThis()) {
-            original.call(column, x, z, surfaceY, chunk);
-            return;
-        }
         if (WorldGen.BAD_LANDS_PILLARS.getBooleanValue()) original.call(column, x, z, surfaceY, chunk);
     }
 }

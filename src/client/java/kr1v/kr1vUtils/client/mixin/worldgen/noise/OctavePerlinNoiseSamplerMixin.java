@@ -38,7 +38,7 @@ public class OctavePerlinNoiseSamplerMixin {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void setConsts(Random random, Pair<Integer, DoubleList> firstOctaveAndAmplitudes, boolean xoroshiro, CallbackInfo ci) {
-        if (OVERRIDE_OCTAVE_PERLIN_NOISE.shouldHandle()) {
+        if (OVERRIDE_OCTAVE_PERLIN_NOISE.getBooleanValue()) {
             this.firstOctave = OPN_FIRST_OCTAVE.getIntegerValue();
             this.persistence = OPN_PERSISTENCE.getDoubleValue();
             this.lacunarity = OPN_LACUNARITY.getDoubleValue();

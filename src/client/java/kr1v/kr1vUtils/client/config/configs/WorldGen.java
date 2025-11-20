@@ -4,8 +4,8 @@ import fi.dy.masa.malilib.config.options.ConfigDouble;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import kr1v.kr1vUtils.client.utils.annotation.Config;
 import kr1v.kr1vUtils.client.utils.annotation.Label;
-import kr1v.kr1vUtils.client.utils.malilib.ConfigBooleanPlus;
-import kr1v.kr1vUtils.client.utils.malilib.ConfigIntegerPlus;
+import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
+import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigIntegerPlus;
 
 @Config(name = "World generation")
 @SuppressWarnings("unused")

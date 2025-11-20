@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.Mixin;
 public class RavineCarverMixin {
     @WrapMethod(method = "shouldCarve(Lnet/minecraft/world/gen/carver/RavineCarverConfig;Lnet/minecraft/util/math/random/Random;)Z")
     private boolean shouldCarve(RavineCarverConfig ravineCarverConfig, Random random, Operation<Boolean> original) {
-        if (!WorldGen.RAVINES.shouldHandleNoThis()) return original.call(ravineCarverConfig, random);
         if (WorldGen.RAVINES.getBooleanValue()) return original.call(ravineCarverConfig, random);
         return false;
     }

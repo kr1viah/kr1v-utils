@@ -1,4 +1,4 @@
-package kr1v.kr1vUtils.client.utils.malilib;
+package kr1v.kr1vUtils.client.utils.malilib.plus;
 
 import fi.dy.masa.malilib.config.options.ConfigHotkey;
 import fi.dy.masa.malilib.hotkeys.IHotkeyCallback;

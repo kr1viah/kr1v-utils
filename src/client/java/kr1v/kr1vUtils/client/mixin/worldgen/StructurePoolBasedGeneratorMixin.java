@@ -22,7 +22,7 @@ import java.util.Optional;
 public class StructurePoolBasedGeneratorMixin {
     @WrapMethod(method = "generate(Lnet/minecraft/world/gen/structure/Structure$Context;Lnet/minecraft/registry/entry/RegistryEntry;Ljava/util/Optional;ILnet/minecraft/util/math/BlockPos;ZLjava/util/Optional;ILnet/minecraft/structure/pool/alias/StructurePoolAliasLookup;Lnet/minecraft/world/gen/structure/DimensionPadding;Lnet/minecraft/structure/StructureLiquidSettings;)Ljava/util/Optional;")
     private static Optional<Structure.StructurePosition> generate(Structure.Context context, RegistryEntry<StructurePool> structurePool, Optional<Identifier> id, int size, BlockPos pos, boolean useExpansionHack, Optional<Heightmap.Type> projectStartToHeightmap, int maxDistanceFromCenter, StructurePoolAliasLookup aliasLookup, DimensionPadding dimensionPadding, StructureLiquidSettings liquidSettings, Operation<Optional<Structure.StructurePosition>> original) {
-        if (WorldGen.OVERRIDE_STRUCTURE_HEIGHT.shouldHandle()) {
+        if (WorldGen.OVERRIDE_STRUCTURE_HEIGHT.getBooleanValue()) {
             pos = pos.withY(WorldGen.OVERRIDE_STRUCTURE_HEIGHT_VALUE.getIntegerValue());
         }
         return original.call(context, structurePool, id, size, pos, useExpansionHack, projectStartToHeightmap, maxDistanceFromCenter, aliasLookup, dimensionPadding, liquidSettings);

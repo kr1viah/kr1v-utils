@@ -21,7 +21,6 @@ import java.util.function.Function;
 public class NetherCaveCarverMixin {
     @WrapMethod(method = "carveAtPoint(Lnet/minecraft/world/gen/carver/CarverContext;Lnet/minecraft/world/gen/carver/CaveCarverConfig;Lnet/minecraft/world/chunk/Chunk;Ljava/util/function/Function;Lnet/minecraft/world/gen/carver/CarvingMask;Lnet/minecraft/util/math/BlockPos$Mutable;Lnet/minecraft/util/math/BlockPos$Mutable;Lnet/minecraft/world/gen/chunk/AquiferSampler;Lorg/apache/commons/lang3/mutable/MutableBoolean;)Z")
     private boolean carveAtPoint(CarverContext carverContext, CaveCarverConfig caveCarverConfig, Chunk chunk, Function<BlockPos, RegistryEntry<Biome>> function, CarvingMask carvingMask, BlockPos.Mutable mutable, BlockPos.Mutable mutable2, AquiferSampler aquiferSampler, MutableBoolean mutableBoolean, Operation<Boolean> original) {
-        if (!WorldGen.NETHER_CAVES.shouldHandleNoThis()) return original.call(carverContext, caveCarverConfig, chunk, function, carvingMask, mutable, mutable2, aquiferSampler, mutableBoolean);
         if (WorldGen.NETHER_CAVES.getBooleanValue()) return original.call(carverContext, caveCarverConfig, chunk, function, carvingMask, mutable, mutable2, aquiferSampler, mutableBoolean);
         return false;
     }
