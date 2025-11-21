@@ -8,20 +8,18 @@ import kr1v.kr1vUtils.client.utils.annotation.Touch;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
 import org.reflections.Reflections;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public final class Annotations {
 	private Annotations() {}
 
-	public static final Map<Class<?>, List<IConfigBase>> CACHE = new HashMap<>();
+	public static final Map<Class<?>, List<IConfigBase>> CACHE = new TreeMap<>(Comparator.comparing(Annotations::nameForConfig));
 
 	static {
 		Reflections reflections = new Reflections();
 		{
 			Set<Class<?>> configTypes = reflections.getTypesAnnotatedWith(Config.class);
+
 			for (Class<?> cfgClass : configTypes) {
                 ConfigBooleanPlus.defaultEnabled = cfgClass.getAnnotation(Config.class).defaultEnabled();
 				List<IConfigBase> list = ConfigHandler.generateOptions(cfgClass);

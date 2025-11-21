@@ -14,8 +14,8 @@ import net.minecraft.client.MinecraftClient;
 @SuppressWarnings("unused")
 public class Chat {
     public static final ConfigBooleanPlus       AFFECT_CHAT = new ConfigBooleanPlus("Affect chat");
-    public static final ConfigStringList        CHAT_HIDE = new ConfigStringList("Prevent messages with these regex strings from getting added to the chat", ImmutableList.of(), "Happens after replacing");
-    public static final ConfigBooleanPlus       REDIRECT_TO_SUBTITLES = new ConfigBooleanPlus("Redirect matched messages to the subtitle hud element", true, "", "");
+    public static final ConfigStringList        CHAT_HIDE = new ConfigStringList("Prevent messages from getting added to the chat", ImmutableList.of(), "Happens after replacing");
+    public static final ConfigBooleanPlus       REDIRECT_TO_SUBTITLES = new ConfigBooleanPlus("Redirect to subtitle hud element", true, "", "");
     public static final ConfigBooleanPlus       ALLOW_DUPLICATE_SUBTITLES = new ConfigBooleanPlus("Duplicate subtitles", false, "", "Allow having multiple of the same message after each other in the subtitles");
     public static final ConfigBooleanPlus       CHAT_SELECTING = new ConfigBooleanPlus("Chat selecting", true, "LEFT_CONTROL,C", KeybindSettings.GUI, "Be able to select and copy the chat", "", "");
 	public static final ConfigColor             CHAT_SELECTED_TEXT_BACKGROUND_COLOUR = new ConfigColor("Selected text background colour", "0xAA0033FF", "");

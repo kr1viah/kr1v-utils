@@ -1,18 +1,22 @@
 package kr1v.kr1vUtils.client.config.configs;
 
+import fi.dy.masa.malilib.config.options.ConfigDouble;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
+import fi.dy.masa.malilib.config.options.ConfigString;
 import kr1v.kr1vUtils.client.utils.annotation.Config;
 import kr1v.kr1vUtils.client.utils.annotation.PopupConfig;
-import kr1v.kr1vUtils.client.utils.malilib.configbutton.ConfigButton;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigDoublePlus;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigIntegerPlus;
+import kr1v.kr1vUtils.client.utils.malilib.plus.*;
 
-@SuppressWarnings("rawtypes")
 @Config
 public class Test {
-    public static final ConfigButton CONFIG_BUTTON = new ConfigButton("Test button", "Press me", () -> System.out.println("Test button pressed!"));
+    public static final ConfigStringPlus STRING = new ConfigStringPlus("String config");
+    public static final ConfigHotkeyPlus HOTKEY = new ConfigHotkeyPlus("Hotkey config", "G,R", (action, key) -> {
+        System.out.println("'String config's value is: " + STRING.getStringValue());
 
-    public static final Class<?> POPUP_DATA = PopupData.class;
+        return true;
+    });
+
+    public static final Class<?> USELESS_NAME = PopupData.class;
     @PopupConfig(distanceFromSides = 50, distanceFromTops = 50)
     static class PopupData {
         public static final ConfigInteger TEST = new ConfigIntegerPlus("Test", 0, -20, 20);
@@ -20,9 +24,10 @@ public class Test {
         public static final Class<?> LAYERED_CONFIGS = LayeredConfigs.class;
         @PopupConfig(buttonName = "Custom button name")
         static class LayeredConfigs {
-            public static final ConfigDoublePlus DOUBLE = new ConfigDoublePlus("Double layered configs!", 0, -100, 100, "Haha, get it? because this is a double config?");
+            public static final ConfigDouble DOUBLE = new ConfigDoublePlus("Double layered configs!", 0, -100, 100, "Haha, get it? because this is a double config?");
+            public static final ConfigString STRING = new ConfigStringPlus("String!!");
         }
     }
 
-    public static final ConfigButton CONFIG_BUTTON2 = new ConfigButton("Other test button", "Press me too!", () -> System.out.println("Test button 2 pressed!"));
+    public static final ConfigBooleanPlus BOOLEAN = new ConfigBooleanPlus("Boolean config", false, "By default, when the hotkey is\npressed it'll toggle this");
 }
