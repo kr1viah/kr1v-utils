@@ -47,7 +47,7 @@ public final class Annotations {
     public static String nameForConfig(Class<?> configClass) {
         String name;
         if (configClass.isAnnotationPresent(PopupConfig.class)) {
-            name = configClass.getAnnotation(PopupConfig.class).value();
+            name = configClass.getAnnotation(PopupConfig.class).name();
         } else {
             name = configClass.getAnnotation(Config.class).name();
         }

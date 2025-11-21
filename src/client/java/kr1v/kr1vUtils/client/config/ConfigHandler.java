@@ -122,7 +122,7 @@ public class ConfigHandler implements IConfigHandler {
     private static <T> void handleClassAnnotations(Class<T> value, List<IConfigBase> list) {
         PopupConfig annotation = value.getAnnotation(PopupConfig.class);
 
-        String name = annotation.value();
+        String name = annotation.name();
         if (name.isEmpty()) {
             name = value.getSimpleName();
         }

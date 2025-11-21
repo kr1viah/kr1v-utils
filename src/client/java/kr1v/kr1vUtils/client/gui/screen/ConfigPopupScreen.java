@@ -31,7 +31,7 @@ public class ConfigPopupScreen extends GuiConfigsBase {
     private final Screen customParent;
 
     public ConfigPopupScreen(Class<?> configClass, Screen parent) {
-        super(0, 0, "", parent, configClass.getAnnotation(PopupConfig.class).value().isEmpty() ? configClass.getSimpleName() : configClass.getAnnotation(PopupConfig.class).value());
+        super(0, 0, "", parent, configClass.getAnnotation(PopupConfig.class).name().isEmpty() ? configClass.getSimpleName() : configClass.getAnnotation(PopupConfig.class).name());
 
         this.setParent(parent);
         this.customParent = parent;
@@ -113,6 +113,8 @@ public class ConfigPopupScreen extends GuiConfigsBase {
         if (this.customParent != null) {
             this.customParent.render(drawContext, mouseX, mouseY, partialTicks);
         }
+
+        drawContext.getMatrices().translate(0f, 0f, 1000f);
 
         super.render(drawContext, mouseX, mouseY, partialTicks);
     }

@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface PopupConfig {
-    String value() default "";
+    String name() default "";
     String buttonName() default "";
     boolean defaultEnabled() default true;
     int width() default 400;
