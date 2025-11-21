@@ -19,7 +19,7 @@ public class Test {
     public static final Class<?> USELESS_NAME = PopupData.class;
     @PopupConfig(distanceFromSides = 50, distanceFromTops = 50)
     static class PopupData {
-        public static final ConfigInteger TEST = new ConfigIntegerPlus("Test", 0, -20, 20);
+        public static final ConfigInteger TEST = new ConfigIntegerPlus("Integer", 0, -20, 20);
 
         public static final Class<?> LAYERED_CONFIGS = LayeredConfigs.class;
         @PopupConfig(buttonName = "Custom button name")
