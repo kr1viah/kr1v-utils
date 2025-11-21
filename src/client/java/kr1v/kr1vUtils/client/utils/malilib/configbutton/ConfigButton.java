@@ -4,8 +4,19 @@ import com.google.gson.JsonElement;
 import fi.dy.masa.malilib.config.IConfigBoolean;
 import fi.dy.masa.malilib.config.options.ConfigBase;
 
-public class ConfigButton extends ConfigBase<ConfigButton> implements IConfigBoolean {
-    public ConfigButton(String name, String comment, String prettyName, String translatedName, Runnable onPressed, String buttonDisplayName) {
+public class ConfigButton<T> extends ConfigBase<ConfigButton<T>> implements IConfigBoolean {
+    public ConfigButton(String name, String buttonDisplayName, Runnable onPressed) {
+        this(name, "", name, name, buttonDisplayName, onPressed);
+    }
+
+    public ConfigButton(String name, String buttonDisplayName, Runnable onPressed, T data) {
+        this(name, "", name, name, buttonDisplayName, onPressed);
+        this.data = data;
+    }
+
+    public T data;
+
+    public ConfigButton(String name, String comment, String prettyName, String translatedName, String buttonDisplayName, Runnable onPressed) {
         super(null, name, comment, prettyName, translatedName);
         this.displayName = buttonDisplayName;
         this.onPressed = onPressed;
@@ -33,9 +44,7 @@ public class ConfigButton extends ConfigBase<ConfigButton> implements IConfigBoo
     }
 
     public void execute() {
-        if (this.onPressed != null) {
-            this.onPressed.run();
-        }
+        this.onPressed.run();
     }
 
 

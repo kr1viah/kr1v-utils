@@ -21,7 +21,7 @@ public class WidgetConfigOptionMixin {
     @Definition(id = "type", local = @Local(type = ConfigType.class, name = "type"))
     @Expression("type == BOOLEAN")
     @ModifyExpressionValue(method = "addConfigOption", at = @At("MIXINEXTRAS:EXPRESSION"))
-    private boolean injected(boolean original, @Local IConfigBase config) {
+    private boolean injected(boolean original, @Local(name = "config") IConfigBase config) {
         return original || config instanceof ConfigButton;
     }
 
@@ -29,7 +29,7 @@ public class WidgetConfigOptionMixin {
     @Expression("new ConfigButtonBoolean(?, ?, ?, ?, ?)")
     @WrapOperation(method = "addConfigOption", at = @At("MIXINEXTRAS:EXPRESSION"))
     private ConfigButtonBoolean injected2(int x, int y, int width, int height, IConfigBoolean config, Operation<ConfigButtonBoolean> original) {
-        if (config instanceof ConfigButton configButton) {
+        if (config instanceof ConfigButton<?> configButton) {
             return new ConfigButtonBoolean(x, y, width, height, config) {
                 @Override
                 protected boolean onMouseClickedImpl(int mouseX, int mouseY, int mouseButton) {
@@ -43,6 +43,6 @@ public class WidgetConfigOptionMixin {
                 }
             };
         }
-        return null;
+        return original.call(x, y, width, height, config);
     }
 }

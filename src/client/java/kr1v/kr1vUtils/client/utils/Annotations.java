@@ -3,6 +3,7 @@ package kr1v.kr1vUtils.client.utils;
 import fi.dy.masa.malilib.config.IConfigBase;
 import kr1v.kr1vUtils.client.config.ConfigHandler;
 import kr1v.kr1vUtils.client.utils.annotation.Config;
+import kr1v.kr1vUtils.client.utils.annotation.PopupConfig;
 import kr1v.kr1vUtils.client.utils.annotation.Touch;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
 import org.reflections.Reflections;
@@ -15,20 +16,18 @@ import java.util.Set;
 public final class Annotations {
 	private Annotations() {}
 
-	public static final Map<Class<?>, List<IConfigBase>> CACHE;
+	public static final Map<Class<?>, List<IConfigBase>> CACHE = new HashMap<>();
 
 	static {
 		Reflections reflections = new Reflections();
 		{
-			Map<Class<?>, List<IConfigBase>> result = new HashMap<>();
 			Set<Class<?>> configTypes = reflections.getTypesAnnotatedWith(Config.class);
 			for (Class<?> cfgClass : configTypes) {
                 ConfigBooleanPlus.defaultEnabled = cfgClass.getAnnotation(Config.class).defaultEnabled();
 				List<IConfigBase> list = ConfigHandler.generateOptions(cfgClass);
                 ConfigBooleanPlus.defaultEnabled = true;
-				result.put(cfgClass, list);
+                CACHE.put(cfgClass, list);
 			}
-			CACHE = result;
 		}
 		{
 			Set<Class<?>> touchableClasses = reflections.getTypesAnnotatedWith(Touch.class);
@@ -48,7 +47,12 @@ public final class Annotations {
 	}
 
     public static String nameForConfig(Class<?> configClass) {
-        String name = configClass.getAnnotation(Config.class).name();
+        String name;
+        if (configClass.isAnnotationPresent(PopupConfig.class)) {
+            name = configClass.getAnnotation(PopupConfig.class).value();
+        } else {
+            name = configClass.getAnnotation(Config.class).name();
+        }
         if (name.isEmpty()) name = configClass.getSimpleName();
         return name;
     }

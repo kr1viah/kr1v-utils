@@ -9,6 +9,7 @@ import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.kr1vUtils.client.config.configs.Misc;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
 import kr1v.kr1vUtils.client.utils.Annotations;
+import kr1v.kr1vUtils.client.utils.annotation.PopupConfig;
 import net.minecraft.client.gui.DrawContext;
 
 import java.util.ArrayList;
@@ -34,7 +35,8 @@ public class ConfigScreen extends GuiConfigsBase {
 		int y = 26;
 
 		for (ConfigGuiTab tab : ConfigGuiTab.values()) {
-			x += this.createButton(x, y, -1, tab);
+            if (!tab.isPopup)
+                x += this.createButton(x, y, -1, tab);
 		}
 	}
 
@@ -93,17 +95,23 @@ public class ConfigScreen extends GuiConfigsBase {
 		private final String translationKey;
 		private final List<? extends IConfigBase> options;
         private static ConfigGuiTab[] values;
+        public final boolean isPopup;
 
-		ConfigGuiTab(String translationKey, List<? extends IConfigBase> options) {
+        ConfigGuiTab(String translationKey, List<? extends IConfigBase> options, boolean isPopup) {
 			this.options = options;
 			this.translationKey = translationKey;
+            this.isPopup = isPopup;
 		}
 
         public static ConfigGuiTab[] values() {
             if (values == null) {
                 List<ConfigGuiTab> valuesList = new ArrayList<>();
                 for (Class<?> clazz : Annotations.CACHE.keySet()) {
-                    valuesList.add(new ConfigGuiTab(Annotations.nameForConfig(clazz), Annotations.configsFor(clazz)));
+                    if (clazz.isAnnotationPresent(PopupConfig.class)) {
+                        valuesList.add(new ConfigGuiTab(Annotations.nameForConfig(clazz), Annotations.configsFor(clazz), true));
+                    } else {
+                        valuesList.add(new ConfigGuiTab(Annotations.nameForConfig(clazz), Annotations.configsFor(clazz), false));
+                    }
                 }
                 values = valuesList.toArray(new ConfigGuiTab[0]);
             }
