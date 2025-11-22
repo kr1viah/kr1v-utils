@@ -32,6 +32,24 @@ repositories {
         name = "JitPack"
         url = "https://jitpack.io"
     }
+    mavenCentral()
+}
+
+sourceSets {
+    ap {
+        java { srcDir "src/ap/java" }
+        resources { srcDir "src/ap/resources" }
+    }
+}
+
+configurations {
+    apImplementation
+    apAnnotationProcessor
+
+    apCompileClasspath {
+        canBeResolved = true
+        extendsFrom apImplementation
+    }
 }
 
 dependencies {
@@ -47,6 +65,90 @@ dependencies {
     implementation include("net.fabricmc:mapping-io:${project.mapping_io_version}")
     implementation include("org.reflections:reflections:${project.reflections_version}")
     implementation include("org.javassist:javassist:${project.javaasist_version}-GA")
+
+    apImplementation "com.google.auto.service:auto-service-annotations:1.1.1"
+    apAnnotationProcessor "com.google.auto.service:auto-service:1.1.1"
+}
+
+def targetJavaVersion = 21
+def apGeneratedDir = file("$buildDir/generated/sources/annotations/main")
+
+afterEvaluate {
+    if (configurations.named("apCompileClasspath") && configurations.named("apAnnotationProcessor")) {
+        configurations.apCompileClasspath.extendsFrom(configurations.apAnnotationProcessor)
+    }
+}
+
+if (tasks.names.contains('compileApJava')) {
+    tasks.named('compileApJava', JavaCompile).configure { JavaCompile jc ->
+        jc.group = "build"
+        jc.description = "Compile annotation processor"
+        jc.source = sourceSets.ap.java
+        jc.classpath = files(sourceSets.ap.compileClasspath, configurations.apCompileClasspath)
+        jc.destinationDirectory = file("$buildDir/classes/java/ap")
+        jc.options.encoding = "UTF-8"
+        jc.options.annotationProcessorPath = configurations.apAnnotationProcessor
+        if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+            jc.options.release.set(targetJavaVersion)
+        } else {
+            jc.options.compilerArgs += ["--release", "${targetJavaVersion}"]
+        }
+    }
+} else {
+    tasks.register('compileApJava', JavaCompile) { JavaCompile jc ->
+        jc.group = "build"
+        jc.description = "Compile annotation processor"
+        jc.source = sourceSets.ap.java
+        jc.classpath = files(sourceSets.ap.compileClasspath, configurations.apCompileClasspath)
+        jc.destinationDirectory = file("$buildDir/classes/java/ap")
+        jc.options.encoding = "UTF-8"
+        jc.options.annotationProcessorPath = configurations.apAnnotationProcessor
+        if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+            jc.options.release.set(targetJavaVersion)
+        }
+    }
+}
+
+sourceSets.main.java.srcDir apGeneratedDir
+
+tasks.withType(JavaCompile).configureEach { JavaCompile jc ->
+    if (jc.name == 'compileApJava') return
+
+    dependsOn tasks.named('compileApJava')
+
+    jc.options.annotationProcessorPath = files(layout.buildDirectory.dir("classes/java/ap"), configurations.apCompileClasspath)
+
+    try {
+        jc.options.annotationProcessorGeneratedSourcesDirectory = apGeneratedDir
+    } catch (MissingPropertyException ignored) {
+        jc.options.compilerArgs += ["-s", apGeneratedDir.absolutePath]
+    }
+
+    jc.doFirst { apGeneratedDir.mkdirs() }
+}
+
+tasks.named("remapJar") {
+    dependsOn tasks.named("openSesameCompileClientJava")
+}
+
+tasks.named("jar") {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    dependsOn tasks.named("openSesameCompileClientJava")
+}
+
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        it.options.release.set(targetJavaVersion)
+    }
 }
 
 processResources {
@@ -62,28 +164,9 @@ processResources {
     }
 }
 
-def targetJavaVersion = 21
-tasks.withType(JavaCompile).configureEach {
-    it.options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        it.options.release.set(targetJavaVersion)
-    }
-}
-
-tasks.named("remapJar") {
-    dependsOn tasks.named("openSesameCompileClientJava")
-}
-
-tasks.named("jar") {
-    dependsOn tasks.named("openSesameCompileClientJava")
-}
-
-java {
-    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
-    withSourcesJar()
+tasks.named("sourcesJar") {
+    dependsOn tasks.named("compileJava")
+    dependsOn tasks.named("compileClientJava")
 }
 
 jar {
