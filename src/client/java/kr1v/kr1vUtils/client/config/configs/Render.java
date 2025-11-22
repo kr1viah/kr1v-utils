@@ -1,11 +1,14 @@
 package kr1v.kr1vUtils.client.config.configs;
 
+import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigDouble;
-import kr1v.kr1vUtils.client.utils.annotation.Config;
-import kr1v.kr1vUtils.client.utils.annotation.Label;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
+import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Label;
+import kr1v.kr1vUtils.client.utils.annotation.methodannotations.Extras;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Config
@@ -64,4 +67,11 @@ public class Render {
     @Label
     @Label("Render layer:")
 	public static final Map<String, ConfigBooleanPlus> RENDER_HOTKEYS = new HashMap<>();
+
+    @Extras
+    public static void addRenderLayers(List<IConfigBase> existingList) {
+        for (int i = 0; i < 6; i++) {
+            existingList.add(new ConfigBooleanPlus("Test! " + i));
+        }
+    }
 }

@@ -3,7 +3,7 @@ package kr1v.kr1vUtils.client.config.configs;
 import fi.dy.masa.malilib.gui.GuiBase;
 import kr1v.kr1vUtils.client.gui.screen.ConfigScreen;
 import kr1v.kr1vUtils.client.gui.screen.DummyScreen;
-import kr1v.kr1vUtils.client.utils.annotation.Config;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigHotkeyPlus;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigStringListPlus;

@@ -1,6 +1,6 @@
 package kr1v.kr1vUtils.client.utils;
 
-import kr1v.kr1vUtils.client.utils.annotation.Touch;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.Touch;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.mappingio.MappingReader;
 import net.fabricmc.mappingio.tree.MappingTree;

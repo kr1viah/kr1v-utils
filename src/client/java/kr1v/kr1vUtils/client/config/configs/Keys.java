@@ -2,7 +2,7 @@ package kr1v.kr1vUtils.client.config.configs;
 
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.hotkeys.KeybindMulti;
-import kr1v.kr1vUtils.client.utils.annotation.Config;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;

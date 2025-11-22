@@ -9,14 +9,14 @@ import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.kr1vUtils.client.config.configs.Misc;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
 import kr1v.kr1vUtils.client.utils.Annotations;
-import kr1v.kr1vUtils.client.utils.annotation.PopupConfig;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
 import net.minecraft.client.gui.DrawContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigScreen extends GuiConfigsBase {
-    public static ConfigGuiTab tab = null;
+    public static ConfigGuiTab tab = ConfigScreen.ConfigGuiTab.values()[0];
 
     public static void setTab(ConfigGuiTab tab) {
         ConfigScreen.tab = tab;

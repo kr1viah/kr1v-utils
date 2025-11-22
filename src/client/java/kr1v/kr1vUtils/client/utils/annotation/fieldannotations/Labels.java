@@ -1,4 +1,4 @@
-package kr1v.kr1vUtils.client.utils.annotation;
+package kr1v.kr1vUtils.client.utils.annotation.fieldannotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

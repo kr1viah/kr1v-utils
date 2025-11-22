@@ -1,7 +1,7 @@
 package kr1v.kr1vUtils.client.config.configs;
 
 import com.google.common.collect.ImmutableList;
-import kr1v.kr1vUtils.client.utils.annotation.Config;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigStringListPlus;
 

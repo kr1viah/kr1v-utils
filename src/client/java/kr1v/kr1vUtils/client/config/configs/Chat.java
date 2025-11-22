@@ -5,7 +5,7 @@ import fi.dy.masa.malilib.config.options.ConfigColor;
 import fi.dy.masa.malilib.config.options.ConfigStringList;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import kr1v.kr1vUtils.client.gui.BetterChatHud;
-import kr1v.kr1vUtils.client.utils.annotation.Config;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigStringPlus;
 import net.minecraft.client.MinecraftClient;

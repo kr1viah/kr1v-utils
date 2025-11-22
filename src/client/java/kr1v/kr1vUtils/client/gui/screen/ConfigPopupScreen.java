@@ -9,7 +9,7 @@ import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.GuiUtils;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
 import kr1v.kr1vUtils.client.utils.Annotations;
-import kr1v.kr1vUtils.client.utils.annotation.PopupConfig;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 

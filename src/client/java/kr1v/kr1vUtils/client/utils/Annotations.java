@@ -2,9 +2,9 @@ package kr1v.kr1vUtils.client.utils;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import kr1v.kr1vUtils.client.config.ConfigHandler;
-import kr1v.kr1vUtils.client.utils.annotation.Config;
-import kr1v.kr1vUtils.client.utils.annotation.PopupConfig;
-import kr1v.kr1vUtils.client.utils.annotation.Touch;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.Touch;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
 import org.reflections.Reflections;
 
