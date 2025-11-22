@@ -7,9 +7,9 @@ public class PositionOffsetter {
 		double yaw  = Math.toRadians(yawDeg);
 		double pitch = Math.toRadians(pitchDeg);
 
-		double localRight = Render.OFFSET_X.getDoubleValue();
-		double localUp = Render.OFFSET_Y.getDoubleValue();
-		double localForward = Render.OFFSET_Z.getDoubleValue();
+		double localRight = Render.Offsetting.OFFSET_X.getDoubleValue();
+		double localUp = Render.Offsetting.OFFSET_Y.getDoubleValue();
+		double localForward = Render.Offsetting.OFFSET_Z.getDoubleValue();
 
 		// forward vector
 		double fx = -Math.sin(yaw) * Math.cos(pitch);

@@ -22,13 +22,13 @@ public class VertexConsumerMixin1 {
 	private VertexConsumer wrap(float x, float y, float z, Operation<VertexConsumer> original) {
         if (!Render.AFFECT_OFFSETTING.getBooleanValue()) return original.call(x, y, z);
 		ClientPlayerEntity player = MinecraftClient.getInstance().player;
-		if (player != null && Render.RELATIVE_TO_PLAYER_ANGLE.getBooleanValue()) {
+		if (player != null && Render.Offsetting.RELATIVE_TO_PLAYER_ANGLE.getBooleanValue()) {
 			double[] d = PositionOffsetter.worldOffsetFromPlayerAngles(player.getYaw(), player.getPitch());
 			x += (float) d[0]; y += (float) d[1]; z += (float) d[2];
 		} else {
-			x += (float) Render.OFFSET_X.getDoubleValue();
-			y += (float) Render.OFFSET_Y.getDoubleValue();
-			z += (float) Render.OFFSET_Z.getDoubleValue();
+			x += (float) Render.Offsetting.OFFSET_X.getDoubleValue();
+			y += (float) Render.Offsetting.OFFSET_Y.getDoubleValue();
+			z += (float) Render.Offsetting.OFFSET_Z.getDoubleValue();
 		}
 		return original.call(x, y, z);
 	}

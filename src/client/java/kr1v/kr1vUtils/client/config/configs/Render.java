@@ -7,6 +7,7 @@ import kr1v.kr1vUtils.client.utils.ClassUtils;
 import kr1v.kr1vUtils.client.utils.MappingUtils;
 import kr1v.kr1vUtils.client.utils.StringUtils;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
+import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
 import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Label;
 import kr1v.kr1vUtils.client.utils.annotation.methodannotations.Extras;
 import kr1v.kr1vUtils.client.utils.malilib.KeybindSetting;
@@ -24,13 +25,15 @@ import java.util.function.Function;
 
 @Config
 public class Render {
-    @Label
     public static final ConfigBooleanPlus       AFFECT_OFFSETTING = new ConfigBooleanPlus("Affect offsetting");
-
-    public static final ConfigDouble            OFFSET_X = new ConfigDouble("Offset x", 0, -100, 100, "");
-    public static final ConfigDouble            OFFSET_Y = new ConfigDouble("Offset y", 0, -100, 100,"");
-    public static final ConfigDouble            OFFSET_Z = new ConfigDouble("Offset z", 0, -100, 100,"");
-    public static final ConfigBooleanPlus       RELATIVE_TO_PLAYER_ANGLE = new ConfigBooleanPlus("Offset relative to player angle");
+    public static final Class<?> CLASS_NAME = Offsetting.class;
+    @PopupConfig
+    public static class Offsetting {
+        public static final ConfigDouble            OFFSET_X = new ConfigDouble("Offset x", 0, -100, 100, "");
+        public static final ConfigDouble            OFFSET_Y = new ConfigDouble("Offset y", 0, -100, 100,"");
+        public static final ConfigDouble            OFFSET_Z = new ConfigDouble("Offset z", 0, -100, 100,"");
+        public static final ConfigBooleanPlus       RELATIVE_TO_PLAYER_ANGLE = new ConfigBooleanPlus("Offset relative to player angle");
+    }
 
     @Label
     @Label("In game hud:")
