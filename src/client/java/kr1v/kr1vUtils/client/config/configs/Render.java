@@ -66,7 +66,6 @@ public class Render {
     public static final ConfigBooleanPlus       HOTBAR_ITEM = new ConfigBooleanPlus("Hotbar item");
     public static final ConfigBooleanPlus       AUTOSAVE_INDICATOR = new ConfigBooleanPlus("Autosave indicator");
 
-
     @Extras(runAfterLabel = "Render layer:")
     public static void addRenderLayers(List<IConfigBase> currentList) {
         for (Field field : ClassUtils.getAllFields(RenderLayer.MultiPhase.class)) {
