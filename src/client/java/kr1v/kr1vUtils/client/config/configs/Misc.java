@@ -14,12 +14,10 @@ import net.minecraft.util.math.Vec3d;
 import java.util.HashMap;
 import java.util.Map;
 
-@Config
 @SuppressWarnings("unused")
+@Config
 public class Misc {
 	public static boolean preventClosingOnce = false;
-
-    public static final ConfigBooleanPlus AFFECT_AT_ALL = new ConfigBooleanPlus("Affect anything at all");
 
 	public static final ConfigHotkeyPlus OPEN_GUI = new ConfigHotkeyPlus("Open config gui", "G,C", (keyAction, keybind) -> {
         GuiBase.openGui(new ConfigScreen());
@@ -53,7 +51,6 @@ public class Misc {
     public static final ConfigBooleanPlus PRINT_MISSED_JUMPS = new ConfigBooleanPlus("Print missed jumps", false, "", "Prints a message to the chat when a jump is missed");
     public static final ConfigBooleanPlus SEPARATE_SERVER_CLIENT_ACTION_BAR = new ConfigBooleanPlus("Separate the server and client action bar", true);
     public static final ConfigBooleanPlus CLIENT_ON_TOP = new ConfigBooleanPlus("Put client action bar on top", true);
-	public static final ConfigBooleanPlus SAVE_LAST_POSITION = new ConfigBooleanPlus("Remember where you were exactly in configs", true);
 
 	public static final Map<String, Integer> tabToScrollPosition = new HashMap<>();
 }

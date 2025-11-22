@@ -8,12 +8,8 @@ import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigIntegerPlus;
 
 @Config(name = "World generation")
-@SuppressWarnings("unused")
 public class WorldGen {
-    public static final ConfigBooleanPlus   AFFECT_GENERATION = new ConfigBooleanPlus("Affect generation in general");
-
     @Label("Generation steps")
-    public static final ConfigBooleanPlus   GENERATION_STEPS = new ConfigBooleanPlus("Affect generation steps");
     public static final ConfigBooleanPlus   GENERATE_STRUCTURES = new ConfigBooleanPlus("Generate structures");
     public static final ConfigBooleanPlus   LOAD_STRUCTURES = new ConfigBooleanPlus("Load structures");
     public static final ConfigBooleanPlus   GENERATE_STRUCTURE_REFERENCES = new ConfigBooleanPlus("Generate structure references");
@@ -36,7 +32,7 @@ public class WorldGen {
 
     @Label
     public static final ConfigBooleanPlus   OVERRIDE_STRUCTURE_HEIGHT = new ConfigBooleanPlus("Override structure height", false);
-    public static final ConfigInteger           OVERRIDE_STRUCTURE_HEIGHT_VALUE = new ConfigIntegerPlus("Override structure height with", 64);
+    public static final ConfigInteger       OVERRIDE_STRUCTURE_HEIGHT_VALUE = new ConfigIntegerPlus("Override structure height with", 64);
 
     @Label
     public static final ConfigBooleanPlus   ICE_BERGS = new ConfigBooleanPlus("Ice bergs");
@@ -44,23 +40,23 @@ public class WorldGen {
 
     @Label("Double perlin noise overrides")
     public static final ConfigBooleanPlus   OVERRIDE_DOUBLE_PERLIN_NOISE = new ConfigBooleanPlus("Override double perlin noise", false);
-    public static final ConfigDouble            DPN_AMPLITUDE = new ConfigDouble("Amplitude", 1);
-    public static final ConfigDouble            DPN_MAX_VALUE = new ConfigDouble("DPN Max value", 1);
-    public static final ConfigDouble            DPN_MAGIC_CONSTANT = new ConfigDouble("Magic constant", 1.0181268882175227);
+    public static final ConfigDouble        DPN_AMPLITUDE = new ConfigDouble("Amplitude", 1);
+    public static final ConfigDouble        DPN_MAX_VALUE = new ConfigDouble("DPN Max value", 1);
+    public static final ConfigDouble        DPN_MAGIC_CONSTANT = new ConfigDouble("Magic constant", 1.0181268882175227);
 
     @Label("Octave perlin noise overrides")
     public static final ConfigBooleanPlus   OVERRIDE_OCTAVE_PERLIN_NOISE = new ConfigBooleanPlus("Override octave perlin noise", false);
-    public static final ConfigInteger           OPN_FIRST_OCTAVE = new ConfigInteger("First octave", 2);
-    public static final ConfigDouble            OPN_PERSISTENCE = new ConfigDouble("Persistence", 0.5714285714285714);
-    public static final ConfigDouble            OPN_LACUNARITY = new ConfigDouble("Lacunarity", 8);
-    public static final ConfigDouble            OPN_MAX_VALUE = new ConfigDouble("OPN Max value", 2.0);
+    public static final ConfigInteger       OPN_FIRST_OCTAVE = new ConfigInteger("First octave", 2);
+    public static final ConfigDouble        OPN_PERSISTENCE = new ConfigDouble("Persistence", 0.5714285714285714);
+    public static final ConfigDouble        OPN_LACUNARITY = new ConfigDouble("Lacunarity", 8);
+    public static final ConfigDouble        OPN_MAX_VALUE = new ConfigDouble("OPN Max value", 2.0);
 
     @Label("Simplex noise overrides")
     public static final ConfigBooleanPlus   SN_OVERRIDE_SIMPLEX_NOISE = new ConfigBooleanPlus("Override simplex noise", false);
-    public static final ConfigDouble            SN_SQRT_3 = new ConfigDouble("Square root of 3", 1.7320508075688772);
-    public static final ConfigDouble            SN_SKEW_FACTOR_2d = new ConfigDouble("Skew factor 2d", 0.3660254037844386);
-    public static final ConfigDouble            SN_UNSKEW_FACTOR_2d = new ConfigDouble("Unskew factor 2d", 0.2113248654051871);
-    public static final ConfigDouble            SN_ORIGIN_X = new ConfigDouble("Origin x", 0.0);
-    public static final ConfigDouble            SN_ORIGIN_Y = new ConfigDouble("Origin y", 0.0);
-    public static final ConfigDouble            SN_ORIGIN_Z = new ConfigDouble("Origin z", 0.0);
+    public static final ConfigDouble        SN_SQRT_3 = new ConfigDouble("Square root of 3", 1.7320508075688772);
+    public static final ConfigDouble        SN_SKEW_FACTOR_2d = new ConfigDouble("Skew factor 2d", 0.3660254037844386);
+    public static final ConfigDouble        SN_UNSKEW_FACTOR_2d = new ConfigDouble("Unskew factor 2d", 0.2113248654051871);
+    public static final ConfigDouble        SN_ORIGIN_X = new ConfigDouble("Origin x", 0.0);
+    public static final ConfigDouble        SN_ORIGIN_Y = new ConfigDouble("Origin y", 0.0);
+    public static final ConfigDouble        SN_ORIGIN_Z = new ConfigDouble("Origin z", 0.0);
 }

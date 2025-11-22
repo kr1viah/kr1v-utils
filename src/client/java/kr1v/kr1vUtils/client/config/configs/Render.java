@@ -9,10 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Config
-@SuppressWarnings("unused")
 public class Render {
-    public static final ConfigBooleanPlus       AFFECT_RENDERING = new ConfigBooleanPlus("Affect rendering");
-
     @Label
     public static final ConfigBooleanPlus       AFFECT_OFFSETTING = new ConfigBooleanPlus("Affect offsetting");
 
@@ -23,8 +20,6 @@ public class Render {
 
     @Label
     @Label("In game hud:")
-    public static final ConfigBooleanPlus       AFFECT_IN_GAME_HUD = new ConfigBooleanPlus("Affect in game hud");
-
     public static final ConfigBooleanPlus       MISC_OVERLAYS = new ConfigBooleanPlus("Misc overlays");
     public static final ConfigBooleanPlus       SLEEP_OVERLAY = new ConfigBooleanPlus("Sleep overlay");
     public static final ConfigBooleanPlus       OVERLAY_MESSAGE = new ConfigBooleanPlus("Overlay message");
@@ -55,8 +50,6 @@ public class Render {
 
     @Label
     @Label("Game renderer:")
-    public static final ConfigBooleanPlus       AFFECT_GAME_RENDERER = new ConfigBooleanPlus("Affect game renderer");
-
     public static final ConfigBooleanPlus       MAIN = new ConfigBooleanPlus("Main");
     public static final ConfigBooleanPlus       PARTICLES = new ConfigBooleanPlus("Particles");
     public static final ConfigBooleanPlus       CLOUDS = new ConfigBooleanPlus("Clouds");
@@ -70,7 +63,5 @@ public class Render {
 
     @Label
     @Label("Render layer:")
-    public static final ConfigBooleanPlus       AFFECT_RENDER_LAYERS = new ConfigBooleanPlus("Affect render layers");
-
 	public static final Map<String, ConfigBooleanPlus> RENDER_HOTKEYS = new HashMap<>();
 }

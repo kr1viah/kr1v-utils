@@ -9,8 +9,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
 
-@Config
 @SuppressWarnings("unused")
+@Config
 public class Keys {
     public static final ConfigBooleanPlus DISPLAY_CURRENTLY_PRESSED_KEYS = new ConfigBooleanPlus("Display currently pressed keys");
     public static final ConfigBooleanPlus DISPLAY_CURRENTLY_PRESSED_MOUSE_BUTTONS = new ConfigBooleanPlus("Display currently pressed mouse buttons");
