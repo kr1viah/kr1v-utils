@@ -9,6 +9,7 @@ import kr1v.kr1vUtils.client.utils.StringUtils;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
 import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Label;
+import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Marker;
 import kr1v.kr1vUtils.client.utils.annotation.methodannotations.Extras;
 import kr1v.kr1vUtils.client.utils.malilib.KeybindSetting;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
@@ -87,6 +88,7 @@ public class Render {
 
     @Label
     @Label("Render layer:")
+    @Marker("Test")
     @Label
     @Label("Game renderer:")
     public static final ConfigBooleanPlus       MAIN = new ConfigBooleanPlus("Main");

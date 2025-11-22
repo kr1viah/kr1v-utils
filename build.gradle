@@ -1,7 +1,7 @@
 plugins {
     id 'fabric-loom' version '1.12.5'
     id 'maven-publish'
-    id 'dev.lukebemish.opensesame.loom' version '0.7.7'
+    id 'dev.lukebemish.opensesame.loom' version '0.8.0'
 }
 
 version = project.mod_version
@@ -68,6 +68,14 @@ tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         it.options.release.set(targetJavaVersion)
     }
+}
+
+tasks.named("remapJar") {
+    dependsOn tasks.named("openSesameCompileClientJava")
+}
+
+tasks.named("jar") {
+    dependsOn tasks.named("openSesameCompileClientJava")
 }
 
 java {
