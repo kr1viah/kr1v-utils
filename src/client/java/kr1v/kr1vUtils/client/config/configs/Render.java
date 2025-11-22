@@ -2,14 +2,25 @@ package kr1v.kr1vUtils.client.config.configs;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigDouble;
+import fi.dy.masa.malilib.hotkeys.KeybindSettings;
+import kr1v.kr1vUtils.client.utils.ClassUtils;
+import kr1v.kr1vUtils.client.utils.MappingUtils;
+import kr1v.kr1vUtils.client.utils.StringUtils;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
 import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Label;
 import kr1v.kr1vUtils.client.utils.annotation.methodannotations.Extras;
+import kr1v.kr1vUtils.client.utils.malilib.KeybindSetting;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
+import net.minecraft.client.render.RenderLayer;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 @Config
 public class Render {
@@ -51,6 +62,28 @@ public class Render {
     public static final ConfigBooleanPlus       HOTBAR_ITEM = new ConfigBooleanPlus("Hotbar item");
     public static final ConfigBooleanPlus       AUTOSAVE_INDICATOR = new ConfigBooleanPlus("Autosave indicator");
 
+
+    @Extras(runAfterLabel = "Render layer:")
+    public static void addRenderLayers(List<IConfigBase> currentList) {
+        for (Field field : ClassUtils.getAllFields(RenderLayer.MultiPhase.class)) {
+            if (Modifier.isStatic(field.getModifiers())) {
+                if (RenderLayer.class.isAssignableFrom(field.getType()) ||
+                        BiFunction.class.isAssignableFrom(field.getType()) ||
+                        Function.class.isAssignableFrom(field.getType())) {
+
+                    String name = MappingUtils.intermediaryToYarnSimple(field).toLowerCase(Locale.ROOT);
+
+                    ConfigBooleanPlus hotkey = new ConfigBooleanPlus(StringUtils.convertCamelCase(name), true, "", (KeybindSettings) KeybindSetting.ofAny(), name, "", "");
+
+                    currentList.add(hotkey);
+                    Render.RENDER_HOTKEYS.put(name, hotkey);
+                }
+            }
+        }
+    }
+
+    @Label
+    @Label("Render layer:")
     @Label
     @Label("Game renderer:")
     public static final ConfigBooleanPlus       MAIN = new ConfigBooleanPlus("Main");
@@ -64,14 +97,5 @@ public class Render {
     public static final ConfigBooleanPlus       TARGET_BLOCK_OUTLINE = new ConfigBooleanPlus("Target block outline");
     public static final ConfigBooleanPlus       SKY = new ConfigBooleanPlus("Sky");
 
-    @Label
-    @Label("Render layer:")
-	public static final Map<String, ConfigBooleanPlus> RENDER_HOTKEYS = new HashMap<>();
-
-    @Extras
-    public static void addRenderLayers(List<IConfigBase> existingList) {
-        for (int i = 0; i < 6; i++) {
-            existingList.add(new ConfigBooleanPlus("Test! " + i));
-        }
-    }
+    public static final Map<String, ConfigBooleanPlus> RENDER_HOTKEYS = new HashMap<>();
 }

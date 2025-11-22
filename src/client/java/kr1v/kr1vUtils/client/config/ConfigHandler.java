@@ -14,6 +14,7 @@ import kr1v.kr1vUtils.client.utils.Annotations;
 import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Label;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
 import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Labels;
+import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Marker;
 import kr1v.kr1vUtils.client.utils.annotation.methodannotations.Extras;
 import kr1v.kr1vUtils.client.utils.malilib.configbutton.ConfigButton;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
@@ -89,15 +90,17 @@ public class ConfigHandler implements IConfigHandler {
                     }
                 }
             }
-
             for (Method m : clazz.getDeclaredMethods()) {
                 if (m.isAnnotationPresent(Extras.class)) {
-                    m.invoke(null, list);
+                    Extras extras = m.getAnnotation(Extras.class);
+                    if (extras.runAfterLabel().isEmpty() && extras.runAt().isEmpty() && extras.runBeforeLabel().isEmpty()) {
+                        m.invoke(null, list);
+                    }
                 }
             }
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
+        } catch (IllegalArgumentException e) {
             throw new RuntimeException("Method descriptor probably doesn't match.", e);
         }
         return list;
@@ -124,18 +127,48 @@ public class ConfigHandler implements IConfigHandler {
         list.add(configButton);
     }
 
-    private static void handleFieldAnnotations(Field f, List<IConfigBase> list) throws IllegalAccessException {
+    private static void handleFieldAnnotations(Field f, List<IConfigBase> list) throws IllegalAccessException, InvocationTargetException {
         for (Annotation annotation : f.getDeclaredAnnotations()) {
             handleFieldAnnotation(f, annotation, list);
         }
     }
 
-    private static void handleFieldAnnotation(Field f, Annotation annotation, List<IConfigBase> list) {
+    private static void handleLabel(Field f, Label label, List<IConfigBase> list) throws InvocationTargetException, IllegalAccessException {
+        for (Method m : f.getDeclaringClass().getDeclaredMethods()) {
+            if (m.isAnnotationPresent(Extras.class)) {
+                Extras extras = m.getAnnotation(Extras.class);
+                if (label.value().equals(extras.runBeforeLabel()) && extras.runAfterLabel().isEmpty() && extras.runAt().isEmpty()) {
+                    m.invoke(null, list);
+                }
+            }
+        }
+        list.add(new ConfigLabel(label.value()));
+        for (Method m : f.getDeclaringClass().getDeclaredMethods()) {
+            if (m.isAnnotationPresent(Extras.class)) {
+                Extras extras = m.getAnnotation(Extras.class);
+                if (label.value().equals(extras.runAfterLabel()) && extras.runBeforeLabel().isEmpty() && extras.runAt().isEmpty()) {
+                    m.invoke(null, list);
+                }
+            }
+        }
+    }
+
+    private static void handleFieldAnnotation(Field f, Annotation annotation, List<IConfigBase> list) throws InvocationTargetException, IllegalAccessException {
         switch (annotation) {
-            case Label label -> list.add(new ConfigLabel(label.value()));
+            case Label label -> handleLabel(f, label, list);
             case Labels labels -> {
                 for (Label label : labels.value()) {
-                    list.add(new ConfigLabel(label.value()));
+                    handleLabel(f, label, list);
+                }
+            }
+            case Marker marker -> {
+                for (Method m : f.getDeclaringClass().getDeclaredMethods()) {
+                    if (m.isAnnotationPresent(Extras.class)) {
+                        Extras extras = m.getAnnotation(Extras.class);
+                        if (marker.value().equals(extras.runAt()) && extras.runBeforeLabel().isEmpty() && extras.runAfterLabel().isEmpty()) {
+                            m.invoke(null, list);
+                        }
+                    }
                 }
             }
             default -> {}
