@@ -67,6 +67,7 @@ dependencies {
     implementation include("org.javassist:javassist:${project.javaasist_version}-GA")
 
     apImplementation "com.google.auto.service:auto-service-annotations:1.1.1"
+    apImplementation "com.google.code.gson:gson:2.13.2"
     apAnnotationProcessor "com.google.auto.service:auto-service:1.1.1"
 }
 

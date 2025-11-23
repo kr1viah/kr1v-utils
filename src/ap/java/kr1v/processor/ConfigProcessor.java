@@ -1,6 +1,8 @@
 package kr1v.processor;
 
 import com.google.auto.service.AutoService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sun.source.tree.*;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
@@ -11,6 +13,9 @@ import javax.lang.model.element.*;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
+import javax.tools.FileObject;
+import javax.tools.StandardLocation;
+import java.io.Writer;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,6 +25,11 @@ import java.util.stream.Collectors;
         "kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig"})
 @AutoService(Processor.class)
 public class ConfigProcessor extends AbstractProcessor {
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
+    // fqcn -> class representation
+    private static final Map<String, List<ElementRepresentation>> map = new HashMap<>();
+
     private Trees trees;
     private Elements elementUtils;
     private Types typeUtils;
@@ -45,7 +55,7 @@ public class ConfigProcessor extends AbstractProcessor {
 
         for (TypeElement typeElement : classes) {
             String fqcn = elementUtils.getBinaryName(typeElement).toString();
-            println(fqcn);
+            List<ElementRepresentation> classRepresentation = new ArrayList<>();
 
             TreePath typePath = trees.getPath(typeElement);
 
@@ -53,7 +63,7 @@ public class ConfigProcessor extends AbstractProcessor {
             List<? extends Tree> members = classTree.getMembers();
 
             for (Tree memberTree : members) {
-                javax.lang.model.element.Element memberElement = trees.getElement(new TreePath(typePath, memberTree));
+                Element memberElement = trees.getElement(new TreePath(typePath, memberTree));
 
                 if (memberElement == null) {
                     continue;
@@ -61,30 +71,50 @@ public class ConfigProcessor extends AbstractProcessor {
 
                 List<? extends AnnotationMirror> annotations = getAnnotations(memberElement);
 
+                List<AnnotationDTO> annotationStrings = new ArrayList<>();
+
+                for (var annotation : annotations) {
+                    annotationStrings.add(toDTO(annotation, elementUtils));
+                }
+
                 switch (memberElement) {
                     case VariableElement field -> {
-                        for (AnnotationMirror annotation : annotations) {
-                            println(annotation);
-                        }
-                        println(field.getSimpleName());
+                        ElementRepresentation representation = new ElementRepresentation("field", field.getSimpleName().toString());
+                        representation.annotations = annotationStrings;
+                        classRepresentation.add(representation);
                     }
                     case ExecutableElement method -> {
-                        for (AnnotationMirror annotation : annotations) {
-                            println(annotation);
-                        }
-                        println(method.getSimpleName());
+                        ElementRepresentation representation = new ElementRepresentation("method", method.getSimpleName().toString());
+                        representation.annotations = annotationStrings;
+                        classRepresentation.add(representation);
                     }
                     case TypeElement inner -> {
-                        for (AnnotationMirror annotation : annotations) {
-                            println(annotation);
-                        }
-                        println(inner.getSimpleName());
+                        ElementRepresentation representation = new ElementRepresentation("innerClass", inner.getQualifiedName().toString());
+                        representation.annotations = annotationStrings;
+                        classRepresentation.add(representation);
                     }
-                    default -> {}
+                    default -> {
+
+                    }
                 }
-                println("");
             }
+
+            map.put(fqcn, classRepresentation);
         }
+
+        try {
+            Filer filer = processingEnv.getFiler();
+            if (roundEnv.processingOver()) {
+                FileObject file = filer.createResource(StandardLocation.CLASS_OUTPUT, "", "META-INF/kr1v/classes.json");
+                try (Writer w = file.openWriter()) {
+                    GSON.toJson(map, w);
+                }
+            }
+            println("Written map. classes processed: " + map.size());
+        } catch (Throwable t) {
+            processingEnv.getMessager().printError("Failed to write resource: " + t);
+        }
+
         return false;
     }
 
@@ -209,5 +239,91 @@ public class ConfigProcessor extends AbstractProcessor {
 
     private void println(Object o) {
         processingEnv.getMessager().printNote(o == null ? "null" : o.toString());
+    }
+
+    public static class ElementRepresentation {
+        public String type;
+        public String name;
+        public List<AnnotationDTO> annotations = new ArrayList<>();
+
+        public ElementRepresentation(String type, String name) {
+            this.type = type;
+            this.name = name;
+        }
+    }
+
+    AnnotationDTO toDTO(AnnotationMirror mirror, Elements elements) {
+        AnnotationDTO dto = new AnnotationDTO();
+        TypeElement annType = (TypeElement) mirror.getAnnotationType().asElement();
+        dto.annotationType = elements.getBinaryName(annType).toString();
+        dto.values = new LinkedHashMap<>();
+
+        for (var entry : mirror.getElementValues().entrySet()) {
+            String name = entry.getKey().getSimpleName().toString();
+            dto.values.put(name, toValueDTO(entry.getValue(), elements));
+        }
+        return dto;
+    }
+
+    ValueDTO toValueDTO(AnnotationValue av, Elements elements) {
+        Object v = av.getValue();
+        ValueDTO dto = new ValueDTO();
+
+        if (v instanceof String s) {
+            dto.kind = "string";
+            dto.value = s;
+        } else if (v instanceof Integer || v instanceof Long ||
+                v instanceof Short   || v instanceof Byte ||
+                v instanceof Boolean || v instanceof Character ||
+                v instanceof Double  || v instanceof Float) {
+            dto.kind = "primitive";
+            dto.value = v;
+        } else if (v instanceof VariableElement ve) {
+            EnumDTO e = new EnumDTO();
+            TypeElement enumType = (TypeElement) ve.getEnclosingElement();
+            e.enumType = elements.getBinaryName(enumType).toString();
+            e.constant = ve.getSimpleName().toString();
+            dto.kind = "enum";
+            dto.value = e;
+        } else if (v instanceof TypeMirror tm) {
+            TypeElement type = (TypeElement)tm;
+            ClassDTO c = new ClassDTO();
+            c.className = elements.getBinaryName(type).toString();
+            dto.kind = "class";
+            dto.value = c;
+        } else if (v instanceof AnnotationMirror nested) {
+            dto.kind = "annotation";
+            dto.value = toDTO(nested, elements);
+        } else if (v instanceof List<?> list) {
+            ArrayDTO arr = new ArrayDTO();
+            arr.values = new ArrayList<>();
+            for (Object o : list) {
+                arr.values.add(toValueDTO((AnnotationValue) o, elements));
+            }
+            dto.kind = "array";
+            dto.value = arr;
+        } else {
+            throw new IllegalStateException("Unknown annotation member type: " + v);
+        }
+        return dto;
+    }
+
+    public static final class AnnotationDTO {
+        public String annotationType;
+        public Map<String, ValueDTO> values;
+    }
+    public static final class ValueDTO {
+        public String kind;
+        public Object value;
+    }
+    public static class ArrayDTO {
+        public List<ValueDTO> values;
+    }
+    public static class EnumDTO {
+        public String enumType;
+        public String constant;
+    }
+    public static class ClassDTO {
+        public String className;
     }
 }
