@@ -86,10 +86,16 @@ public class ConfigProcessor extends AbstractProcessor {
                     case ExecutableElement method -> {
                         ElementRepresentation representation = new ElementRepresentation("method", method.getSimpleName().toString());
                         representation.annotations = annotationStrings;
+                        for (var x : method.getParameters()) {
+                            TypeMirror tm = x.asType();
+                            TypeElement te =  (TypeElement) typeUtils.asElement(tm);
+                            representation.types.add(te.getQualifiedName().toString());
+                        }
                         classRepresentation.add(representation);
                     }
                     case TypeElement inner -> {
-                        ElementRepresentation representation = new ElementRepresentation("innerClass", inner.getQualifiedName().toString());
+                        String binaryName = elementUtils.getBinaryName(inner).toString();
+                        ElementRepresentation representation = new ElementRepresentation("innerClass", binaryName);
                         representation.annotations = annotationStrings;
                         classRepresentation.add(representation);
                     }
@@ -245,6 +251,7 @@ public class ConfigProcessor extends AbstractProcessor {
         public String type;
         public String name;
         public List<AnnotationDTO> annotations = new ArrayList<>();
+        public List<String> types = new ArrayList<>();
 
         public ElementRepresentation(String type, String name) {
             this.type = type;
