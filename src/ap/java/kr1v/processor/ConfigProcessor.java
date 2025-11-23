@@ -109,8 +109,8 @@ public class ConfigProcessor extends AbstractProcessor {
                 try (Writer w = file.openWriter()) {
                     GSON.toJson(map, w);
                 }
+                println("Written map. classes processed: " + map.size());
             }
-            println("Written map. classes processed: " + map.size());
         } catch (Throwable t) {
             processingEnv.getMessager().printError("Failed to write resource: " + t);
         }
