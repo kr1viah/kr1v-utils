@@ -8,12 +8,14 @@ import fi.dy.masa.malilib.util.StringUtils;
 import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.kr1vUtils.client.config.configs.Misc;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
+import kr1v.kr1vUtils.client.mixin.accessor.WidgetListConfigOptionsBaseAccessor;
 import kr1v.kr1vUtils.client.utils.Annotations;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
 import net.minecraft.client.gui.DrawContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ConfigScreen extends GuiConfigsBase {
     public static ConfigGuiTab tab = ConfigScreen.ConfigGuiTab.values()[0];
@@ -30,6 +32,9 @@ public class ConfigScreen extends GuiConfigsBase {
 	public void initGui() {
 		super.initGui();
 		this.clearOptions();
+        this.configWidth = ((WidgetListConfigOptionsBaseAccessor) Objects.requireNonNull(getListWidget())).getMaxLabelWidth();
+        this.configWidth = this.width - this.configWidth - 94;
+        ((WidgetListConfigOptionsBaseAccessor) getListWidget()).setConfigWidth(this.configWidth);
 
 		int x = 10;
 		int y = 26;
@@ -116,15 +121,6 @@ public class ConfigScreen extends GuiConfigsBase {
                 values = valuesList.toArray(new ConfigGuiTab[0]);
             }
             return values;
-        }
-
-        public static ConfigGuiTab valueOf(String lastTab) {
-            for (ConfigGuiTab tab : values()) {
-                if (tab.translationKey.equals(lastTab)) return tab;
-            }
-            System.out.println(lastTab);
-            return values()[0];
-//            throw new RuntimeException("No such tab exists!");
         }
 
         public List<? extends IConfigBase> getOptions() {
