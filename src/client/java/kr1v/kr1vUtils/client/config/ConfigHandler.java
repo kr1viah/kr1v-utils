@@ -118,6 +118,7 @@ public class ConfigHandler implements IConfigHandler {
                         list.add(new ConfigLabel(label.value()));
                 case Extras extras -> {
                     if (extras.runAt().isEmpty()) {
+                        element.method.setAccessible(true);
                         element.method.invoke(null, list);
                     }
                 }
@@ -126,6 +127,7 @@ public class ConfigHandler implements IConfigHandler {
                         if (m.isAnnotationPresent(Extras.class)) {
                             Extras extras = m.getAnnotation(Extras.class);
                             if (marker.value().equals(extras.runAt())) {
+                                m.setAccessible(true);
                                 m.invoke(null, list);
                             }
                         }
