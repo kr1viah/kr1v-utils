@@ -1,7 +1,6 @@
 plugins {
     id 'fabric-loom' version '1.12.5'
     id 'maven-publish'
-    id 'dev.lukebemish.opensesame.loom' version '0.8.0'
 }
 
 version = project.mod_version
@@ -22,10 +21,6 @@ loom {
         }
     }
 }
-
-opensesame.apply(sourceSets.main)
-opensesame.apply(sourceSets.client)
-
 
 repositories {
     maven {
@@ -60,7 +55,6 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modApi "com.github.sakura-ryoko:malilib:${project.malilib_version}"
 
-    modImplementation include("dev.lukebemish.opensesame:opensesame-fabric:${project.opensesame_version}")
     implementation include("net.fabricmc:tiny-remapper:${project.tiny_version}")
     implementation include("net.fabricmc:mapping-io:${project.mapping_io_version}")
     implementation include("org.reflections:reflections:${project.reflections_version}")
@@ -126,15 +120,6 @@ tasks.withType(JavaCompile).configureEach { JavaCompile jc ->
     }
 
     jc.doFirst { apGeneratedDir.mkdirs() }
-}
-
-tasks.named("remapJar") {
-    dependsOn tasks.named("openSesameCompileClientJava")
-}
-
-tasks.named("jar") {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    dependsOn tasks.named("openSesameCompileClientJava")
 }
 
 java {

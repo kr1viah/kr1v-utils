@@ -1,20 +1,16 @@
 package kr1v.kr1vUtils.client.utils.malilib;
 
 
-import dev.lukebemish.opensesame.annotations.extend.Constructor;
-import dev.lukebemish.opensesame.annotations.extend.Extend;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 
 @SuppressWarnings("unused")
-@Extend(targetClass = KeybindSettings.class, unsafe = true)
-public interface KeybindSetting {
-	@Constructor
-	static KeybindSetting create(KeybindSettings.Context context, KeyAction activateOn, boolean allowExtraKeys, boolean orderSensitive, boolean exclusive, boolean cancel, boolean allowEmpty) {
-		throw new AssertionError();
+public class KeybindSetting {
+	public static KeybindSettings create(KeybindSettings.Context context, KeyAction activateOn, boolean allowExtraKeys, boolean orderSensitive, boolean exclusive, boolean cancel, boolean allowEmpty) {
+		return KeybindSettings.create(context, activateOn, allowExtraKeys, orderSensitive, exclusive, cancel, allowEmpty);
 	}
 
-	static KeybindSetting ofInGame() {
+	public static KeybindSettings ofInGame() {
 		return create(
 			KeybindSettings.Context.INGAME,
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -26,7 +22,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofGui() {
+	public static KeybindSettings ofGui() {
 		return create(
 			KeybindSettings.Context.GUI,
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -38,7 +34,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofAny() {
+	public static KeybindSettings ofAny() {
 		return create(
 			KeybindSettings.Context.ANY,
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -50,7 +46,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofPress() {
+	public static KeybindSettings ofPress() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeyAction.PRESS,
@@ -62,7 +58,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofRelease() {
+	public static KeybindSettings ofRelease() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeyAction.RELEASE,
@@ -74,7 +70,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofBoth() {
+	public static KeybindSettings ofBoth() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeyAction.BOTH,
@@ -86,7 +82,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofAllowExtraKeys() {
+	public static KeybindSettings ofAllowExtraKeys() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -98,7 +94,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofDisallowExtraKeys() {
+	public static KeybindSettings ofDisallowExtraKeys() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -110,7 +106,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofOrderSensitive() {
+	public static KeybindSettings ofOrderSensitive() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -122,7 +118,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofNotOrderSensitive() {
+	public static KeybindSettings ofNotOrderSensitive() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -134,7 +130,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofExclusive() {
+	public static KeybindSettings ofExclusive() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -146,7 +142,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofNonExclusive() {
+	public static KeybindSettings ofNonExclusive() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -158,7 +154,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofCancel() {
+	public static KeybindSettings ofCancel() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -170,7 +166,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofDontCancel() {
+	public static KeybindSettings ofDontCancel() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -182,7 +178,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofAllowEmpty() {
+	public static KeybindSettings ofAllowEmpty() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -194,7 +190,7 @@ public interface KeybindSetting {
 		);
 	}
 
-	static KeybindSetting ofDisallowEmpty() {
+	public static KeybindSettings ofDisallowEmpty() {
 		return create(
 			KeybindSettings.DEFAULT.getContext(),
 			KeybindSettings.DEFAULT.getActivateOn(),
@@ -202,214 +198,6 @@ public interface KeybindSetting {
 			KeybindSettings.DEFAULT.isOrderSensitive(),
 			KeybindSettings.DEFAULT.isExclusive(),
 			KeybindSettings.DEFAULT.shouldCancel(),
-			false
-		);
-	}
-
-	default KeybindSetting inGame() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			KeybindSettings.Context.INGAME,
-			thiz.getActivateOn(),
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting gui() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			KeybindSettings.Context.GUI,
-			thiz.getActivateOn(),
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting any() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			KeybindSettings.Context.ANY,
-			thiz.getActivateOn(),
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting onPress() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			KeyAction.PRESS,
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting onRelease() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			KeyAction.RELEASE,
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting onBoth() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			KeyAction.BOTH,
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting allowExtraKeys() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			thiz.getActivateOn(),
-			true,
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting disallowExtraKeys() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			thiz.getActivateOn(),
-			false,
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting orderSensitive() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			thiz.getActivateOn(),
-			thiz.getAllowExtraKeys(),
-			true,
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting notOrderSensitive() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			thiz.getActivateOn(),
-			thiz.getAllowExtraKeys(),
-			false,
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting exclusive() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			thiz.getActivateOn(),
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			true,
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting nonExclusive() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			thiz.getActivateOn(),
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			false,
-			thiz.shouldCancel(),
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting cancel() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			thiz.getActivateOn(),
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			true,
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting dontCancel() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			thiz.getActivateOn(),
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			false,
-			thiz.getAllowEmpty()
-		);
-	}
-
-	default KeybindSetting allowEmpty() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			thiz.getActivateOn(),
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
-			true
-		);
-	}
-
-	default KeybindSetting disallowEmpty() {
-		KeybindSettings thiz = (KeybindSettings) this;
-		return create(
-			thiz.getContext(),
-			thiz.getActivateOn(),
-			thiz.getAllowExtraKeys(),
-			thiz.isOrderSensitive(),
-			thiz.isExclusive(),
-			thiz.shouldCancel(),
 			false
 		);
 	}

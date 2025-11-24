@@ -2,7 +2,6 @@ package kr1v.kr1vUtils.client.config.configs;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigDouble;
-import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import kr1v.kr1vUtils.client.utils.ClassUtils;
 import kr1v.kr1vUtils.client.utils.MappingUtils;
 import kr1v.kr1vUtils.client.utils.StringUtils;
@@ -76,7 +75,7 @@ public class Render {
 
                     String name = MappingUtils.intermediaryToYarnSimple(field).toLowerCase(Locale.ROOT);
 
-                    ConfigBooleanPlus hotkey = new ConfigBooleanPlus(StringUtils.convertCamelCase(name), true, "", (KeybindSettings) KeybindSetting.ofAny(), name, "", "");
+                    ConfigBooleanPlus hotkey = new ConfigBooleanPlus(StringUtils.convertCamelCase(name), true, "", KeybindSetting.ofAny(), name, "", "");
 
                     currentList.add(hotkey);
                     Render.RENDER_HOTKEYS.put(name, hotkey);
