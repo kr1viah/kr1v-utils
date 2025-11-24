@@ -17,7 +17,8 @@ public class SubtitlesHudMixin {
 	@Shadow
 	private boolean enabled;
 
-	@ModifyExpressionValue(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;enabled:Z", ordinal = 4))
+	@SuppressWarnings("MissingOrInvalidOpcode")
+    @ModifyExpressionValue(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;enabled:Z", ordinal = 4))
 	private boolean forceRender(boolean original) {
 		return original || Chat.REDIRECT_TO_SUBTITLES.getBooleanValue();
 	}

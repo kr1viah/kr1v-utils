@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @Mixin(StructurePoolBasedGenerator.class)
 public class StructurePoolBasedGeneratorMixin {
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     @WrapMethod(method = "generate(Lnet/minecraft/world/gen/structure/Structure$Context;Lnet/minecraft/registry/entry/RegistryEntry;Ljava/util/Optional;ILnet/minecraft/util/math/BlockPos;ZLjava/util/Optional;ILnet/minecraft/structure/pool/alias/StructurePoolAliasLookup;Lnet/minecraft/world/gen/structure/DimensionPadding;Lnet/minecraft/structure/StructureLiquidSettings;)Ljava/util/Optional;")
     private static Optional<Structure.StructurePosition> generate(Structure.Context context, RegistryEntry<StructurePool> structurePool, Optional<Identifier> id, int size, BlockPos pos, boolean useExpansionHack, Optional<Heightmap.Type> projectStartToHeightmap, int maxDistanceFromCenter, StructurePoolAliasLookup aliasLookup, DimensionPadding dimensionPadding, StructureLiquidSettings liquidSettings, Operation<Optional<Structure.StructurePosition>> original) {
         if (WorldGen.OVERRIDE_STRUCTURE_HEIGHT.getBooleanValue()) {

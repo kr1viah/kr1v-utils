@@ -3,8 +3,7 @@ package kr1v.kr1vUtils.client.utils.annotation.classannotations;
 import java.lang.annotation.*;
 
 /**
- * Generates a list of configs based on the public static finals the annotated class
- * As a side effect also loads this class at mod init
+ * Marks this class as a config class.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

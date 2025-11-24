@@ -14,6 +14,7 @@ import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigStringPlus;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 @Config
 public class Test {
     @Label("Label above class")

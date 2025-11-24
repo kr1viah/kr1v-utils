@@ -1,7 +1,6 @@
 package kr1v.kr1vUtils.client.utils.malilib.plus;
 
 import fi.dy.masa.malilib.config.options.ConfigInteger;
-import kr1v.kr1vUtils.client.config.ConfigHandler;
 
 public class ConfigIntegerPlus extends ConfigInteger implements Plus {
     public ConfigIntegerPlus(String name) {

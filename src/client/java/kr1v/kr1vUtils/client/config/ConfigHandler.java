@@ -18,6 +18,7 @@ import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Marker;
 import kr1v.kr1vUtils.client.utils.annotation.methodannotations.Extras;
 import kr1v.kr1vUtils.client.utils.malilib.configbutton.ConfigButton;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
+import kr1v.processor.ConfigProcessor;
 import net.minecraft.client.MinecraftClient;
 
 import java.io.File;
@@ -65,11 +66,10 @@ public class ConfigHandler implements IConfigHandler {
     public static List<IConfigBase> generateOptions(Class<?> clazz) {
         List<IConfigBase> list = new ArrayList<>();
 
-        List<ClassUtils.Element> elements = ClassUtils.getDeclaredElements(clazz);
-
+        List<ConfigProcessor.Element> elements = ClassUtils.getDeclaredElements(clazz);
 
         try {
-            for (ClassUtils.Element element : elements) {
+            for (ConfigProcessor.Element element : elements) {
                 handleAnnotations(element, list, clazz);
                 if (element.field != null) {
                     Field f = element.field;
@@ -88,7 +88,7 @@ public class ConfigHandler implements IConfigHandler {
         return list;
     }
 
-    private static void handleAnnotations(ClassUtils.Element element, List<IConfigBase> list, Class<?> declaringClass) throws InvocationTargetException, IllegalAccessException {
+    private static void handleAnnotations(ConfigProcessor.Element element, List<IConfigBase> list, Class<?> declaringClass) throws InvocationTargetException, IllegalAccessException {
         for (Annotation annotation : element.annotations) {
             switch (annotation) {
                 case PopupConfig popupConfig -> {
@@ -124,6 +124,9 @@ public class ConfigHandler implements IConfigHandler {
                     }
                 }
                 case Marker marker -> {
+                    if (marker.value().isEmpty()) {
+                        continue;
+                    }
                     for (Method m : declaringClass.getDeclaredMethods()) {
                         if (m.isAnnotationPresent(Extras.class)) {
                             Extras extras = m.getAnnotation(Extras.class);

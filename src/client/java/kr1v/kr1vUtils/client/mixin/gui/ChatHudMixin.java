@@ -30,7 +30,7 @@ public class ChatHudMixin {
 							List<SubtitlesHud.SubtitleEntry> entries = (MinecraftClient.getInstance().inGameHud.subtitlesHud).entries;
 							if (!Chat.ALLOW_DUPLICATE_SUBTITLES.getBooleanValue()) {
 								List<SubtitlesHud.SubtitleEntry> audibleEntries = MinecraftClient.getInstance().inGameHud.subtitlesHud.audibleEntries;
-								for (var entry : audibleEntries) {
+								for (SubtitlesHud.SubtitleEntry entry : audibleEntries) {
 									if (entry.getText().copy().equals(message.copy())) {
 										audibleEntries.remove(entry);
 										entries.remove(entry);

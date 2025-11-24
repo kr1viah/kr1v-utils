@@ -40,7 +40,7 @@ public class Keys {
 		String toDisplay = KeybindMulti.getActiveKeysString();
 		toDisplay = toDisplay.replaceAll("\\s*\\([^)]*\\)", "");
 		if (toDisplay.equals("<none>")) return;
-		var individualKeys = toDisplay.split("\\+");
+        String[] individualKeys = toDisplay.split("\\+");
 		StringBuilder keyDisplay = new StringBuilder();
 		StringBuilder mouseDisplay = new StringBuilder();
 		boolean shouldNotAddPlusKey = true;

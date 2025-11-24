@@ -1,7 +1,6 @@
 package kr1v.kr1vUtils.client.utils.malilib.plus;
 
 import fi.dy.masa.malilib.config.options.ConfigDouble;
-import kr1v.kr1vUtils.client.config.ConfigHandler;
 
 @SuppressWarnings("unused")
 public class ConfigDoublePlus extends ConfigDouble implements Plus {

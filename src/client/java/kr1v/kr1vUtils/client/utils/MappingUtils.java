@@ -204,7 +204,7 @@ public class MappingUtils {
 				String version = MinecraftVersion.CURRENT.getName();
 				String url = "https://maven.fabricmc.net/net/fabricmc/yarn/" + version + "%2Bbuild.1/yarn-" + version + "%2Bbuild.1-tiny.gz";
 
-				var gzPath = mappingsPath.resolveSibling("temp.gz");
+                Path gzPath = mappingsPath.resolveSibling("temp.gz");
 				InputStream in = URI.create(url).toURL().openStream();
 
 				if (!Files.exists(gzPath)) {

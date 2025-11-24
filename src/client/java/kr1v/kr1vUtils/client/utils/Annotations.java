@@ -2,7 +2,6 @@ package kr1v.kr1vUtils.client.utils;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import kr1v.kr1vUtils.client.config.ConfigHandler;
-import kr1v.kr1vUtils.client.config.configs.Keys;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.Touch;
@@ -14,16 +13,7 @@ import java.util.*;
 public final class Annotations {
 	private Annotations() {}
 
-	public static final Map<Class<?>, List<IConfigBase>> CACHE = new TreeMap<>(Comparator.comparing(x -> Annotations.nameForConfig(x) + x.getName())) {
-        @Override
-        public List<IConfigBase> put(Class<?> key, List<IConfigBase> value) {
-            if (key == Keys.class) {
-                var o = 0L;
-            }
-            var ret = super.put(key, value);
-            return ret;
-        }
-    };
+	public static final Map<Class<?>, List<IConfigBase>> CACHE = new TreeMap<>(Comparator.comparing(x -> Annotations.nameForConfig(x) + x.getName()));
 
 	static {
 		Reflections reflections = new Reflections();

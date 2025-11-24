@@ -40,6 +40,7 @@ sourceSets {
 configurations {
     apImplementation
     apAnnotationProcessor
+    apImplementation.extendsFrom implementation
 
     apCompileClasspath {
         canBeResolved = true
@@ -52,6 +53,7 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+    clientImplementation sourceSets.ap.output
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modApi "com.github.sakura-ryoko:malilib:${project.malilib_version}"
 
@@ -66,7 +68,7 @@ dependencies {
 }
 
 def targetJavaVersion = 21
-def apGeneratedDir = file("$buildDir/generated/sources/annotations/main")
+def apGeneratedDir = layout.buildDirectory.dir("generated/sources/annotations/main")
 
 afterEvaluate {
     if (configurations.named("apCompileClasspath") && configurations.named("apAnnotationProcessor")) {
@@ -80,7 +82,7 @@ if (tasks.names.contains('compileApJava')) {
         jc.description = "Compile annotation processor"
         jc.source = sourceSets.ap.java
         jc.classpath = files(sourceSets.ap.compileClasspath, configurations.apCompileClasspath)
-        jc.destinationDirectory = file("$buildDir/classes/java/ap")
+        jc.destinationDirectory.set(layout.buildDirectory.dir("classes/java/ap"))
         jc.options.encoding = "UTF-8"
         jc.options.annotationProcessorPath = configurations.apAnnotationProcessor
         if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
@@ -95,7 +97,7 @@ if (tasks.names.contains('compileApJava')) {
         jc.description = "Compile annotation processor"
         jc.source = sourceSets.ap.java
         jc.classpath = files(sourceSets.ap.compileClasspath, configurations.apCompileClasspath)
-        jc.destinationDirectory = file("$buildDir/classes/java/ap")
+        jc.destinationDirectory.set(layout.buildDirectory.dir("classes/java/ap"))
         jc.options.encoding = "UTF-8"
         jc.options.annotationProcessorPath = configurations.apAnnotationProcessor
         if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
@@ -114,12 +116,11 @@ tasks.withType(JavaCompile).configureEach { JavaCompile jc ->
     jc.options.annotationProcessorPath = files(layout.buildDirectory.dir("classes/java/ap"), configurations.apCompileClasspath)
 
     try {
-        jc.options.annotationProcessorGeneratedSourcesDirectory = apGeneratedDir
+        jc.options.generatedSourceOutputDirectory.set(apGeneratedDir)
     } catch (MissingPropertyException ignored) {
-        jc.options.compilerArgs += ["-s", apGeneratedDir.absolutePath]
+        jc.options.compilerArgs += ["-s", apGeneratedDir.get().asFile.absolutePath]
     }
-
-    jc.doFirst { apGeneratedDir.mkdirs() }
+    jc.doFirst { apGeneratedDir.get().asFile.mkdirs() }
 }
 
 java {

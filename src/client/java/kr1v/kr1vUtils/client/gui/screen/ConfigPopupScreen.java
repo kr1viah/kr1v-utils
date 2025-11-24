@@ -57,7 +57,9 @@ public class ConfigPopupScreen extends GuiConfigsBase {
             this.dialogWidth = GuiUtils.getScaledWindowWidth() - configDistanceFromSides;
         } else {
             if (configWidth == -1) {
-                this.dialogWidth = ((WidgetListConfigOptionsBaseAccessor) getListWidget()).getMaxLabelWidth();
+                WidgetListConfigOptions listWidget = getListWidget();
+                assert listWidget != null;
+                this.dialogWidth = ((WidgetListConfigOptionsBaseAccessor) listWidget).getMaxLabelWidth();
                 this.dialogWidth += 204 + 85;
                 if (this.dialogWidth < 400) this.dialogWidth = 400;
                 System.out.println(dialogWidth);

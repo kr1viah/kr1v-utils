@@ -65,7 +65,7 @@ public abstract class TitleScreenMixin extends Screen {
 				}
 				name += "...";
 			}
-			var temp = dummyWidget.new ServerEntry(dummyScreen, new ServerInfo(name, ip, ServerInfo.ServerType.OTHER));
+            MultiplayerServerListWidget.ServerEntry temp = dummyWidget.new ServerEntry(dummyScreen, new ServerInfo(name, ip, ServerInfo.ServerType.OTHER));
 			serverEntries.add(temp);
 		}
 	}
