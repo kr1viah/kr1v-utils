@@ -72,7 +72,7 @@ public class ClassUtils {
                         }
                         Class<?>[] types = typeList.toArray(new Class[]{});
 
-                        m = clazz.getMethod(el.name, types);
+                        m = clazz.getDeclaredMethod(el.name, types);
                     }
                     default -> {}
                 }

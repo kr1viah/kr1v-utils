@@ -14,7 +14,6 @@ import kr1v.kr1vUtils.client.utils.Annotations;
 import kr1v.kr1vUtils.client.utils.ClassUtils;
 import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Label;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
-import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Labels;
 import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Marker;
 import kr1v.kr1vUtils.client.utils.annotation.methodannotations.Extras;
 import kr1v.kr1vUtils.client.utils.malilib.configbutton.ConfigButton;
@@ -26,7 +25,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,41 +84,6 @@ public class ConfigHandler implements IConfigHandler {
         } catch (InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-
-//        try {
-//            for (Field f : clazz.getDeclaredFields()) {
-//                int mods = f.getModifiers();
-//                if (Modifier.isStatic(mods)) {
-//                    handleFieldAnnotations(f, list);
-//                    if (IConfigBase.class.isAssignableFrom(f.getType())) {
-//                        f.setAccessible(true);
-//                        IConfigBase value = (IConfigBase) f.get(null);
-//                        if (value != null) {
-//                            list.add(value);
-//                        }
-//                    } else if (Class.class.isAssignableFrom(f.getType())) {
-//                        f.setAccessible(true);
-//                        Class<?> klass = (Class<?>)f.get(null);
-//
-//                        if (klass.isAnnotationPresent(PopupConfig.class)) {
-//                            handleClassAnnotations(klass, list);
-//                        }
-//                    }
-//                }
-//            }
-//            for (Method m : clazz.getDeclaredMethods()) {
-//                if (m.isAnnotationPresent(Extras.class)) {
-//                    Extras extras = m.getAnnotation(Extras.class);
-//                    if (extras.runAfterLabel().isEmpty() && extras.runAt().isEmpty() && extras.runBeforeLabel().isEmpty()) {
-//                        m.invoke(null, list);
-//                    }
-//                }
-//            }
-//        } catch (IllegalAccessException | InvocationTargetException e) {
-//            throw new RuntimeException(e);
-//        } catch (IllegalArgumentException e) {
-//            throw new RuntimeException("Method descriptor probably doesn't match.", e);
-//        }
         return list;
     }
 
@@ -154,7 +117,7 @@ public class ConfigHandler implements IConfigHandler {
                 case Label label ->
                         list.add(new ConfigLabel(label.value()));
                 case Extras extras -> {
-                    if (extras.runAfterLabel().isEmpty() && extras.runAt().isEmpty() && extras.runBeforeLabel().isEmpty()) {
+                    if (extras.runAt().isEmpty()) {
                         element.method.invoke(null, list);
                     }
                 }
@@ -173,72 +136,4 @@ public class ConfigHandler implements IConfigHandler {
         }
     }
 
-    private static <T> void handleClassAnnotations(Class<T> value, List<IConfigBase> list) {
-        PopupConfig annotation = value.getAnnotation(PopupConfig.class);
-
-        String name = annotation.name();
-        if (name.isEmpty()) {
-            name = value.getSimpleName();
-        }
-        String buttonName = annotation.buttonName();
-        if (buttonName.isEmpty()) {
-            buttonName = "Edit " + name;
-        }
-
-        ConfigButton<Class<T>> configButton = new ConfigButton<>(name, buttonName, () ->
-                MinecraftClient.getInstance().setScreen(
-                        new ConfigPopupScreen(value, GuiUtils.getCurrentScreen())
-                ),
-                value);
-
-        list.add(configButton);
-    }
-
-    private static void handleFieldAnnotations(Field f, List<IConfigBase> list) throws IllegalAccessException, InvocationTargetException {
-        for (Annotation annotation : f.getDeclaredAnnotations()) {
-            handleFieldAnnotation(f, annotation, list);
-        }
-    }
-
-    private static void handleLabel(Field f, Label label, List<IConfigBase> list) throws InvocationTargetException, IllegalAccessException {
-        for (Method m : f.getDeclaringClass().getDeclaredMethods()) {
-            if (m.isAnnotationPresent(Extras.class)) {
-                Extras extras = m.getAnnotation(Extras.class);
-                if (label.value().equals(extras.runBeforeLabel()) && extras.runAfterLabel().isEmpty() && extras.runAt().isEmpty()) {
-                    m.invoke(null, list);
-                }
-            }
-        }
-        list.add(new ConfigLabel(label.value()));
-        for (Method m : f.getDeclaringClass().getDeclaredMethods()) {
-            if (m.isAnnotationPresent(Extras.class)) {
-                Extras extras = m.getAnnotation(Extras.class);
-                if (label.value().equals(extras.runAfterLabel()) && extras.runBeforeLabel().isEmpty() && extras.runAt().isEmpty()) {
-                    m.invoke(null, list);
-                }
-            }
-        }
-    }
-
-    private static void handleFieldAnnotation(Field f, Annotation annotation, List<IConfigBase> list) throws InvocationTargetException, IllegalAccessException {
-        switch (annotation) {
-            case Label label -> handleLabel(f, label, list);
-            case Labels labels -> {
-                for (Label label : labels.value()) {
-                    handleLabel(f, label, list);
-                }
-            }
-            case Marker marker -> {
-                for (Method m : f.getDeclaringClass().getDeclaredMethods()) {
-                    if (m.isAnnotationPresent(Extras.class)) {
-                        Extras extras = m.getAnnotation(Extras.class);
-                        if (marker.value().equals(extras.runAt()) && extras.runBeforeLabel().isEmpty() && extras.runAfterLabel().isEmpty()) {
-                            m.invoke(null, list);
-                        }
-                    }
-                }
-            }
-            default -> {}
-        }
-    }
 }

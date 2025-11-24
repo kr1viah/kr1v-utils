@@ -9,7 +9,6 @@ import kr1v.kr1vUtils.client.utils.StringUtils;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
 import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Label;
-import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Marker;
 import kr1v.kr1vUtils.client.utils.annotation.methodannotations.Extras;
 import kr1v.kr1vUtils.client.utils.malilib.KeybindSetting;
 import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
@@ -27,7 +26,6 @@ import java.util.function.Function;
 @Config
 public class Render {
     public static final ConfigBooleanPlus       AFFECT_OFFSETTING = new ConfigBooleanPlus("Affect offsetting");
-    public static final Class<?> CLASS_NAME = Offsetting.class;
     @PopupConfig
     public static class Offsetting {
         public static final ConfigDouble            OFFSET_X = new ConfigDouble("Offset x", 0, -100, 100, "");
@@ -66,7 +64,9 @@ public class Render {
     public static final ConfigBooleanPlus       HOTBAR_ITEM = new ConfigBooleanPlus("Hotbar item");
     public static final ConfigBooleanPlus       AUTOSAVE_INDICATOR = new ConfigBooleanPlus("Autosave indicator");
 
-    @Extras(runAfterLabel = "Render layer:")
+    @Label
+    @Label("Render layer:")
+    @Extras
     public static void addRenderLayers(List<IConfigBase> currentList) {
         for (Field field : ClassUtils.getAllFields(RenderLayer.MultiPhase.class)) {
             if (Modifier.isStatic(field.getModifiers())) {
@@ -85,9 +85,6 @@ public class Render {
         }
     }
 
-    @Label
-    @Label("Render layer:")
-    @Marker("Test")
     @Label
     @Label("Game renderer:")
     public static final ConfigBooleanPlus       MAIN = new ConfigBooleanPlus("Main");

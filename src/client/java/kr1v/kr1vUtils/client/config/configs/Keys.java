@@ -13,9 +13,6 @@ import net.minecraft.client.render.RenderTickCounter;
 @SuppressWarnings("unused")
 @Config
 public class Keys {
-    public static final Class<?> KEYS_CONFIG = KeysConfig.class;
-    public static final Class<?> MOUSE_CONFIG = MouseConfig.class;
-
     @PopupConfig(name = "Mouse", buttonName = "Edit")
     public static class KeysConfig {
         public static final ConfigBooleanPlus DISPLAY_CURRENTLY_PRESSED_KEYS = new ConfigBooleanPlus("Display currently pressed keys");
