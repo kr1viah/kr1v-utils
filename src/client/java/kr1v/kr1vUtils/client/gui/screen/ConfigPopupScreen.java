@@ -8,6 +8,7 @@ import fi.dy.masa.malilib.gui.widgets.WidgetListConfigOptions;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.GuiUtils;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
+import kr1v.kr1vUtils.client.mixin.accessor.WidgetListConfigOptionsBaseAccessor;
 import kr1v.kr1vUtils.client.utils.Annotations;
 import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
 import net.minecraft.client.gui.DrawContext;
@@ -56,6 +57,10 @@ public class ConfigPopupScreen extends GuiConfigsBase {
             this.dialogWidth = GuiUtils.getScaledWindowWidth() - configDistanceFromSides;
         } else {
             if (configWidth == -1) {
+                this.dialogWidth = ((WidgetListConfigOptionsBaseAccessor) getListWidget()).getMaxLabelWidth();
+                this.dialogWidth += 204 + 85;
+                if (this.dialogWidth < 400) this.dialogWidth = 400;
+                System.out.println(dialogWidth);
             }
             else {
                 this.dialogWidth = configWidth;
@@ -73,12 +78,13 @@ public class ConfigPopupScreen extends GuiConfigsBase {
         if (customParent != null && customParent instanceof GuiBase guiBase) {
             guiBase.initGui();
         }
+        super.initGui();
         this.setWidthAndHeight();
         this.centerOnScreen();
         this.setListPosition(this.dialogLeft + 5, this.dialogTop + 20);
         this.reCreateListWidget();
-
         super.initGui();
+
     }
 
     @Override
@@ -114,7 +120,6 @@ public class ConfigPopupScreen extends GuiConfigsBase {
 
     @Override
     public void render(DrawContext drawContext, int mouseX, int mouseY, float partialTicks) {
-        System.out.println(this.getListWidget().width);
         if (this.customParent != null) {
             this.customParent.render(drawContext, mouseX, mouseY, partialTicks);
         }

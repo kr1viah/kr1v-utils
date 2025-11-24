@@ -4,6 +4,7 @@
   "package": "kr1v.kr1vUtils.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "accessor.WidgetListConfigOptionsBaseAccessor",
     "actionbar.ClientPlayNetworkHandlerMixin",
     "actionbar.InGameHudMixin",
     "actionbar.MessageHandlerMixin",

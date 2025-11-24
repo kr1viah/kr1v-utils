@@ -67,6 +67,7 @@ public class ConfigHandler implements IConfigHandler {
 
         List<ClassUtils.Element> elements = ClassUtils.getDeclaredElements(clazz);
 
+
         try {
             for (ClassUtils.Element element : elements) {
                 handleAnnotations(element, list, clazz);
