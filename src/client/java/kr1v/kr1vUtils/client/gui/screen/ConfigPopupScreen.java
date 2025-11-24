@@ -55,7 +55,11 @@ public class ConfigPopupScreen extends GuiConfigsBase {
         if (configDistanceFromSides != -1) {
             this.dialogWidth = GuiUtils.getScaledWindowWidth() - configDistanceFromSides;
         } else {
-            this.dialogWidth = configWidth;
+            if (configWidth == -1) {
+            }
+            else {
+                this.dialogWidth = configWidth;
+            }
         }
         if (configDistanceFromTops != -1) {
             this.dialogHeight = GuiUtils.getScaledWindowHeight() - configDistanceFromTops;
@@ -110,6 +114,7 @@ public class ConfigPopupScreen extends GuiConfigsBase {
 
     @Override
     public void render(DrawContext drawContext, int mouseX, int mouseY, float partialTicks) {
+        System.out.println(this.getListWidget().width);
         if (this.customParent != null) {
             this.customParent.render(drawContext, mouseX, mouseY, partialTicks);
         }

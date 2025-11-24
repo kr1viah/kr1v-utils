@@ -11,7 +11,7 @@ public @interface PopupConfig {
     String name() default "";
     String buttonName() default "";
     boolean defaultEnabled() default true;
-    int width() default 400;
+    int width() default -1; // by default, will adjust the width to fit the configs. is at minimum 400 by default.
     int height() default 300;
     int distanceFromSides() default -1; // if this is set, width is ignored
     int distanceFromTops() default -1; // if this is set, height is ignored
