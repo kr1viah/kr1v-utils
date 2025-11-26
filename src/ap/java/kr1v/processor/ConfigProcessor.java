@@ -116,9 +116,11 @@ public class ConfigProcessor extends AbstractProcessor {
         try {
             Filer filer = processingEnv.getFiler();
             if (roundEnv.processingOver()) {
-                FileObject file = filer.createResource(StandardLocation.CLASS_OUTPUT, "", "META-INF/kr1v/classes.json");
-                try (Writer w = file.openWriter()) {
-                    GSON.toJson(map, w);
+                for (Map.Entry<String, List<ElementRepresentation>> entry : map.entrySet()) {
+                    FileObject file = filer.createResource(StandardLocation.CLASS_OUTPUT, "", "META-INF/kr1v/" + entry.getKey() + ".json");
+                    try (Writer w = file.openWriter()) {
+                        GSON.toJson(entry.getValue(), w);
+                    }
                 }
                 println("Written map. classes processed: " + map.size());
             }
@@ -299,18 +301,16 @@ public class ConfigProcessor extends AbstractProcessor {
 
     public static List<ElementRepresentation> getDeclaredElementRepresentationsForClass(Class<?> clazz) {
         try (InputStream in = ConfigProcessor.class.getClassLoader()
-                .getResourceAsStream("META-INF/kr1v/classes.json")) {
+                .getResourceAsStream("META-INF/kr1v/" + clazz.getName() + ".json")) {
 
             if (in == null) {
-                throw new IllegalStateException("classes.json not found on classpath");
+                throw new IllegalStateException(clazz.getName() + ".json not found");
             }
 
             String json = new String(in.readAllBytes(), StandardCharsets.UTF_8);
 
-            Type type = new TypeToken<Map<String, List<ElementRepresentation>>>(){}.getType();
-            Map<String, List<ElementRepresentation>> data =
-                    GSON.fromJson(json, type);
-            return data.get(clazz.getName());
+            Type type = new TypeToken<List<ElementRepresentation>>(){}.getType();
+            return GSON.fromJson(json, type);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
