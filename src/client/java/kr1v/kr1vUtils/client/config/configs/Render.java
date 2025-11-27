@@ -2,15 +2,16 @@ package kr1v.kr1vUtils.client.config.configs;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigDouble;
+import fi.dy.masa.malilib.hotkeys.KeyAction;
+import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import kr1v.kr1vUtils.client.utils.ClassUtils;
 import kr1v.kr1vUtils.client.utils.MappingUtils;
 import kr1v.kr1vUtils.client.utils.StringUtils;
-import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
-import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
-import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Label;
-import kr1v.kr1vUtils.client.utils.annotation.methodannotations.Extras;
-import kr1v.kr1vUtils.client.utils.malilib.KeybindSetting;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
+import kr1v.malilibApi.annotation.Config;
+import kr1v.malilibApi.annotation.Extras;
+import kr1v.malilibApi.annotation.Label;
+import kr1v.malilibApi.annotation.PopupConfig;
+import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
 import net.minecraft.client.render.RenderLayer;
 
 import java.lang.reflect.Field;
@@ -24,7 +25,7 @@ import java.util.function.Function;
 
 @Config
 public class Render {
-    public static final ConfigBooleanPlus       AFFECT_OFFSETTING = new ConfigBooleanPlus("Affect offsetting");
+    public static final ConfigBooleanPlus AFFECT_OFFSETTING = new ConfigBooleanPlus("Affect offsetting");
     @PopupConfig
     public static class Offsetting {
         public static final ConfigDouble            OFFSET_X = new ConfigDouble("Offset x", 0, -100, 100, "");
@@ -75,7 +76,7 @@ public class Render {
 
                     String name = MappingUtils.intermediaryToYarnSimple(field).toLowerCase(Locale.ROOT);
 
-                    ConfigBooleanPlus hotkey = new ConfigBooleanPlus(StringUtils.convertCamelCase(name), true, "", KeybindSetting.ofAny(), name, "", "");
+                    ConfigBooleanPlus hotkey = new ConfigBooleanPlus(StringUtils.convertCamelCase(name), true, "", KeybindSettings.create(KeybindSettings.Context.ANY, KeyAction.PRESS, false, true, false, true), name, "", "");
 
                     currentList.add(hotkey);
                     Render.RENDER_HOTKEYS.put(name, hotkey);

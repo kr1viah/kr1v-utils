@@ -2,15 +2,11 @@ package kr1v.kr1vUtils.client.config.configs;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;
-import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
-import kr1v.kr1vUtils.client.utils.annotation.classannotations.PopupConfig;
-import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Label;
-import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Marker;
-import kr1v.kr1vUtils.client.utils.annotation.methodannotations.Extras;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigIntegerPlus;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigStringListPlus;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigStringPlus;
+import kr1v.malilibApi.annotation.*;
+import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
+import kr1v.malilibApi.config.plus.ConfigIntegerPlus;
+import kr1v.malilibApi.config.plus.ConfigStringListPlus;
+import kr1v.malilibApi.config.plus.ConfigStringPlus;
 
 import java.util.List;
 

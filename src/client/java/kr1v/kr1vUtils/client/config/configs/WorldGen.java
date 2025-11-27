@@ -1,16 +1,15 @@
 package kr1v.kr1vUtils.client.config.configs;
 
 import fi.dy.masa.malilib.config.options.ConfigDouble;
-import fi.dy.masa.malilib.config.options.ConfigInteger;
-import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
-import kr1v.kr1vUtils.client.utils.annotation.fieldannotations.Label;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigIntegerPlus;
+import kr1v.malilibApi.annotation.Config;
+import kr1v.malilibApi.annotation.Label;
+import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
+import kr1v.malilibApi.config.plus.ConfigIntegerPlus;
 
 @Config(name = "World generation")
 public class WorldGen {
     @Label("Generation steps")
-    public static final ConfigBooleanPlus   GENERATE_STRUCTURES = new ConfigBooleanPlus("Generate structures");
+    public static final ConfigBooleanPlus GENERATE_STRUCTURES = new ConfigBooleanPlus("Generate structures");
     public static final ConfigBooleanPlus   LOAD_STRUCTURES = new ConfigBooleanPlus("Load structures");
     public static final ConfigBooleanPlus   GENERATE_STRUCTURE_REFERENCES = new ConfigBooleanPlus("Generate structure references");
     public static final ConfigBooleanPlus   POPULATE_BIOMES = new ConfigBooleanPlus("Populate biomes");
@@ -32,7 +31,7 @@ public class WorldGen {
 
     @Label
     public static final ConfigBooleanPlus   OVERRIDE_STRUCTURE_HEIGHT = new ConfigBooleanPlus("Override structure height", false);
-    public static final ConfigInteger       OVERRIDE_STRUCTURE_HEIGHT_VALUE = new ConfigIntegerPlus("Override structure height with", 64);
+    public static final ConfigIntegerPlus   OVERRIDE_STRUCTURE_HEIGHT_VALUE = new ConfigIntegerPlus("Override structure height with", 64);
 
     @Label
     public static final ConfigBooleanPlus   ICE_BERGS = new ConfigBooleanPlus("Ice bergs");
@@ -46,7 +45,7 @@ public class WorldGen {
 
     @Label("Octave perlin noise overrides")
     public static final ConfigBooleanPlus   OVERRIDE_OCTAVE_PERLIN_NOISE = new ConfigBooleanPlus("Override octave perlin noise", false);
-    public static final ConfigInteger       OPN_FIRST_OCTAVE = new ConfigInteger("First octave", 2);
+    public static final ConfigIntegerPlus   OPN_FIRST_OCTAVE = new ConfigIntegerPlus("First octave", 2);
     public static final ConfigDouble        OPN_PERSISTENCE = new ConfigDouble("Persistence", 0.5714285714285714);
     public static final ConfigDouble        OPN_LACUNARITY = new ConfigDouble("Lacunarity", 8);
     public static final ConfigDouble        OPN_MAX_VALUE = new ConfigDouble("OPN Max value", 2.0);

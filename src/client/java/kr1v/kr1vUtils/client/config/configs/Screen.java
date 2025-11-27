@@ -1,9 +1,9 @@
 package kr1v.kr1vUtils.client.config.configs;
 
 import com.google.common.collect.ImmutableList;
-import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigStringListPlus;
+import kr1v.malilibApi.annotation.Config;
+import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
+import kr1v.malilibApi.config.plus.ConfigStringListPlus;
 
 @Config
 public class Screen {

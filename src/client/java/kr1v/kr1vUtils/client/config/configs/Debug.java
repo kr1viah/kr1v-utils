@@ -1,7 +1,7 @@
 package kr1v.kr1vUtils.client.config.configs;
 
-import kr1v.kr1vUtils.client.utils.annotation.classannotations.Config;
-import kr1v.kr1vUtils.client.utils.malilib.plus.ConfigBooleanPlus;
+import kr1v.malilibApi.annotation.Config;
+import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
 
 @Config(defaultEnabled = false)
 public class Debug {
