@@ -6,7 +6,7 @@ import kr1v.malilibApi.annotation.Label;
 import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
 import kr1v.malilibApi.config.plus.ConfigIntegerPlus;
 
-@Config(name = "World generation")
+@Config(value = "kr1v-utils", name = "World generation")
 public class WorldGen {
     @Label("Generation steps")
     public static final ConfigBooleanPlus GENERATE_STRUCTURES = new ConfigBooleanPlus("Generate structures");

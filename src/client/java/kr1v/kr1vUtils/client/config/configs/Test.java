@@ -11,7 +11,7 @@ import kr1v.malilibApi.config.plus.ConfigStringPlus;
 import java.util.List;
 
 @SuppressWarnings("unused")
-@Config
+@Config("kr1v-utils")
 public class Test {
     @Label("Label above class")
     @PopupConfig

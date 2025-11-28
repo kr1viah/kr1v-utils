@@ -1,12 +1,11 @@
 package kr1v.kr1vUtils.client.config.configs;
 
-import fi.dy.masa.malilib.gui.GuiBase;
 import kr1v.kr1vUtils.client.gui.screen.DummyScreen;
+import kr1v.malilibApi.MalilibApi;
 import kr1v.malilibApi.annotation.Config;
 import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
 import kr1v.malilibApi.config.plus.ConfigHotkeyPlus;
 import kr1v.malilibApi.config.plus.ConfigStringListPlus;
-import kr1v.malilibApi.screen.ConfigScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.Vec3d;
@@ -15,12 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-@Config
+@Config("kr1v-utils")
 public class Misc {
 	public static boolean preventClosingOnce = false;
 
 	public static final ConfigHotkeyPlus OPEN_GUI = new ConfigHotkeyPlus("Open config gui", "G,C", (keyAction, keybind) -> {
-        GuiBase.openGui(new ConfigScreen("kr1v-utils", "kr1v-utils", "0.0.0"));
+        MalilibApi.openScreenFor("kr1v-utils");
         return true;
     });
     public static final ConfigHotkeyPlus SHOW_CURSOR = new ConfigHotkeyPlus("Show cursor", (button, keybind) -> {

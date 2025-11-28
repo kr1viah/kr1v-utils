@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-@Config
+@Config("kr1v-utils")
 public class Render {
     public static final ConfigBooleanPlus AFFECT_OFFSETTING = new ConfigBooleanPlus("Affect offsetting");
     @PopupConfig

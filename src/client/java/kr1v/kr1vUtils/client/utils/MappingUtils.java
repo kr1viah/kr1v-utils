@@ -6,7 +6,6 @@ import net.fabricmc.mappingio.MappingReader;
 import net.fabricmc.mappingio.tree.MappingTree;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 import net.minecraft.MinecraftVersion;
-import net.minecraft.client.MinecraftClient;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -29,7 +28,7 @@ public class MappingUtils {
 	private static final Map<String, String> cachedFields = new HashMap<>();
 	private static final Map<String, String> cachedMethods = new HashMap<>();
 	private static final MemoryMappingTree tree = new MemoryMappingTree();
-	private static final Path mappingsPath = MinecraftClient.getInstance().runDirectory.toPath().resolve(".tiny").resolve("yarn-" + MinecraftVersion.CURRENT.getName() + "+build.1-tiny");
+	private static final Path mappingsPath = FabricLoader.getInstance().getGameDir().resolve(".tiny").resolve("yarn-" + MinecraftVersion.CURRENT.getName() + "+build.1-tiny");
 
 
 	@SuppressWarnings("DataFlowIssue")

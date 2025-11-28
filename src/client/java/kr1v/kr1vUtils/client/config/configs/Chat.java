@@ -10,7 +10,7 @@ import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
 import kr1v.malilibApi.config.plus.ConfigStringPlus;
 import net.minecraft.client.MinecraftClient;
 
-@Config
+@Config("kr1v-utils")
 public class Chat {
     public static final ConfigStringList        CHAT_HIDE = new ConfigStringList("Prevent messages from getting added to the chat", ImmutableList.of(), "Happens after replacing");
     public static final ConfigBooleanPlus REDIRECT_TO_SUBTITLES = new ConfigBooleanPlus("Redirect to subtitle hud element", true, "", "");

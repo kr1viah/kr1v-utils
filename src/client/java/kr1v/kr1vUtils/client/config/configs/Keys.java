@@ -11,7 +11,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
 
 @SuppressWarnings("unused")
-@Config
+@Config("kr1v-utils")
 public class Keys {
     @PopupConfig(name = "Mouse", buttonName = "Edit")
     public static class KeysConfig {
