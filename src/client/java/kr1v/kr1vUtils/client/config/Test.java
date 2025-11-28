@@ -1,4 +1,4 @@
-package kr1v.kr1vUtils.client.config.configs;
+package kr1v.kr1vUtils.client.config;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import kr1v.kr1vUtils.client.malilib.ConfigLabel;

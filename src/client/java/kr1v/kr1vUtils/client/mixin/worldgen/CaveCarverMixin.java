@@ -2,7 +2,7 @@ package kr1v.kr1vUtils.client.mixin.worldgen;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import kr1v.kr1vUtils.client.config.configs.WorldGen;
+import kr1v.kr1vUtils.client.config.WorldGen;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;

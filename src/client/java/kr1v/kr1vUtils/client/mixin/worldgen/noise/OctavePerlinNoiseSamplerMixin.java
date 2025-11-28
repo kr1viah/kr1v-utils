@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static kr1v.kr1vUtils.client.config.configs.WorldGen.*;
+import static kr1v.kr1vUtils.client.config.WorldGen.*;
 
 @Mixin(OctavePerlinNoiseSampler.class)
 public class OctavePerlinNoiseSamplerMixin {

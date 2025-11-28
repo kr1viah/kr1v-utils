@@ -2,7 +2,7 @@ package kr1v.kr1vUtils.client.mixin.chat;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import kr1v.kr1vUtils.client.config.configs.Chat;
+import kr1v.kr1vUtils.client.config.Chat;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.MessageIndicator;
 import net.minecraft.network.message.MessageSignatureData;

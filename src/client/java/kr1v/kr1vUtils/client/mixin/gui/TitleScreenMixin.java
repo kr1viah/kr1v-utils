@@ -1,6 +1,6 @@
 package kr1v.kr1vUtils.client.mixin.gui;
 
-import kr1v.kr1vUtils.client.config.configs.Misc;
+import kr1v.kr1vUtils.client.config.Misc;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;

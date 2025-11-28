@@ -1,4 +1,4 @@
-package kr1v.kr1vUtils.client.config.configs;
+package kr1v.kr1vUtils.client.config;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigDouble;
@@ -28,10 +28,10 @@ public class Render {
     public static final ConfigBooleanPlus AFFECT_OFFSETTING = new ConfigBooleanPlus("Affect offsetting");
     @PopupConfig
     public static class Offsetting {
-        public static final ConfigDouble            OFFSET_X = new ConfigDouble("Offset x", 0, -100, 100, "");
-        public static final ConfigDouble            OFFSET_Y = new ConfigDouble("Offset y", 0, -100, 100,"");
-        public static final ConfigDouble            OFFSET_Z = new ConfigDouble("Offset z", 0, -100, 100,"");
-        public static final ConfigBooleanPlus       RELATIVE_TO_PLAYER_ANGLE = new ConfigBooleanPlus("Offset relative to player angle");
+        public static final ConfigDouble        OFFSET_X = new ConfigDouble("Offset x", 0, -100, 100, "");
+        public static final ConfigDouble        OFFSET_Y = new ConfigDouble("Offset y", 0, -100, 100,"");
+        public static final ConfigDouble        OFFSET_Z = new ConfigDouble("Offset z", 0, -100, 100,"");
+        public static final ConfigBooleanPlus   RELATIVE_TO_PLAYER_ANGLE = new ConfigBooleanPlus("Offset relative to player angle");
     }
 
     @Label

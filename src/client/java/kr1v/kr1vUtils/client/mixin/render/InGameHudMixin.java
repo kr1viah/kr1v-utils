@@ -1,6 +1,6 @@
 package kr1v.kr1vUtils.client.mixin.render;
 
-import kr1v.kr1vUtils.client.config.configs.Render;
+import kr1v.kr1vUtils.client.config.Render;
 import net.minecraft.client.gui.hud.InGameHud;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

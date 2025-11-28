@@ -1,6 +1,6 @@
 package kr1v.kr1vUtils.client.mixin.render;
 
-import kr1v.kr1vUtils.client.config.configs.Render;
+import kr1v.kr1vUtils.client.config.Render;
 import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
 import net.minecraft.client.render.BuiltBuffer;
 import net.minecraft.client.render.RenderLayer;

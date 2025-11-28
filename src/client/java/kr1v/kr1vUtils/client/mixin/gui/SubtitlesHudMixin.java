@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import kr1v.kr1vUtils.client.config.configs.Chat;
+import kr1v.kr1vUtils.client.config.Chat;
 import net.minecraft.client.gui.hud.SubtitlesHud;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

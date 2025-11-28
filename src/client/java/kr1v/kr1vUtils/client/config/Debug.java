@@ -1,4 +1,4 @@
-package kr1v.kr1vUtils.client.config.configs;
+package kr1v.kr1vUtils.client.config;
 
 import kr1v.malilibApi.annotation.Config;
 import kr1v.malilibApi.config.plus.ConfigBooleanPlus;

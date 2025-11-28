@@ -2,7 +2,7 @@ package kr1v.kr1vUtils.client.mixin.parcour;
 
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
-import kr1v.kr1vUtils.client.config.configs.Misc;
+import kr1v.kr1vUtils.client.config.Misc;
 import kr1v.kr1vUtils.client.utils.ChatUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.network.ClientPlayerEntity;

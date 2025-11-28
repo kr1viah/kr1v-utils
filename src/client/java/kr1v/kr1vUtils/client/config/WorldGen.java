@@ -1,4 +1,4 @@
-package kr1v.kr1vUtils.client.config.configs;
+package kr1v.kr1vUtils.client.config;
 
 import fi.dy.masa.malilib.config.options.ConfigDouble;
 import kr1v.malilibApi.annotation.Config;
@@ -9,7 +9,7 @@ import kr1v.malilibApi.config.plus.ConfigIntegerPlus;
 @Config(value = "kr1v-utils", name = "World generation")
 public class WorldGen {
     @Label("Generation steps")
-    public static final ConfigBooleanPlus GENERATE_STRUCTURES = new ConfigBooleanPlus("Generate structures");
+    public static final ConfigBooleanPlus   GENERATE_STRUCTURES = new ConfigBooleanPlus("Generate structures");
     public static final ConfigBooleanPlus   LOAD_STRUCTURES = new ConfigBooleanPlus("Load structures");
     public static final ConfigBooleanPlus   GENERATE_STRUCTURE_REFERENCES = new ConfigBooleanPlus("Generate structure references");
     public static final ConfigBooleanPlus   POPULATE_BIOMES = new ConfigBooleanPlus("Populate biomes");

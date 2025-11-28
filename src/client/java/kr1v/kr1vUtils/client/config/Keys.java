@@ -1,4 +1,4 @@
-package kr1v.kr1vUtils.client.config.configs;
+package kr1v.kr1vUtils.client.config;
 
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.hotkeys.KeybindMulti;
@@ -15,16 +15,16 @@ import net.minecraft.client.render.RenderTickCounter;
 public class Keys {
     @PopupConfig(name = "Mouse", buttonName = "Edit")
     public static class KeysConfig {
-        public static final ConfigBooleanPlus DISPLAY_CURRENTLY_PRESSED_KEYS = new ConfigBooleanPlus("Display currently pressed keys");
-        public static final ConfigInteger PRESSED_KEYS_X = new ConfigInteger("Currently pressed keys X", 2, "");
-        public static final ConfigInteger PRESSED_KEYS_Y = new ConfigInteger("Currently pressed keys Y", 2, "");
+        public static final ConfigBooleanPlus   DISPLAY_CURRENTLY_PRESSED_KEYS = new ConfigBooleanPlus("Display currently pressed keys");
+        public static final ConfigInteger       PRESSED_KEYS_X = new ConfigInteger("Currently pressed keys X", 2, "");
+        public static final ConfigInteger       PRESSED_KEYS_Y = new ConfigInteger("Currently pressed keys Y", 2, "");
     }
 
     @PopupConfig(name = "Keys", buttonName = "Edit")
     public static class MouseConfig {
-        public static final ConfigBooleanPlus DISPLAY_CURRENTLY_PRESSED_MOUSE_BUTTONS = new ConfigBooleanPlus("Display currently pressed mouse buttons");
-        public static final ConfigInteger PRESSED_MOUSE_X = new ConfigInteger("Currently pressed mouse X", 2, "");
-        public static final ConfigInteger PRESSED_MOUSE_Y = new ConfigInteger("Currently pressed mouse Y", 13, "");
+        public static final ConfigBooleanPlus   DISPLAY_CURRENTLY_PRESSED_MOUSE_BUTTONS = new ConfigBooleanPlus("Display currently pressed mouse buttons");
+        public static final ConfigInteger       PRESSED_MOUSE_X = new ConfigInteger("Currently pressed mouse X", 2, "");
+        public static final ConfigInteger       PRESSED_MOUSE_Y = new ConfigInteger("Currently pressed mouse Y", 13, "");
 
     }
 

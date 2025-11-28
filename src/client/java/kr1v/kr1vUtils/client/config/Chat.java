@@ -1,4 +1,4 @@
-package kr1v.kr1vUtils.client.config.configs;
+package kr1v.kr1vUtils.client.config;
 
 import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.options.ConfigColor;
@@ -13,12 +13,12 @@ import net.minecraft.client.MinecraftClient;
 @Config("kr1v-utils")
 public class Chat {
     public static final ConfigStringList        CHAT_HIDE = new ConfigStringList("Prevent messages from getting added to the chat", ImmutableList.of(), "Happens after replacing");
-    public static final ConfigBooleanPlus REDIRECT_TO_SUBTITLES = new ConfigBooleanPlus("Redirect to subtitle hud element", true, "", "");
+    public static final ConfigBooleanPlus       REDIRECT_TO_SUBTITLES = new ConfigBooleanPlus("Redirect to subtitle hud element", true, "", "");
     public static final ConfigBooleanPlus       ALLOW_DUPLICATE_SUBTITLES = new ConfigBooleanPlus("Duplicate subtitles", false, "", "Allow having multiple of the same message after each other in the subtitles");
     public static final ConfigBooleanPlus       CHAT_SELECTING = new ConfigBooleanPlus("Chat selecting", true, "LEFT_CONTROL,C", KeybindSettings.GUI, "Be able to select and copy the chat", "", "");
 	public static final ConfigColor             CHAT_SELECTED_TEXT_BACKGROUND_COLOUR = new ConfigColor("Selected text background colour", "0xAA0033FF", "");
     public static final ConfigBooleanPlus       ADD_HOVER_TIMESTAMP = new ConfigBooleanPlus("Add hover timestamp", true);
-	public static final ConfigStringPlus TIMESTAMP_FORMAT = new ConfigStringPlus("Timestamp format", "[HH:mm:ss]");
+	public static final ConfigStringPlus        TIMESTAMP_FORMAT = new ConfigStringPlus("Timestamp format", "[HH:mm:ss]");
 
 	static {
 		CHAT_SELECTING.getKeybind().setCallback((button, keybind) -> {

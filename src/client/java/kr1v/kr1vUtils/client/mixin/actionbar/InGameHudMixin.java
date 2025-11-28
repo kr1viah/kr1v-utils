@@ -2,7 +2,7 @@ package kr1v.kr1vUtils.client.mixin.actionbar;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import kr1v.kr1vUtils.client.config.configs.Misc;
+import kr1v.kr1vUtils.client.config.Misc;
 import kr1v.kr1vUtils.client.mixinclasses.ActionbarMessageManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
