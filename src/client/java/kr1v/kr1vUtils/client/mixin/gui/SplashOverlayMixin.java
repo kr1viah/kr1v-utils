@@ -8,8 +8,10 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.systems.CommandEncoder;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.GpuTexture;
 import kr1v.kr1vUtils.client.config.Misc;
+import kr1v.kr1vUtils.client.mixin.accessor.Matrix4fStackAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.SplashOverlay;
@@ -54,8 +56,16 @@ public class SplashOverlayMixin {
 
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/CommandEncoder;clearColorTexture(Lcom/mojang/blaze3d/textures/GpuTexture;I)V"))
     private void prevent(CommandEncoder instance, GpuTexture gpuTexture, int i, Operation<Void> original, @Local DrawContext drawContext, @Local(argsOnly = true, ordinal = 0) int mouseX, @Local(argsOnly = true, ordinal = 1) int mouseY, @Local(argsOnly = true, ordinal = 0) float deltaTicks) {
-        if (Misc.FAST_MAIN_MENU.getBooleanValue())
-           this.client.currentScreen.render(drawContext, mouseX, mouseY, deltaTicks);
+        if (Misc.FAST_MAIN_MENU.getBooleanValue()) {
+            var viewStack = RenderSystem.getModelViewStack();
+            var accessor = (Matrix4fStackAccessor)viewStack;
+            int curr = accessor.getCurr();
+            try {
+                this.client.currentScreen.render(drawContext, mouseX, mouseY, deltaTicks);
+            } catch (Throwable ignored) {
+                while (accessor.getCurr() > curr) viewStack.popMatrix();
+            }
+        }
         else
             original.call(instance, gpuTexture, i);
     }
