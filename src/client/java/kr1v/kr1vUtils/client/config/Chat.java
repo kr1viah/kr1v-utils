@@ -4,13 +4,14 @@ import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.options.ConfigColor;
 import fi.dy.masa.malilib.config.options.ConfigStringList;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
+import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.kr1vUtils.client.gui.BetterChatHud;
 import kr1v.malilibApi.annotation.Config;
 import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
 import kr1v.malilibApi.config.plus.ConfigStringPlus;
 import net.minecraft.client.MinecraftClient;
 
-@Config("kr1v-utils")
+@Config(Kr1vUtilsClient.MOD_ID)
 public class Chat {
     public static final ConfigStringList        CHAT_HIDE = new ConfigStringList("Prevent messages from getting added to the chat", ImmutableList.of(), "Happens after replacing");
     public static final ConfigBooleanPlus       REDIRECT_TO_SUBTITLES = new ConfigBooleanPlus("Redirect to subtitle hud element", true, "", "");

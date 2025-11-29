@@ -41,6 +41,10 @@ dependencies {
     modImplementation "com.github.kr1viah:malilib-api:${project.malilib_api_version}"
     annotationProcessor "com.github.kr1viah:malilib-api:${project.malilib_api_version}"
 
+    // maven local
+//    modImplementation "com.kr1v:malilib-api:${project.malilib_api_version}"
+//    annotationProcessor "com.kr1v:malilib-api:${project.malilib_api_version}"
+
     implementation include("net.fabricmc:tiny-remapper:${project.tiny_version}")
     implementation include("net.fabricmc:mapping-io:${project.mapping_io_version}")
     implementation include("org.reflections:reflections:${project.reflections_version}")

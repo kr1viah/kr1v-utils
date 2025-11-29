@@ -1,5 +1,6 @@
 package kr1v.kr1vUtils.client.config;
 
+import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.kr1vUtils.client.gui.screen.DummyScreen;
 import kr1v.malilibApi.MalilibApi;
 import kr1v.malilibApi.annotation.Config;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-@Config("kr1v-utils")
+@Config(Kr1vUtilsClient.MOD_ID)
 public class Misc {
 	public static boolean preventClosingOnce = false;
 

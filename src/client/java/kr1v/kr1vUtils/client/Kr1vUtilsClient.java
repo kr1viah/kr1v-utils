@@ -8,6 +8,8 @@ import kr1v.malilibApi.MalilibApi;
 import net.fabricmc.api.ClientModInitializer;
 
 public class Kr1vUtilsClient implements ClientModInitializer {
+	public static final String MOD_ID = "kr1v-utils";
+
 	@Override
 	public void onInitializeClient() {
 		ClassUtils.touch(Annotations.class);

@@ -4,6 +4,7 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigDouble;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
+import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.kr1vUtils.client.utils.ClassUtils;
 import kr1v.kr1vUtils.client.utils.MappingUtils;
 import kr1v.kr1vUtils.client.utils.StringUtils;
@@ -23,7 +24,7 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-@Config("kr1v-utils")
+@Config(Kr1vUtilsClient.MOD_ID)
 public class Render {
     public static final ConfigBooleanPlus AFFECT_OFFSETTING = new ConfigBooleanPlus("Affect offsetting");
     @PopupConfig

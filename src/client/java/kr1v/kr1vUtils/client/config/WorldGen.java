@@ -1,12 +1,13 @@
 package kr1v.kr1vUtils.client.config;
 
 import fi.dy.masa.malilib.config.options.ConfigDouble;
+import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.malilibApi.annotation.Config;
 import kr1v.malilibApi.annotation.Label;
 import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
 import kr1v.malilibApi.config.plus.ConfigIntegerPlus;
 
-@Config(value = "kr1v-utils", name = "World generation")
+@Config(value = Kr1vUtilsClient.MOD_ID, name = "World generation")
 public class WorldGen {
     @Label("Generation steps")
     public static final ConfigBooleanPlus   GENERATE_STRUCTURES = new ConfigBooleanPlus("Generate structures");

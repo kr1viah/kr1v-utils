@@ -1,6 +1,7 @@
 package kr1v.kr1vUtils.client.config;
 
 import fi.dy.masa.malilib.config.IConfigBase;
+import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.malilibApi.annotation.*;
 import kr1v.malilibApi.config.ConfigLabel;
 import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
@@ -11,7 +12,7 @@ import kr1v.malilibApi.config.plus.ConfigStringPlus;
 import java.util.List;
 
 @SuppressWarnings("unused")
-@Config("kr1v-utils")
+@Config(Kr1vUtilsClient.MOD_ID)
 public class Test {
     @Label("Label above class")
     @PopupConfig

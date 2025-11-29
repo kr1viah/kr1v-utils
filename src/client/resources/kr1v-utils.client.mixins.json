@@ -14,9 +14,7 @@
     "gui.ChatHudMixin",
     "gui.ClientPlayNetworkHandlerMixin",
     "gui.InGameHudMixin",
-    "gui.MouseMixin",
     "gui.ParentElementMixin",
-    "gui.SplashOverlayMixin",
     "gui.SubtitlesHudMixin",
     "gui.TitleScreenMixin",
     "render.InGameHudMixin",
@@ -24,7 +22,10 @@
     "render.VertexConsumerMixin1",
     "render.VertexConsumerMixin2",
     "render.VertexConsumerMixin3",
-    "render.WorldRendererMixin"
+    "render.WorldRendererMixin",
+    "speed.MainMixin",
+    "speed.MouseMixin",
+    "speed.SplashOverlayMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -39,6 +40,7 @@
     "accessor.Matrix4fStackAccessor",
     "malilib.GuiScrollBarMixin",
     "parcour.LivingEntityMixin",
+    "speed.DataFixerBuilderMixin",
     "worldgen.CaveCarverMixin",
     "worldgen.ChunkGeneratingMixin",
     "worldgen.NetherCaveCarverMixin",

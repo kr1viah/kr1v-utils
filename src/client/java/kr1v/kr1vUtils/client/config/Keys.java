@@ -2,6 +2,7 @@ package kr1v.kr1vUtils.client.config;
 
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.hotkeys.KeybindMulti;
+import kr1v.kr1vUtils.client.Kr1vUtilsClient;
 import kr1v.malilibApi.annotation.Config;
 import kr1v.malilibApi.annotation.PopupConfig;
 import kr1v.malilibApi.config.plus.ConfigBooleanPlus;
@@ -11,7 +12,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
 
 @SuppressWarnings("unused")
-@Config("kr1v-utils")
+@Config(Kr1vUtilsClient.MOD_ID)
 public class Keys {
     @PopupConfig(name = "Mouse", buttonName = "Edit")
     public static class KeysConfig {
