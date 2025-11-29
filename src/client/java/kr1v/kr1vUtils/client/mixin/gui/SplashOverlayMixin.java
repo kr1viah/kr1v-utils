@@ -8,8 +8,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.systems.CommandEncoder;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.GpuTexture;
+import kr1v.kr1vUtils.client.config.Misc;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.SplashOverlay;
@@ -20,6 +20,8 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Function;
 
@@ -35,7 +37,9 @@ public class SplashOverlayMixin {
     @Expression("context.fill(?, ?, ?, ?, ?, ?)")
     @WrapWithCondition(method = "render", at = @At("MIXINEXTRAS:EXPRESSION"))
     private boolean preventFill(DrawContext instance, RenderLayer layer, int x1, int y1, int x2, int y2, int color) {
-        return false;
+        if (Misc.FAST_MAIN_MENU.getBooleanValue())
+            return false;
+        return true;
     }
 
     @Definition(id = "context", local = @Local(type = DrawContext.class, argsOnly = true))
@@ -43,18 +47,28 @@ public class SplashOverlayMixin {
     @Expression("context.drawTexture(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
     @WrapWithCondition(method = "render", at = @At("MIXINEXTRAS:EXPRESSION"))
     private boolean preventFill(DrawContext instance, Function<Identifier, RenderLayer> renderLayers, Identifier sprite, int x, int y, float u, float v, int width, int height, int regionWidth, int regionHeight, int textureWidth, int textureHeight, int color) {
-        return false;
+        if (Misc.FAST_MAIN_MENU.getBooleanValue())
+            return false;
+        return true;
     }
+
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/CommandEncoder;clearColorTexture(Lcom/mojang/blaze3d/textures/GpuTexture;I)V"))
     private void prevent(CommandEncoder instance, GpuTexture gpuTexture, int i, Operation<Void> original, @Local DrawContext drawContext, @Local(argsOnly = true, ordinal = 0) int mouseX, @Local(argsOnly = true, ordinal = 1) int mouseY, @Local(argsOnly = true, ordinal = 0) float deltaTicks) {
-        try {
-            this.client.currentScreen.render(drawContext, mouseX, mouseY, deltaTicks);
-        } catch (Throwable ignored) {
-            RenderSystem.getModelViewStack().popMatrix();
-            RenderSystem.getModelViewStack().popMatrix();
-        }
+        if (Misc.FAST_MAIN_MENU.getBooleanValue())
+           this.client.currentScreen.render(drawContext, mouseX, mouseY, deltaTicks);
+        else
+            original.call(instance, gpuTexture, i);
     }
 
     @WrapMethod(method = "renderProgressBar")
-    private void preventProgressBarRendering(DrawContext context, int minX, int minY, int maxX, int maxY, float opacity, Operation<Void> original) {}
+    private void preventProgressBarRendering(DrawContext context, int minX, int minY, int maxX, int maxY, float opacity, Operation<Void> original) {
+	    if (!Misc.FAST_MAIN_MENU.getBooleanValue())
+		    original.call(context, minX, minY, maxX, maxY, opacity);
+    }
+
+    @Inject(method = "pausesGame", at = @At("RETURN"), cancellable = true)
+    private void doesntPauseGame(CallbackInfoReturnable<Boolean> cir) {
+        if (Misc.FAST_MAIN_MENU.getBooleanValue())
+            cir.setReturnValue(false);
+    }
 }

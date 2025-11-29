@@ -14,7 +14,7 @@
     "gui.ChatHudMixin",
     "gui.ClientPlayNetworkHandlerMixin",
     "gui.InGameHudMixin",
-    "gui.MinecraftClientMixin",
+    "gui.MouseMixin",
     "gui.ParentElementMixin",
     "gui.SplashOverlayMixin",
     "gui.SubtitlesHudMixin",

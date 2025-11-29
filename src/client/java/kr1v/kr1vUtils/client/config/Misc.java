@@ -44,7 +44,7 @@ public class Misc {
         return true;
     });
     public static final ConfigStringListPlus    QUICKPLAY_SERVERS = new ConfigStringListPlus("Servers to put onto the main menu", "Separate name with ip with a #");
-    public static final ConfigBooleanPlus       FAST_MAIN_MENU = new ConfigBooleanPlus("Fast main menu", true);
+    public static final ConfigBooleanPlus       FAST_MAIN_MENU = new ConfigBooleanPlus("Fast main menu", false);
     public static final ConfigBooleanPlus       PRINT_SUBOPTIMAL_JUMPS = new ConfigBooleanPlus("Print suboptimal jumps", false, "", "Prints a message to the chat when a jump isn't made on the last tick possible");
     public static final ConfigBooleanPlus       PRINT_OPTIMAL_JUMPS = new ConfigBooleanPlus("Print optimal jumps", false, "", "Prints a message to the chat when a jump is made on the last tick possible");
     public static final ConfigBooleanPlus       PRINT_MISSED_JUMPS = new ConfigBooleanPlus("Print missed jumps", false, "", "Prints a message to the chat when a jump is missed");

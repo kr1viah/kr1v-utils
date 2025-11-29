@@ -42,7 +42,10 @@ public abstract class TitleScreenMixin extends Screen {
 
 	@ModifyVariable(method = "<init>(ZLnet/minecraft/client/gui/LogoDrawer;)V", at = @At("HEAD"), ordinal = 0, argsOnly = true)
 	private static boolean modifyInitArg(boolean original) {
-		return !Misc.FAST_MAIN_MENU.getBooleanValue() && original;
+		if (Misc.FAST_MAIN_MENU.getBooleanValue()) {
+			return false;
+		}
+		return original;
 	}
 
 	@Inject(method = "init", at = @At("TAIL"))
