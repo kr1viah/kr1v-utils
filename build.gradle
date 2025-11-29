@@ -38,8 +38,8 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "com.github.sakura-ryoko:malilib:${project.malilib_version}"
-    modImplementation "com.github.kr1viah:malilib-api:master-SNAPSHOT"
-    annotationProcessor "com.github.kr1viah:malilib-api:master-SNAPSHOT"
+    modImplementation "com.github.kr1viah:malilib-api:${project.malilib_api_version}"
+    annotationProcessor "com.github.kr1viah:malilib-api:${project.malilib_api_version}"
 
     implementation include("net.fabricmc:tiny-remapper:${project.tiny_version}")
     implementation include("net.fabricmc:mapping-io:${project.mapping_io_version}")
