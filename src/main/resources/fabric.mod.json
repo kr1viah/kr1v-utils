@@ -8,8 +8,8 @@
     "kr1v"
   ],
   "contact": {},
+  "accessWidener": "kr1v-utils.accesswidener",
   "license": "MIT",
-  "icon": "assets/kr1v-utils/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
