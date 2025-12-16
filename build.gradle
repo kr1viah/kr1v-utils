@@ -38,8 +38,8 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "com.github.sakura-ryoko:malilib:${project.malilib_version}"
-    modImplementation "com.github.kr1viah:malilib-api:${project.malilib_api_version}"
-    annotationProcessor "com.github.kr1viah:malilib-api:${project.malilib_api_version}"
+    modImplementation "com.github.kr1viah:malilib-api:master-SNAPSHOT"
+    annotationProcessor "com.github.kr1viah:malilib-api:master-SNAPSHOT"
 
     // maven local
 //    modImplementation "com.kr1v:malilib-api:${project.malilib_api_version}"
